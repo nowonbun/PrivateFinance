@@ -41,7 +41,7 @@
 		<filter-class>Common.WebFilter</filter-class>
 		<init-param>
 			<param-name>passPage</param-name>
-			<param-value>/,/index.html,/test.ajax</param-value>
+			<param-value>/,/index.html,/login.html,/logout.html,/test.ajax</param-value>
 		</init-param>
 	</filter>
 	<!-- url-pattern *.html -->

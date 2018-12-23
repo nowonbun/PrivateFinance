@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import Common.AbstractServletController;
+
 @Controller
-public class MainController {
+public class MainController extends AbstractServletController{
 	@RequestMapping(value = "/main.html")
 	public String index(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
 		modelmap.addAttribute("test", "hello world");

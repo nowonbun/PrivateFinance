@@ -23,6 +23,9 @@ public class Viewrole implements Serializable {
 	@ManyToMany(mappedBy = "viewroles", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<User> users;
 
+	@OneToMany(mappedBy = "viewrole", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Menu> menu;
+
 	public Viewrole() {
 	}
 
@@ -64,6 +67,14 @@ public class Viewrole implements Serializable {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+
+	public List<Menu> getMenu() {
+		return menu;
+	}
+
+	public void setMenu(List<Menu> menu) {
+		this.menu = menu;
 	}
 
 }

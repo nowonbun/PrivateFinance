@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="container">
-		<form method="POST">
+		<form method="POST" action="login.html">
 			<input type="hidden" name="id" id="pId" /> 
 			<input type="hidden" name="email" id="pEmail" /> 
 			<input type="hidden" name="name" id="pName" />

@@ -9,6 +9,7 @@ import Dao.GroupDao;
 import Dao.LanguageTypeDao;
 import Dao.LocalizationDao;
 import Dao.LowCategoryDao;
+import Dao.MenuDao;
 import Dao.ViewroleDao;
 
 public class FactoryDao {
@@ -46,5 +47,6 @@ public class FactoryDao {
 		FactoryDao.getDao(LocalizationDao.class).reset();
 		FactoryDao.getDao(LowCategoryDao.class).reset();
 		FactoryDao.getDao(ViewroleDao.class).reset();
+		FactoryDao.getDao(MenuDao.class).reset();
 	}
 }
