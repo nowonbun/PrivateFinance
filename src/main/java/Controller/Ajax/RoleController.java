@@ -122,6 +122,10 @@ public class RoleController extends AbstractAjaxController {
 
 	@RequestMapping(value = "/saveViewRole.ajax", method = RequestMethod.POST)
 	public void saveViewRole(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("ADMN"))) {
+			res.setStatus(403);
+			return;
+		}
 		String type = req.getParameter("type");
 		String name = req.getParameter("name");
 		String data = req.getParameter("data");
@@ -171,6 +175,10 @@ public class RoleController extends AbstractAjaxController {
 	
 	@RequestMapping(value = "/saveActionRole.ajax", method = RequestMethod.POST)
 	public void saveActionRole(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("ADMN"))) {
+			res.setStatus(403);
+			return;
+		}
 		String type = req.getParameter("type");
 		String name = req.getParameter("name");
 		String data = req.getParameter("data");

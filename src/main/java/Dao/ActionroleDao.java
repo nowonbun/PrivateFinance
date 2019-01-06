@@ -8,7 +8,6 @@ import javax.persistence.Query;
 import Common.MasterDao;
 import Common.Util;
 import Model.Actionrole;
-import Model.Viewrole;
 
 public class ActionroleDao extends MasterDao<Actionrole> {
 	protected ActionroleDao() {

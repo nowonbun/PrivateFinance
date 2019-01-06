@@ -43,6 +43,10 @@ public class UserController extends AbstractAjaxController {
 
 	@RequestMapping(value = "/getUser.ajax")
 	public void getUser(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("ADMN"))) {
+			res.setStatus(403);
+			return;
+		}
 		String q = req.getParameter("q");
 		List<User> userlist = FactoryDao.getDao(UserDao.class).getUserLikeEmail(q);
 		Select2AjaxBean ret = new Select2AjaxBean();
@@ -55,9 +59,25 @@ public class UserController extends AbstractAjaxController {
 		}
 		returnAjax(res, ret);
 	}
+	
+	@RequestMapping(value = "/modifyUser.ajax")
+	public void modifyUser(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("ADMN"))) {
+			res.setStatus(403);
+			return;
+		}
+		String id = req.getParameter("id");
+		String name = req.getParameter("name");
+		String country = req.getParameter("country");
+		
+	}
 
 	@RequestMapping(value = "/resetMaster.ajax")
 	public void resetMaster(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("ADMN"))) {
+			res.setStatus(403);
+			return;
+		}
 		FactoryDao.resetMaster();
 		ObjectBean bean = new ObjectBean();
 		bean.setRet(true);

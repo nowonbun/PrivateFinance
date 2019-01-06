@@ -247,7 +247,8 @@
 			var $row = $("<div></div>").addClass("row custom-table-row");
 			var $col1 = $("<div></div>").addClass("custom-table-col col-12 col-sm-6 col-md-4").text(user.email);
 			$col1.append($("<input type='hidden' class='user-id'>").val(user.id));
-			var $col2 = $("<div></div>").addClass("custom-table-col col-12 col-sm-6 col-md-4 no-padding").append($("<input type='text' class='form-control user-name'>").val(user.name));
+			var $col2 = $("<div></div>").addClass("custom-table-col col-12 col-sm-6 col-md-4 no-padding")
+										.append($("<input type='text' class='form-control user-name'>").val(user.name));
 			var $col3 = $("<div></div>").addClass("custom-table-col col-12 col-sm-4 col-md-2 no-padding");
 			$col3.append($($(".countrySelect").html()).addClass("user-country").val(user.country));
 			var $col4 = $("<div></div>").addClass("custom-table-col col-12 col-sm-4 col-md-1 no-padding btn-col").append(
@@ -453,9 +454,16 @@
 			
 			$(document).on("click", ".modify-btn", function() {
 				var $obj = $(this).parent().parent();
-				$obj.find(".user-id").val();
-				$obj.find(".user-name").val();
-				$obj.find(".user-country").val();
+				var data = {
+					id:$obj.find(".user-id").val(),
+					name:$obj.find(".user-name").val(),
+					country:$obj.find(".user-country").val()
+				}
+				_admin.ajax("./modifyUser.ajax", data, function(data) {
+					if (data.ret) {
+						toastr.success("Master reset!");
+					}
+				});
 			});
 		}
 	});
