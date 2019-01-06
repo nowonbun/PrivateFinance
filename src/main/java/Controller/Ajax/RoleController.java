@@ -17,6 +17,7 @@ import Bean.RoleListBean;
 import Common.AbstractAjaxController;
 import Common.FactoryDao;
 import Common.JsonConverter;
+import Dao.ActionroleDao;
 import Dao.GroupDao;
 import Dao.UserDao;
 import Dao.ViewroleDao;
@@ -156,6 +157,55 @@ public class RoleController extends AbstractAjaxController {
 				for (String code : list) {
 					Viewrole role = FactoryDao.getDao(ViewroleDao.class).getRole(code);
 					user.getViewroles().add(role);
+				}
+				FactoryDao.getDao(UserDao.class).update(user);
+				bean.setRet(true);
+			} else {
+				bean.setRet(false);
+			}
+		} else {
+			bean.setRet(false);
+		}
+		returnAjax(res, bean);
+	}
+	
+	@RequestMapping(value = "/saveActionRole.ajax", method = RequestMethod.POST)
+	public void saveActionRole(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		String type = req.getParameter("type");
+		String name = req.getParameter("name");
+		String data = req.getParameter("data");
+		if (type == null || name == null || data == null) {
+			res.setStatus(403);
+			return;
+		}
+		List<String> list = new ArrayList<>();
+		JsonConverter.parseArray(data, (obj) -> {
+			for (int i = 0; i < obj.size(); i++) {
+				list.add(obj.getString(i));
+			}
+			return true;
+		});
+		ObjectBean bean = new ObjectBean();
+		if ("0".equals(type)) {
+			Group group = FactoryDao.getDao(GroupDao.class).getGroup(name);
+			if (group != null) {
+				group.getActionroles().clear();
+				for (String code : list) {
+					Actionrole role = FactoryDao.getDao(ActionroleDao.class).getRole(code);
+					group.getActionroles().add(role);
+				}
+				FactoryDao.getDao(GroupDao.class).update(group);
+				bean.setRet(true);
+			} else {
+				bean.setRet(false);
+			}
+		} else if ("1".equals(type)) {
+			User user = FactoryDao.getDao(UserDao.class).getUser(name);
+			if (user != null) {
+				user.getActionroles().clear();
+				for (String code : list) {
+					Actionrole role = FactoryDao.getDao(ActionroleDao.class).getRole(code);
+					user.getActionroles().add(role);
 				}
 				FactoryDao.getDao(UserDao.class).update(user);
 				bean.setRet(true);

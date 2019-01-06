@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import Bean.ObjectBean;
 import Bean.Select2AjaxBean;
 import Bean.Select2AjaxItem;
 import Bean.UserBean;
@@ -53,5 +54,13 @@ public class UserController extends AbstractAjaxController {
 			ret.getResults().add(item);
 		}
 		returnAjax(res, ret);
+	}
+
+	@RequestMapping(value = "/resetMaster.ajax")
+	public void resetMaster(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		FactoryDao.resetMaster();
+		ObjectBean bean = new ObjectBean();
+		bean.setRet(true);
+		returnAjax(res, bean);
 	}
 }
