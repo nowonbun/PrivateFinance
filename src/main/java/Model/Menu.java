@@ -3,14 +3,9 @@ package Model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
-/**
- * The persistent class for the mst_menu database table.
- * 
- */
 @Entity
 @Table(name="mst_menu")
-@NamedQuery(name="Menu.findAll", query="SELECT m FROM Menu m")
+@NamedQuery(name="Menu.findAll", query="SELECT m FROM Menu m where m.isactive = true")
 public class Menu implements Serializable {
 	private static final long serialVersionUID = 1L;
 

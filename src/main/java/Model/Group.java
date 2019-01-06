@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "mst_group")
-@NamedQuery(name = "Group.findAll", query = "SELECT g FROM Group g")
+@NamedQuery(name = "Group.findAll", query = "SELECT g FROM Group g where g.isactive = true")
 public class Group implements Serializable {
 	private static final long serialVersionUID = 1L;
 

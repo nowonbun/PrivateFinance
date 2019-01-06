@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name="mst_actionrole")
-@NamedQuery(name="Actionrole.findAll", query="SELECT a FROM Actionrole a")
+@NamedQuery(name="Actionrole.findAll", query="SELECT a FROM Actionrole a where a.isactive = true")
 public class Actionrole implements Serializable {
 	private static final long serialVersionUID = 1L;
 

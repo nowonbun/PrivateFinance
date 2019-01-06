@@ -11,6 +11,5 @@ public class Startup extends HttpServlet {
 
 	public void init() {
 		FactoryDao.initializeMaster();
-		System.out.println("Startup");
 	}
 }

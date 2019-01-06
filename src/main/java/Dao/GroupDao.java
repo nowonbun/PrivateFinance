@@ -1,6 +1,8 @@
 package Dao;
 
 import java.util.List;
+import java.util.Optional;
+
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import Common.MasterDao;
@@ -22,5 +24,14 @@ public class GroupDao extends MasterDao<Group> {
 				return null;
 			}
 		});
+	}
+
+	public Group getGroup(String code) {
+		Optional<Group> ret = getData().stream().filter(x -> x.getCode().equals(code)).findFirst();
+		if (!ret.isPresent()) {
+			return null;
+		} else {
+			return ret.get();
+		}
 	}
 }

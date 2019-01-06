@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "mst_localization")
-@NamedQuery(name = "Localization.findAll", query = "SELECT l FROM Localization l")
+@NamedQuery(name = "Localization.findAll", query = "SELECT l FROM Localization l where l.isactive = true")
 public class Localization implements Serializable {
 	private static final long serialVersionUID = 1L;
 

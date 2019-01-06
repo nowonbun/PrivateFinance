@@ -1,5 +1,7 @@
 package Common;
 
+import Dao.LocalizationDao;
+
 public class Util {
 	public static boolean StringEquals(String val1, String val2) {
 		if (val1 == null) {
@@ -19,5 +21,9 @@ public class Util {
 			return true;
 		}
 		return false;
+	}
+
+	public static String localization(String name, String type) {
+		return FactoryDao.getDao(LocalizationDao.class).getLocalization(name, type);
 	}
 }

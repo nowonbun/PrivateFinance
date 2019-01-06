@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "mst_language_type")
-@NamedQuery(name = "LanguageType.findAll", query = "SELECT l FROM LanguageType l")
+@NamedQuery(name = "LanguageType.findAll", query = "SELECT l FROM LanguageType l where l.isactive = true")
 public class LanguageType implements Serializable {
 	private static final long serialVersionUID = 1L;
 

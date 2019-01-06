@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "mst_viewrole")
-@NamedQuery(name = "Viewrole.findAll", query = "SELECT v FROM Viewrole v")
+@NamedQuery(name = "Viewrole.findAll", query = "SELECT v FROM Viewrole v where v.isactive = true")
 public class Viewrole implements Serializable {
 	private static final long serialVersionUID = 1L;
 

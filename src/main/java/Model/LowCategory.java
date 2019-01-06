@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "mst_low_category")
-@NamedQuery(name = "LowCategory.findAll", query = "SELECT l FROM LowCategory l")
+@NamedQuery(name = "LowCategory.findAll", query = "SELECT l FROM LowCategory l where l.isactive = true")
 public class LowCategory implements Serializable {
 	private static final long serialVersionUID = 1L;
 
