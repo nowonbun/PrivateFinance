@@ -40,7 +40,546 @@
 		<li class="breadcrumb-item"><a href="./main.html">Dashboard</a></li>
 		<li class="breadcrumb-item active">Finance</li>
 	</ol>
+<!-- from household copy -->
+<link rel="stylesheet" href="/css/finance.css" />
+<link rel="stylesheet" media="screen and (max-width:768px)" href="/css/finance_mobile.css" />
+<link rel="stylesheet" media="screen and (min-width:769px)" href="/css/finance_pc.css" />
+<link rel="stylesheet" type="text/css" href="/css/loading.css" />	
+<div class="main">
+    <div class="container">
+        <input type="button" class="signout" value="SIGN OUT">
+        <label class="error" id="error"></label>
+        <div class="space"></div>
+        <form id="applyPc">
+            <div class="main-date">
+                <span class="fa fa-chevron-circle-left"></span>
+                <div class="selectDiv household-date year">
+                    <span>2019</span>
+                    <select class="household-date year" id="householdYear" name="householdYear">
+                        <option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option>
+                    </select>
+                </div>
+                <label class="household-date">年</label>
+                <div class="selectDiv household-date month">
+                    <span>1</span>
+                    <select class="household-date month" id="householdMonth" name="householdMonth">
+                        <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option>
+                    </select>
+                </div>
+                <label class="household-date">月</label>
+                <span class="fa fa-chevron-circle-right"></span>
+            </div>
+            <div class="space"></div>
+            <div class="main-input">
+                <table class="table-input pc-private">
+                    <thead>
+                        <tr>
+                            <th>日</th>
+                            <th>カテゴリ</th>
+                            <th>区分</th>
+                            <th>内容</th>
+                            <th>金額</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="hidden" id="householdIdx_pc" name="householdIdx" value="">
+                                <input type="hidden" id="householdPdt_pc" name="householdPdt">
+                                <div class="selectDiv household-date day">
+                                    <span>8</span>
+                                    <select class="household-date day" id="householdDay_pc" name="householdDay">
+                                        <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="selectDiv household-category">
+                                    <span>一般</span>
+                                    <select class="household-category" id="householdCategory_pc" name="householdCategory">
+                                        <option value="000">一般</option><option value="010">貯蓄</option><option value="020">クレジット</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="selectDiv household-category">
+                                    <span>支出</span>
+                                    <select class="household-type" id="householdType_pc" name="householdType"><option value="001">収入</option><option value="002">支出</option><option value="003">食費</option><option value="004">交通費</option><option value="005">ローン</option><option value="006">お小遣い</option><option value="007">外食</option><option value="008">光熱費</option></select>
+                                </div>
+                            </td>
+                            <td>
+                                <input name="householdContent" id="householdContent_pc" autocomplete="off" maxlength="40">
+                            </td>
+                            <td>
+                                <input type="tel" pattern="[0-9]*" name="householdPrice" id="householdPrice_pc" autocomplete="off" maxlength="8">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <div class="apply-area">
+                                    <input type="button" value="登録" id="applySubmit_pc">
+                                </div>
+                                <div class="modify-area off">
+                                    <input type="button" value="取消" id="cancelSubmit_pc">
+                                    <input type="button" value="修正" id="modifySubmit_pc">
+                                    <input type="button" value="削除" id="deleteSubmit_pc">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="table-input mobile-private">
+                    <input type="button" value="登録" id="apply_mobile">
+                </div>
+            </div>
+        </form>
+        <div class="space"></div>
+        <div class="main-data">
+            <div class="total-data data-income">
+                <label>収入</label>
+                <span id="Income" class="money-plus">￥481,619</span>
+            </div>
+            <div class="total-data data-expend">
+                <label>支出</label>
+                <span id="expend" class="money-minus">￥304,562</span>
+            </div>
+            <div class="search-data">
+                <input type="button" id="searchInit" value="検索初期">
+                <label>日 : </label>
+                <div class="selectDiv searchDaySelect">
+                    <span>全体</span>
+                    <select id="searchDaySelect">
+                        <option value="">全体</option>
+                        <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
+                    </select>
+                </div>
+                <label>区分 : </label>
+                <div class="selectDiv searchTypeSelect">
+                    <span>=全体=</span>
+                    <select id="searchTypeSelect">
+                        <option value="">=全体=</option>
+                        <option value="001">収入</option><option value="002">支出</option><option value="003">食費</option><option value="004">交通費</option><option value="005">ローン</option><option value="006">お小遣い</option><option value="007">外食</option><option value="008">光熱費</option>
+                    </select>
+                </div>
+            </div>
+            <div class="normal-data title-data">
+                <label class="mobile-private">
+                    <span class="fa fa-square fa-plus-square"></span>
+                    <span class="fa fa-square fa-minus-square off"></span>
+                </label>
+                <label>一般</label>
+                <label>TOTAL : <span id="totalMoney1" class="money-plus">￥177,057</span></label>
+            </div>
+            <table class="table-data table-data1 mobile-off">
+                <thead>
+                    <tr>
+                        <th>日</th>
+                        <th>カテゴリ</th>
+                        <th>区分</th>
+                        <th>内容</th>
+                        <th>金額</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr class="">
+                    <td>4日<input type="hidden" value="3687,4,000,002,家賃,-130000,20190104233014000"></td>
+                    <td>一般</td>
+                    <td>支出</td>
+                    <td>家賃</td>
+                    <td><span class="money-minus">￥130,000</span></td>
+                </tr>
+            
+                <tr class="">
+                    <td>4日<input type="hidden" value="3688,4,000,002,交通費,-90000,20190104233040000"></td>
+                    <td>一般</td>
+                    <td>支出</td>
+                    <td>交通費</td>
+                    <td><span class="money-minus">￥90,000</span></td>
+                </tr>
+            
+                <tr class="">
+                    <td>4日<input type="hidden" value="3689,4,000,002,おっつ,-5400,20190104233159000"></td>
+                    <td>一般</td>
+                    <td>支出</td>
+                    <td>おっつ</td>
+                    <td><span class="money-minus">￥5,400</span></td>
+                </tr>
+            
+                <tr class="">
+                    <td>5日<input type="hidden" value="3690,5,000,002,アトリエ,-6000,20190105004403000"></td>
+                    <td>一般</td>
+                    <td>支出</td>
+                    <td>アトリエ</td>
+                    <td><span class="money-minus">￥6,000</span></td>
+                </tr>
+            
+                <tr class="">
+                    <td>5日<input type="hidden" value="3691,5,000,002,保険,-5000,20190105004419000"></td>
+                    <td>一般</td>
+                    <td>支出</td>
+                    <td>保険</td>
+                    <td><span class="money-minus">￥5,000</span></td>
+                </tr>
+            
+                <tr class="">
+                    <td>5日<input type="hidden" value="3692,5,000,002,給食費,-8000,20190105004431000"></td>
+                    <td>一般</td>
+                    <td>支出</td>
+                    <td>給食費</td>
+                    <td><span class="money-minus">￥8,000</span></td>
+                </tr>
+            
+                <tr class="">
+                    <td>5日<input type="hidden" value="3693,5,000,002,ジェーコム,-6664,20190105004451000"></td>
+                    <td>一般</td>
+                    <td>支出</td>
+                    <td>ジェーコム</td>
+                    <td><span class="money-minus">￥6,664</span></td>
+                </tr>
+            
+                <tr class="">
+                    <td>5日<input type="hidden" value="3694,5,000,002,ジェーコム,-756,20190105004500000"></td>
+                    <td>一般</td>
+                    <td>支出</td>
+                    <td>ジェーコム</td>
+                    <td><span class="money-minus">￥756</span></td>
+                </tr>
+            
+                <tr class="">
+                    <td>5日<input type="hidden" value="3695,5,000,002,ファム,-216,20190105004525000"></td>
+                    <td>一般</td>
+                    <td>支出</td>
+                    <td>ファム</td>
+                    <td><span class="money-minus">￥216</span></td>
+                </tr>
+            
+                <tr class="">
+                    <td>5日<input type="hidden" value="3696,5,000,002,アルバ,-540,20190105004625000"></td>
+                    <td>一般</td>
+                    <td>支出</td>
+                    <td>アルバ</td>
+                    <td><span class="money-minus">￥540</span></td>
+                </tr>
+            
+                <tr class="">
+                    <td>5日<input type="hidden" value="3697,5,000,002,アマゾン,-1296,20190105004638000"></td>
+                    <td>一般</td>
+                    <td>支出</td>
+                    <td>アマゾン</td>
+                    <td><span class="money-minus">￥1,296</span></td>
+                </tr>
+            
+                <tr class="">
+                    <td>5日<input type="hidden" value="3698,5,000,002,アマゾン,-690,20190105004647000"></td>
+                    <td>一般</td>
+                    <td>支出</td>
+                    <td>アマゾン</td>
+                    <td><span class="money-minus">￥690</span></td>
+                </tr>
+            
+                <tr class="">
+                    <td>5日<input type="hidden" value="3699,5,000,002,雑誌,-800,20190105004705000"></td>
+                    <td>一般</td>
+                    <td>支出</td>
+                    <td>雑誌</td>
+                    <td><span class="money-minus">￥800</span></td>
+                </tr>
+            
+                <tr class="">
+                    <td>5日<input type="hidden" value="3700,5,000,002,アマゾン,-3900,20190105004723000"></td>
+                    <td>一般</td>
+                    <td>支出</td>
+                    <td>アマゾン</td>
+                    <td><span class="money-minus">￥3,900</span></td>
+                </tr>
+            
+                <tr class="">
+                    <td>5日<input type="hidden" value="3701,5,000,002,お小遣いスンヨプ亜弥,-20000,20190105004957000"></td>
+                    <td>一般</td>
+                    <td>支出</td>
+                    <td>お小遣いスンヨプ亜弥</td>
+                    <td><span class="money-minus">￥20,000</span></td>
+                </tr>
+            
+                <tr class="">
+                    <td>5日<input type="hidden" value="3702,5,000,002,洗濯機,-10000,20190105005635000"></td>
+                    <td>一般</td>
+                    <td>支出</td>
+                    <td>洗濯機</td>
+                    <td><span class="money-minus">￥10,000</span></td>
+                </tr>
+            
+                <tr class="">
+                    <td>5日<input type="hidden" value="3703,5,000,002,太陽光,-15300,20190105010944000"></td>
+                    <td>一般</td>
+                    <td>支出</td>
+                    <td>太陽光</td>
+                    <td><span class="money-minus">￥15,300</span></td>
+                </tr>
+            
+                <tr class="">
+                    <td>31日<input type="hidden" value="3686,31,000,001,お給料,481619,20190104232949000"></td>
+                    <td>一般</td>
+                    <td>収入</td>
+                    <td>お給料</td>
+                    <td><span class="money-plus">￥481,619</span></td>
+                </tr>
+            </tbody>
+            </table>
+            <div class="caption"><sup>&nbsp;</sup></div>
+            <div class="account-data title-data">
+                <label class="mobile-private">
+                    <span class="fa fa-square fa-plus-square"></span>
+                    <span class="fa fa-square fa-minus-square off"></span>
+                </label>
+                <label>貯蓄</label>
+                <label>TOTAL : <span id="totalMoney2" class="money-plus">￥568,411</span></label>
+            </div>
+            <table class="table-data table-data2 mobile-off">
+                <thead>
+                    <tr>
+                        <th>日</th>
+                        <th>区分</th>
+                        <th>内容</th>
+                        <th>金額</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr class="nothing result-data2">
+                    <td colspan="4">データがありません。</td>
+                </tr>
+            </tbody>
+            </table>
+            <div class="caption"><sup>「貯蓄のTotal」は現在まで金額の合算である。</sup></div>
+            <div class="credits-data title-data">
+                <label class="mobile-private">
+                    <span class="fa fa-square fa-plus-square"></span>
+                    <span class="fa fa-square fa-minus-square off"></span>
+                </label>
+                <label>クレジット</label>
+                <label>TOTAL : <span id="totalMoney3" class="money-zero">￥0</span></label>
+            </div>
+            <table class="table-data table-data3  mobile-off">
+                <thead>
+                    <tr>
+                        <th>日</th>
+                        <th>内容</th>
+                        <th>金額</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr class="nothing result-data3">
+                    <td colspan="3">データがありません。</td>
+                </tr>
+            </tbody>
+            </table>
+            <div class="caption"><sup>「クレジット」は先月の金額である。</sup></div>
+        </div>
+    </div>
+    <div class="template">
+        <table class="template-data1">
+            <tbody>
+                <tr class="##HOVER##">
+                    <td>##DATE##日<input type="hidden" value="##DATA##"></td>
+                    <td>##CATEGORY##</td>
+                    <td>##TYPE##</td>
+                    <td>##CONTENTS##</td>
+                    <td><span class="##CLASS##">##PRICE##</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="template-data1-nothing">
+            <tbody>
+                <tr class="nothing result-data1">
+                    <td colspan="5">データがありません。</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="template-data2">
+            <tbody>
+                <tr>
+                    <td>##DATE##日</td>
+                    <td>##TYPE##</td>
+                    <td>##CONTENTS##</td>
+                    <td><span class="##CLASS##">##PRICE##</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="template-data2-nothing">
+            <tbody>
+                <tr class="nothing result-data2">
+                    <td colspan="4">データがありません。</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="template-data3">
+            <tbody>
+                <tr>
+                    <td>##DATE##日</td>
+                    <td>##CONTENTS##</td>
+                    <td><span class="##CLASS##">##PRICE##</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="template-data3-nothing">
+            <tbody>
+                <tr class="nothing result-data3">
+                    <td colspan="3">データがありません。</td>
+                </tr>
+            </tbody>
+        </table>
+        <select id="select_000"><option value="001">収入</option><option value="002">支出</option><option value="003">食費</option><option value="004">交通費</option><option value="005">ローン</option><option value="006">お小遣い</option><option value="007">外食</option><option value="008">光熱費</option></select><select id="select_010"><option value="011">入金</option><option value="012">出金</option></select><select id="select_020"><option value="022">支出</option></select>
+    </div>
+    <div class="layout off">
+        <div class="apply off">
+            <div class="title">
+                <label>登録</label>
+                <span class="remove fa fa-close" aria-hidden="true"></span>
+            </div>
+            <div class="layout-main">
+                <form id="apply_form_mobile">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>日</th>
+                                <td>
+                                    <input type="hidden" id="householdYear_mobile" name="householdYear" value="">
+                                    <input type="hidden" id="householdMonth_mobile" name="householdMonth" value="">
+                                    <input type="hidden" id="householdIdx_mobile" name="householdIdx" value="">
+                                    <input type="hidden" id="householdPdt_mobile" name="householdPdt" value="">
+                                    <div class="selectDiv householdDay_mobile">
+                                        <span>8</span>
+                                        <select class="household-date day" id="householdDay_mobile" name="householdDay">
+                                            <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>カテゴリ</th>
+                                <td>
+                                    <div class="selectDiv householdCategory_mobile">
+                                        <span>一般</span>
+                                        <select class="household-category" id="householdCategory_mobile" name="householdCategory">
+                                            <option value="000">一般</option><option value="010">貯蓄</option><option value="020">クレジット</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>区分</th>
+                                <td>
+                                    <div class="selectDiv householdType_mobile">
+                                        <span>支出</span>
+                                        <select class="household-type" id="householdType_mobile" name="householdType"><option value="001">収入</option><option value="002">支出</option><option value="003">食費</option><option value="004">交通費</option><option value="005">ローン</option><option value="006">お小遣い</option><option value="007">外食</option><option value="008">光熱費</option></select>
+                                    </div>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>内容</th>
+                                <td>
+                                    <input type="text" name="householdContent" id="householdContent_mobile" autocomplete="off" maxlength="40">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>金額</th>
+                                <td>
+                                    <input type="tel" pattern="[0-9]*" name="householdPrice" id="householdPrice_mobile" autocomplete="off" maxlength="9">
+                                    <input type="button" value="計算機" id="calc_mobile">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <label class="error_mobile"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="apply-area mobile-private">
+                                        <input type="button" value="登録" id="applySubmit_mobile">
+                                    </div>
+                                    <div class="modify-area mobile-private">
+                                        <input type="button" value="修正" id="modifySubmit_mobile">
+                                        <input type="button" value="削除" id="deleteSubmit_mobile">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div class="calc off">
+            <div class="calcmain">
+                <div class="title">
+                    <label>計算機</label>
+                    <span class="remove fa fa-close" aria-hidden="true"></span>
+                </div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colspan="2" class="calc-txt">
+                                <input type="tel" pattern="[0-9]*" id="calc" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="calc-sum">
+                                <span id="operation"></span>
+                                S : <input type="tel" pattern="[0-9]*" id="calc_sum" autocomplete="off" readonly="" disabled="disabled" maxlength="8">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="button" id="calc_add" value="+">
+                            </td>
+                            <td>
+                                <input type="button" id="calc_subtract" value="-">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="button" id="calc_multiply" value="*">
+                            </td>
+                            <td>
+                                <input type="button" id="calc_division" value="/">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="button" id="calc_clear" value="C">
+                            </td>
+                            <td>
+                                <input type="button" id="calc_result" value="=">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="button" id="calc_input" value="入力">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="lodding lodding-off">
+        <div class="lodding-background"></div>
+        <div class="uil-battery-demo-css" style="-webkit-transform:scale(0.6)">
+            <div class="outer"></div>
+            <div class="inner"></div>
+            <div class="inner"></div>
+            <div class="inner"></div>
+            <div class="inner"></div>
+        </div>
+    </div>
+</div>
 	
+	
+	
+	
+	
+<!-- from household copy -->	
 </div>
 
 <jsp:include page="./particle/bottom.jsp"></jsp:include>
