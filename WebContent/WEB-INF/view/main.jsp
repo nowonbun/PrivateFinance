@@ -5,9 +5,9 @@
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item active">Dashboard</li>
 	</ol>
-	<h1>Blank Page</h1>
+	<h1>Welcome</h1>
 	<hr>
-	<p>This is a great starting point for new custom pages.</p>
+	<p>Welcome to Soonyub world</p>
 </div>
 <jsp:include page="./particle/bottom.jsp"></jsp:include>
 <jsp:include page="./particle/bottom2.jsp"></jsp:include>

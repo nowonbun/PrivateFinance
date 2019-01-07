@@ -1,6 +1,7 @@
 package Dao;
 
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import Common.MasterDao;
@@ -22,5 +23,14 @@ public class LanguageTypeDao extends MasterDao<LanguageType> {
 				return null;
 			}
 		});
+	}
+	
+	public LanguageType getLanuageType(String code) {
+		Optional<LanguageType> ret = getData().stream().filter(x -> x.getCode().equals(code)).findFirst();
+		if (!ret.isPresent()) {
+			return null;
+		} else {
+			return ret.get();
+		}
 	}
 }

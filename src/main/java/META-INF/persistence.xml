@@ -12,6 +12,7 @@
 		<class>Model.Payment</class>
 		<class>Model.User</class>
 		<class>Model.Menu</class>
+		<shared-cache-mode>NONE</shared-cache-mode>
 		<properties>
 			<property name="eclipselink.query-results-cache" value="false"/>
 			<property name="eclipselink.logging.level" value="INFO" />

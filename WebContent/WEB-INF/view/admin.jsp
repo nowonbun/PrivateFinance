@@ -4,7 +4,8 @@
 <style>
 .custom-table {
 	border: 1px solid #000;
-	box-shadow: 0px 1.2px 1px 1.4px rgba(0, 0, 0, 0.1), 0px 1.4px 2px 1.8px rgba(0, 0, 0, 0.1), 0px 1.8px 3px 2.2px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 1.2px 1px 1.4px rgba(0, 0, 0, 0.1), 0px 1.4px 2px 1.8px
+		rgba(0, 0, 0, 0.1), 0px 1.8px 3px 2.2px rgba(0, 0, 0, 0.1);
 }
 
 .custom-table .custom-table-row {
@@ -34,18 +35,21 @@
 	display: none;
 }
 
-.view-select-user .select2-selection, .action-select-user .select2-selection {
+.view-select-user .select2-selection, .action-select-user .select2-selection
+	{
 	height: 38px;
 	border-top-left-radius: 0px;
 	border-bottom-left-radius: 0px;
 	border-color: #ced4da;
 }
 
-.view-select-user .select2-selection__rendered, .action-select-user .select2-selection__rendered {
+.view-select-user .select2-selection__rendered, .action-select-user .select2-selection__rendered
+	{
 	line-height: 38px !important;
 }
 
-.view-select-user .select2-selection__arrow, .action-select-user .select2-selection__arrow {
+.view-select-user .select2-selection__arrow, .action-select-user .select2-selection__arrow
+	{
 	height: 38px !important;
 }
 </style>
@@ -61,11 +65,12 @@
 		<div class="card-body">
 			<div class="custom-table user-table">
 				<div class="custom-table-row row">
-					<div class="custom-table-col col-12 col-sm-6 col-md-4">Email</div>
-					<div class="custom-table-col col-12 col-sm-6 col-md-4">Name</div>
-					<div class="custom-table-col col-12 col-sm-4 col-md-2">Country</div>
-					<div class="custom-table-col col-12 col-sm-4 col-md-1"></div>
-					<div class="custom-table-col col-12 col-sm-4 col-md-1"></div>
+					<div class="custom-table-col col-12 col-sm-6 col-md-3">Email</div>
+					<div class="custom-table-col col-12 col-sm-6 col-md-3">Name</div>
+					<div class="custom-table-col col-12 col-sm-6 col-md-2">Group</div>
+					<div class="custom-table-col col-12 col-sm-6 col-md-2">Country</div>
+					<div class="custom-table-col col-12 col-sm-6 col-md-1"></div>
+					<div class="custom-table-col col-12 col-sm-6 col-md-1"></div>
 				</div>
 			</div>
 		</div>
@@ -185,11 +190,7 @@
 		<div class="card-footer small text-muted">&nbsp;</div>
 	</div>
 </div>
-<template class="countrySelect"> <select class="form-control">
-	<c:forEach items="${country}" var="item">
-		<option value="${item.value}">${item.name}</option>
-	</c:forEach>
-</select> </template>
+<template class="countrySelect"> </template>
 <template class="viewrole-list-item">
 <div class="custom-table-row row">
 	<div class="custom-table-col col-12 col-sm-10 no-padding">
@@ -220,6 +221,38 @@
 	</div>
 </div>
 </template>
+<template class="user-management-list-item">
+<div class="row custom-table-row">
+	<div class="custom-table-col col-12 col-sm-6 col-md-3">
+		<span class="user-email"></span>
+		<input type="hidden" class="user-id">
+	</div>
+	<div class="custom-table-col col-12 col-sm-6 col-md-3 no-padding">
+		<input type="text" class="form-control user-name">
+	</div>
+	<div class="custom-table-col col-12 col-sm-6 col-md-2 no-padding">
+		<select class="form-control user-group">
+			<c:forEach items="${group}" var="item">
+				<option value="${item.value}">${item.name}</option>
+			</c:forEach>
+		</select> 
+	</div>
+	<div class="custom-table-col col-12 col-sm-6 col-md-2 no-padding">
+		<select class="form-control user-country">
+			<c:forEach items="${country}" var="item">
+				<option value="${item.value}">${item.name}</option>
+			</c:forEach>
+		</select> 
+	</div>
+	<div class="custom-table-col col-12 col-sm-6 col-md-1 no-padding btn-col">
+		<button type="button" class="btn btn-outline-primary btn-sm user-btn modify-btn">MODIFY</button>
+	</div>
+	<div class="custom-table-col col-12 col-sm-6 col-md-1 no-padding btn-col">
+		<button type="button" class="btn btn-outline-danger btn-sm user-btn delete-btn">DELETE</button>
+		<button type="button" class="btn btn-outline-warning btn-sm user-btn delete-btn">ACTIVE</button>
+	</div>
+</div>
+</template>
 <jsp:include page="./particle/bottom.jsp"></jsp:include>
 <script>
 	var _admin = (function(obj) {
@@ -236,35 +269,44 @@
 					cb.call(this, data);
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
-
+					console.log(jqXHR);
+					console.log(errorThrown);
+					toastr.error("system error!");
 				},
 				complete : function(jqXHR, textStatus) {
 
 				}
 			});
 		},
-		createUserRow : function(user) {
-			var $row = $("<div></div>").addClass("row custom-table-row");
-			var $col1 = $("<div></div>").addClass("custom-table-col col-12 col-sm-6 col-md-4").text(user.email);
-			$col1.append($("<input type='hidden' class='user-id'>").val(user.id));
-			var $col2 = $("<div></div>").addClass("custom-table-col col-12 col-sm-6 col-md-4 no-padding")
-										.append($("<input type='text' class='form-control user-name'>").val(user.name));
-			var $col3 = $("<div></div>").addClass("custom-table-col col-12 col-sm-4 col-md-2 no-padding");
-			$col3.append($($(".countrySelect").html()).addClass("user-country").val(user.country));
-			var $col4 = $("<div></div>").addClass("custom-table-col col-12 col-sm-4 col-md-1 no-padding btn-col").append(
-					$("<button type='button' class='btn btn-outline-primary btn-sm user-btn modify-btn'>MODIFY</button>"));
-			var $col5 = $("<div></div>").addClass("custom-table-col col-12 col-sm-4 col-md-1 no-padding btn-col");
-			if (user.deleted) {
-				$col5.append("<button type='button' class='btn btn-outline-success btn-sm user-btn active-btn'>ACTIVE</button>");
-			} else {
-				$col5.append("<button type='button' class='btn btn-outline-danger btn-sm user-btn delete-btn'>DELETE</button>");
+		isNullorEmptyOrUndefined: function(val){
+			if(val === null){
+				return true;
 			}
-			$row.append($col1);
-			$row.append($col2);
-			$row.append($col3);
-			$row.append($col4);
-			$row.append($col5);
-			$(".user-table").append($row);
+			if(val === undefined){
+				return true;
+			}
+			if($.trim(val) === ""){
+				return true;
+			}
+			return false;
+		},
+		createUserRow : function(user) {
+			$dom = $($(".user-management-list-item").html());
+			$dom.find(".user-email").text(user.email);
+			$dom.find(".user-id").val(user.id);
+			$dom.find(".user-name").val(user.name);
+			$dom.find(".user-country").val(user.country);
+			$dom.find(".user-group").select2({
+				multiple: true,
+				width: "100%"
+			});
+			$dom.find(".user-group").val(user.group).trigger("change");
+			if(user.deleted){
+				$dom.find(".btn-outline-danger.delete-btn").hide();
+			} else {
+				$dom.find(".btn-outline-warning.delete-btn").hide();
+			}
+			$(".user-table").append($dom);
 		},
 		selectionResize : function() {
 			var width = $(".view-select-user").width();
@@ -298,24 +340,24 @@
 				},
 				width : $(".view-select-user").width() - 110
 			});
-			
+
 			//TODO: Dynamic view role add button
 			$(document).on("click", ".view-role-add-btn", function() {
 				$dom = $($(".viewrole-list-item").html());
 				$(".view-role-list-result").append($dom);
 			});
-			
+
 			//TODO: Dynamic action role add button
 			$(document).on("click", ".action-role-add-btn", function() {
 				$dom = $($(".actionrole-list-item").html());
 				$(".action-role-list-result").append($dom);
 			});
-			
+
 			//TODO: Dynamic delete button.
 			$(document).on("click", ".role-delete-btn", function() {
 				$(this).parent().parent().remove();
 			});
-			
+
 			//TODO: View role save button
 			$(".view-role-save-btn").on("click", function() {
 				var data = {
@@ -344,7 +386,7 @@
 					toastr.error("View-role save error");
 				});
 			});
-			
+
 			//TODO: Action role save button
 			$(".action-role-save-btn").on("click", function() {
 				var data = {
@@ -373,21 +415,21 @@
 					toastr.error("Action-role save error");
 				});
 			});
-			
+
 			//TODO: View role radio button event
-			$("input[name=searchTypeView]").on("click", function(){
+			$("input[name=searchTypeView]").on("click", function() {
 				$(".view-role-list-result").html("");
 				$(".view-role-result").addClass("hide");
 				$(".view-role-save-btn").attr("disabled", true);
 			});
-			
+
 			//TODO: Action role radio button event
-			$("input[name=searchTypeAction]").on("click", function(){
+			$("input[name=searchTypeAction]").on("click", function() {
 				$(".action-role-list-result").html("");
 				$(".action-role-result").addClass("hide");
 				$(".action-role-save-btn").attr("disabled", true);
 			});
-			
+
 			//TODO: View role search button
 			$(".view-role-btn").on("click", function() {
 				var data = {
@@ -415,7 +457,7 @@
 					}
 				});
 			});
-			
+
 			//TODO: Action role search button
 			$(".action-role-btn").on("click", function() {
 				var data = {
@@ -451,17 +493,49 @@
 					}
 				});
 			});
-			
+
 			$(document).on("click", ".modify-btn", function() {
 				var $obj = $(this).parent().parent();
 				var data = {
-					id:$obj.find(".user-id").val(),
-					name:$obj.find(".user-name").val(),
-					country:$obj.find(".user-country").val()
+					id : $obj.find(".user-id").val(),
+					name : $obj.find(".user-name").val(),
+					group: $obj.find(".user-group").val(),
+					country : $obj.find(".user-country").val()
+				}
+				if(_admin.isNullorEmptyOrUndefined(data.id)){
+					toastr.warning("The id was null or empty.");
+					return;
+				}
+				if(_admin.isNullorEmptyOrUndefined(data.name)){
+					toastr.warning("The name was null or empty.");
+					return;
+				}
+				if(_admin.isNullorEmptyOrUndefined(data.country)){
+					toastr.warning("The country was null or empty.");
+					return;
 				}
 				_admin.ajax("./modifyUser.ajax", data, function(data) {
 					if (data.ret) {
-						toastr.success("Master reset!");
+						toastr.success("The user was modified.");
+					}
+				});
+			});
+			
+			$(document).on("click", ".delete-btn", function(){
+				var $obj = $(this).parent().parent();
+				var data = {
+					id : $obj.find(".user-id").val()
+				}
+				if(_admin.isNullorEmptyOrUndefined(data.id)){
+					toastr.warning("The id was null or empty.");
+					return;
+				}
+				_admin.ajax("./deleteOrActiveUser.ajax", data, function(data) {
+					toastr.success("The user was deleted or actived.");
+					if(data.ret){
+						$obj.find(".btn-outline-danger.delete-btn").hide();
+					} else {
+						$obj.find(".btn-outline-warning.delete-btn").hide();
 					}
 				});
 			});

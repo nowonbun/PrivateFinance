@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 //import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSession;
 
+import Model.User;
+
 public class WebFilter implements Filter {
 
 	private ArrayList<String> passUrl = null;
@@ -41,6 +43,11 @@ public class WebFilter implements Filter {
 		}
 		if (session.getAttribute(Define.USER_SESSION_NAME) == null) {
 			res.sendRedirect("./");
+			return;
+		}
+		User user = (User)session.getAttribute(Define.USER_SESSION_NAME);
+		if(user.Isdeleted()) {
+			res.setStatus(401);
 			return;
 		}
 		chain.doFilter(req, res);

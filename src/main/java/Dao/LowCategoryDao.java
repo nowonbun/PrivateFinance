@@ -1,9 +1,12 @@
 package Dao;
 
 import java.util.List;
+import java.util.Optional;
+
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import Common.MasterDao;
+import Common.Util;
 import Model.LowCategory;
 
 public class LowCategoryDao extends MasterDao<LowCategory> {
@@ -22,5 +25,14 @@ public class LowCategoryDao extends MasterDao<LowCategory> {
 				return null;
 			}
 		});
+	}
+
+	public LowCategory getLowCategory(String code) {
+		Optional<LowCategory> data = super.getData().stream().filter(x -> Util.StringEquals(x.getCode(), code)).findFirst();
+		if (!data.isPresent()) {
+			return null;
+		} else {
+			return data.get();
+		}
 	}
 }

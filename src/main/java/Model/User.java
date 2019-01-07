@@ -19,7 +19,7 @@ public class User implements Serializable {
 
 	private String email;
 
-	private boolean isdelted;
+	private boolean isdeleted;
 
 	private String name;
 
@@ -72,12 +72,12 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public boolean getIsdelted() {
-		return this.isdelted;
+	public boolean Isdeleted() {
+		return this.isdeleted;
 	}
 
-	public void setIsdelted(boolean isdelted) {
-		this.isdelted = isdelted;
+	public void setdeleted(boolean isdeleted) {
+		this.isdeleted = isdeleted;
 	}
 
 	public String getName() {

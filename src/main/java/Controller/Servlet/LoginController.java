@@ -19,7 +19,7 @@ import Dao.UserDao;
 import Model.User;
 
 @Controller
-public class LoginController extends AbstractServletController{
+public class LoginController extends AbstractServletController {
 	@RequestMapping(value = "/index.html", method = RequestMethod.GET)
 	public String index(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
 		session.setAttribute(Define.USER_SESSION_NAME, null);
@@ -44,9 +44,8 @@ public class LoginController extends AbstractServletController{
 			user.setName(name);
 			user.setGroups(FactoryDao.getDao(GroupDao.class).getData().stream().filter(x -> x.getIsdefault()).collect(Collectors.toList()));
 			user.setLanguaueType(FactoryDao.getDao(LanguageTypeDao.class).getData().stream().filter(x -> x.getCode().equals("0")).findFirst().get());
-			user.setIsdelted(false);
+			user.setdeleted(false);
 			user.setCreateddate(new Date());
-			System.out.println("debugger");
 			FactoryDao.getDao(UserDao.class).create(user);
 		}
 
@@ -59,7 +58,7 @@ public class LoginController extends AbstractServletController{
 
 		return "redirect:main.html";
 	}
-	
+
 	@RequestMapping(value = "/logout.html", method = RequestMethod.GET)
 	public String logout(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
 		session.setAttribute(Define.USER_SESSION_NAME, null);

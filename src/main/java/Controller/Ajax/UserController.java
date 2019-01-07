@@ -14,9 +14,13 @@ import Bean.Select2AjaxBean;
 import Bean.Select2AjaxItem;
 import Bean.UserBean;
 import Common.AbstractAjaxController;
+import Common.Define;
 import Common.FactoryDao;
+import Dao.GroupDao;
+import Dao.LanguageTypeDao;
 import Dao.UserDao;
 import Dao.ViewroleDao;
+import Model.Group;
 import Model.User;
 
 @Controller
@@ -35,7 +39,11 @@ public class UserController extends AbstractAjaxController {
 			bean.setEmail(user.getEmail());
 			bean.setName(user.getName());
 			bean.setCountry(user.getLanguaueType().getCode());
-			bean.setDeleted(user.getIsdelted());
+			bean.setGroup(new ArrayList<>());
+			for (Group group : user.getGroups()) {
+				bean.getGroup().add(group.getCode());
+			}
+			bean.setDeleted(user.Isdeleted());
 			ret.add(bean);
 		}
 		returnAjax(res, ret);
@@ -59,7 +67,7 @@ public class UserController extends AbstractAjaxController {
 		}
 		returnAjax(res, ret);
 	}
-	
+
 	@RequestMapping(value = "/modifyUser.ajax")
 	public void modifyUser(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("ADMN"))) {
@@ -69,7 +77,52 @@ public class UserController extends AbstractAjaxController {
 		String id = req.getParameter("id");
 		String name = req.getParameter("name");
 		String country = req.getParameter("country");
-		
+		String[] group = req.getParameterMap().get("group[]");
+
+		if (id == null || name == null || country == null || group == null) {
+			res.setStatus(403);
+			return;
+		}
+		User user = FactoryDao.getDao(UserDao.class).getUser(id);
+		user.setName(name);
+		user.setLanguaueType(FactoryDao.getDao(LanguageTypeDao.class).getLanuageType(country));
+		user.getGroups().clear();
+		for (String g : group) {
+			user.getGroups().add(FactoryDao.getDao(GroupDao.class).getGroup(g));
+		}
+		FactoryDao.getDao(UserDao.class).update(user);
+
+		user = getCurrentUser(session);
+		if (user.getId().equals(id)) {
+			session.setAttribute(Define.USER_SESSION_NAME, FactoryDao.getDao(UserDao.class).getUser(id));
+		}
+		ObjectBean bean = new ObjectBean();
+		bean.setRet(true);
+		returnAjax(res, bean);
+	}
+
+	@RequestMapping(value = "/deleteOrActiveUser.ajax")
+	public void deleteOrActiveUser(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("ADMN"))) {
+			res.setStatus(403);
+			return;
+		}
+		String id = req.getParameter("id");
+		if (id == null) {
+			res.setStatus(403);
+			return;
+		}
+		User user = FactoryDao.getDao(UserDao.class).getUser(id);
+		user.setdeleted(!user.Isdeleted());
+		FactoryDao.getDao(UserDao.class).update(user);
+
+		user = getCurrentUser(session);
+		if (user.getId().equals(id)) {
+			session.setAttribute(Define.USER_SESSION_NAME, FactoryDao.getDao(UserDao.class).getUser(id));
+		}
+		ObjectBean bean = new ObjectBean();
+		bean.setRet(user.Isdeleted());
+		returnAjax(res, bean);
 	}
 
 	@RequestMapping(value = "/resetMaster.ajax")

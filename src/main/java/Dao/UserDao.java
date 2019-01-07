@@ -15,7 +15,7 @@ public class UserDao extends TransactionDao<User> {
 	public User getUser(String id) {
 		return transaction((em) -> {
 			try {
-				String qy = "SELECT u FROM User u WHERE u.id = :id and u.isdelted = false";
+				String qy = "SELECT u FROM User u WHERE u.id = :id";
 				Query query = em.createQuery(qy);
 				query.setParameter("id", id);
 				return (User) query.getSingleResult();

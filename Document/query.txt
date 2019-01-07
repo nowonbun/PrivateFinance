@@ -64,9 +64,9 @@ CREATE TABLE MST_ACTIONROLE(
 INSERT INTO MST_ACTIONROLE (CODE, NAME, ISACTIVE) VALUES('PFNA', N'PrivateFinanceNoteItemAdd', 1);
 INSERT INTO MST_ACTIONROLE (CODE, NAME, ISACTIVE) VALUES('PFND', N'PrivateFinanceNoteItemDelete', 1);
 INSERT INTO MST_ACTIONROLE (CODE, NAME, ISACTIVE) VALUES('PFNM', N'PrivateFinanceNoteItemModify', 1);
-INSERT INTO MST_ACTIONROLE (CODE, NAME, ISACTIVE) VALUES('CTGA', N'PrivateFinanceNoteCategoryAdd', 1);
-INSERT INTO MST_ACTIONROLE (CODE, NAME, ISACTIVE) VALUES('CTGD', N'PrivateFinanceNoteCategoryDelete', 1);
-INSERT INTO MST_ACTIONROLE (CODE, NAME, ISACTIVE) VALUES('CTGM', N'PrivateFinanceNoteCategoryModify', 1);
+--INSERT INTO MST_ACTIONROLE (CODE, NAME, ISACTIVE) VALUES('CTGA', N'PrivateFinanceNoteCategoryAdd', 1);
+--INSERT INTO MST_ACTIONROLE (CODE, NAME, ISACTIVE) VALUES('CTGD', N'PrivateFinanceNoteCategoryDelete', 1);
+--INSERT INTO MST_ACTIONROLE (CODE, NAME, ISACTIVE) VALUES('CTGM', N'PrivateFinanceNoteCategoryModify', 1);
  
 CREATE TABLE TSN_USER(
   ID VARCHAR(255) NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE TSN_USER(
   NAME NVARCHAR(255) NOT NULL,
   COUNTRY CHAR(1) DEFAULT '0' NOT NULL,
   CREATEDDATE DATETIME DEFAULT NOW() NOT NULL,
-  ISDELTED BIT DEFAULT 0 NOT NULL,
+  ISDELETED BIT DEFAULT 0 NOT NULL,
  
   PRIMARY KEY(ID),
   FOREIGN KEY (COUNTRY) REFERENCES MST_LANGUAGE_TYPE(CODE)
@@ -140,15 +140,15 @@ INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'Private
 INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteItemModify','0',N'가계부 수정',1);
 INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteItemModify','1',N'Private finance item modify',1);
 INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteItemModify','2',N'家計簿修正',1);
-INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryAdd','0',N'가계부 카테고리 추가',1);
-INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryAdd','1',N'Private finance category add',1);
-INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryAdd','2',N'家計簿カテゴリ追加',1);
-INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryDelete','0',N'가계부 카테고리 삭제',1);
-INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryDelete','1',N'Private finance category delted',1);
-INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryDelete','2',N'家計簿カテゴリ削除',1);
-INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryModify','0',N'가계부 카테고리 수정',1);
-INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryModify','1',N'Private finance category modify',1);
-INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryModify','2',N'家計簿カテゴリ修正',1);
+--INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryAdd','0',N'가계부 카테고리 추가',1);
+--INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryAdd','1',N'Private finance category add',1);
+--INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryAdd','2',N'家計簿カテゴリ追加',1);
+--INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryDelete','0',N'가계부 카테고리 삭제',1);
+--INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryDelete','1',N'Private finance category deleted',1);
+--INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryDelete','2',N'家計簿カテゴリ削除',1);
+--INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryModify','0',N'가계부 카테고리 수정',1);
+--INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryModify','1',N'Private finance category modify',1);
+--INSERT INTO MST_LOCALIZATION (`KEY`, `TYPE`, `VALUE`, ISACTIVE) VALUES(N'PrivateFinanceNoteCategoryModify','2',N'家計簿カテゴリ修正',1);
 
 CREATE TABLE MST_LOW_CATEGORY(
   CODE CHAR(1) NOT NULL,

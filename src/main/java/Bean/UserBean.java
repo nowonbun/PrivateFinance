@@ -1,10 +1,13 @@
 package Bean;
 
+import java.util.List;
+
 public class UserBean {
 	private String id;
 	private String email;
 	private String name;
 	private String country;
+	private List<String> group;
 	private boolean deleted;
 
 	public String getId() {
@@ -45,6 +48,14 @@ public class UserBean {
 
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
+	}
+
+	public List<String> getGroup() {
+		return group;
+	}
+
+	public void setGroup(List<String> group) {
+		this.group = group;
 	}
 
 }
