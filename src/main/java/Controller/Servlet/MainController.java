@@ -169,4 +169,14 @@ public class MainController extends AbstractServletController {
 
 		return "admin";
 	}
+	
+	@RequestMapping(value = "/finance.html")
+	public String finance(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("PFNV"))) {
+			res.setStatus(403);
+			return "";
+		}
+		super.initMenu(modelmap, session);
+		return "finance";
+	}
 }

@@ -186,7 +186,9 @@
 </div>
 </template>
 <form method="POST" action="saveCategory.html">
-	<input type="hidden" name="income"> <input type="hidden" name="expenditure"> <input type="hidden" name="saving">
+	<input type="hidden" name="income">
+	<input type="hidden" name="expenditure"> 
+	<input type="hidden" name="saving">
 </form>
 <jsp:include page="./particle/bottom.jsp"></jsp:include>
 <script>
@@ -194,37 +196,6 @@
 		$(obj.onLoad);
 		return obj;
 	})({
-		ajax : function(url, data, cb) {
-			$.ajax({
-				url : url,
-				type : "POST",
-				dataType : "json",
-				data : data,
-				success : function(data, textStatus, jqXHR) {
-					cb.call(this, data);
-				},
-				error : function(jqXHR, textStatus, errorThrown) {
-					console.log(jqXHR);
-					console.log(errorThrown);
-					toastr.error("system error!");
-				},
-				complete : function(jqXHR, textStatus) {
-
-				}
-			});
-		},
-		isNullorEmptyOrUndefined : function(val) {
-			if (val === null) {
-				return true;
-			}
-			if (val === undefined) {
-				return true;
-			}
-			if ($.trim(val) === "") {
-				return true;
-			}
-			return false;
-		},
 		onLoad : function() {
 			$(".add-btn").on("click", function() {
 				$result = $(this).parent().parent().parent().find(".list-result");

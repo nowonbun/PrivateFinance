@@ -216,7 +216,7 @@ CREATE TABLE MST_MENU(
   FOREIGN KEY (VIEWCODE) REFERENCES MST_VIEWROLE(CODE)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 INSERT INTO MST_MENU (`CODE`, `NAME`, `VIEWCODE`, ICON, LINK, SEQUENCE, ISACTIVE) VALUES('DASH', N'Dashboard', null, 'fas fa-fw fa-tachometer-alt', './main.html', 1, 1);
-INSERT INTO MST_MENU (`CODE`, `NAME`, `VIEWCODE`, ICON, LINK, SEQUENCE, ISACTIVE) VALUES('FNNC', N'Finence', 'PFNV', 'fas fa-clipboard-list', './finence.html', 2, 1);
+INSERT INTO MST_MENU (`CODE`, `NAME`, `VIEWCODE`, ICON, LINK, SEQUENCE, ISACTIVE) VALUES('FNNC', N'Finence', 'PFNV', 'fas fa-clipboard-list', './finance.html', 2, 1);
 INSERT INTO MST_MENU (`CODE`, `NAME`, `VIEWCODE`, ICON, LINK, SEQUENCE, ISACTIVE) VALUES('CTGV', N'Category', 'CTGV', 'fas fa-gavel', './category.html', 3, 1);
 INSERT INTO MST_MENU (`CODE`, `NAME`, `VIEWCODE`, ICON, LINK, SEQUENCE, ISACTIVE) VALUES('ADMN', N'Admin', 'ADMN', 'fas fa-luggage-cart', './admin.html', 4, 1);
 
