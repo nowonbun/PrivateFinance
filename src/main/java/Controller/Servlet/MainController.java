@@ -1,7 +1,10 @@
 package Controller.Servlet;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,6 +28,7 @@ import Model.Actionrole;
 import Model.Category;
 import Model.Group;
 import Model.LanguageType;
+import Model.LowCategory;
 import Model.Viewrole;
 
 @Controller
@@ -83,7 +87,7 @@ public class MainController extends AbstractServletController {
 		updateCategory(convertCategoryItem(income), "i");
 		updateCategory(convertCategoryItem(expenditure), "e");
 		updateCategory(convertCategoryItem(saving), "s");
-		
+
 		modelmap.addAttribute("categoryupdated", true);
 		return category(modelmap, session, req, res);
 	}
@@ -169,7 +173,7 @@ public class MainController extends AbstractServletController {
 
 		return "admin";
 	}
-	
+
 	@RequestMapping(value = "/finance.html")
 	public String finance(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("PFNV"))) {
@@ -177,6 +181,55 @@ public class MainController extends AbstractServletController {
 			return "";
 		}
 		super.initMenu(modelmap, session);
+
+		List<SelectionBean> yearlist = new ArrayList<>();
+		for (int i = 2014; i <= 2020; i++) {
+			SelectionBean bean = new SelectionBean();
+			bean.setName(String.valueOf(i));
+			bean.setValue(String.valueOf(i));
+			yearlist.add(bean);
+		}
+		List<SelectionBean> monthlist = new ArrayList<>();
+		for (int i = 1; i <= 12; i++) {
+			SelectionBean bean = new SelectionBean();
+			bean.setName(String.valueOf(i));
+			bean.setValue(String.valueOf(i));
+			monthlist.add(bean);
+		}
+		List<SelectionBean> daylist = new ArrayList<>();
+		for (int i = 1; i <= 31; i++) {
+			SelectionBean bean = new SelectionBean();
+			bean.setName(String.valueOf(i));
+			bean.setValue(String.valueOf(i));
+			daylist.add(bean);
+		}
+
+		List<SelectionBean> lowcategory = new ArrayList<>();
+		Map<String, List<SelectionBean>> category = new HashMap<>();
+		for (LowCategory item : FactoryDao.getDao(LowCategoryDao.class).getData()) {
+			SelectionBean bean = new SelectionBean();
+			bean.setName(Util.localization(item.getName(), getCurrentUser(session).getLanguaueType().getCode()));
+			bean.setValue(item.getCode());
+			lowcategory.add(bean);
+			if (!category.containsKey(item.getCode())) {
+				category.put(item.getCode(), new ArrayList<>());
+			}
+			List<SelectionBean> sub = category.get(item.getCode());
+			for (Category item2 : item.getCategories()) {
+				SelectionBean bean2 = new SelectionBean();
+				bean2.setName(Util.localization(item2.getName(), getCurrentUser(session).getLanguaueType().getCode()));
+				bean2.setValue(item2.getName());
+				sub.add(bean2);
+			}
+		}
+
+		modelmap.addAttribute("yearlist", yearlist);
+		modelmap.addAttribute("monthlist", monthlist);
+		modelmap.addAttribute("daylist", daylist);
+		modelmap.addAttribute("lowcategory", lowcategory);
+		modelmap.addAttribute("categorymap", category);
+		modelmap.addAttribute("categorykey", category.keySet().toArray());
+
 		return "finance";
 	}
 }
