@@ -89,7 +89,7 @@
 	                                <input type="hidden" id="householdPdt_pc" name="householdPdt">
 	                                <div class="selectDiv household-date day">
 	                                    <span></span>
-	                                    <select class="household-date day" id="householdDay_pc" name="householdDay">
+	                                    <select class="household-date day" id="householdDay" name="householdDay">
 	                                        <c:forEach items="${daylist}" var="item">
 					                        	<option value="${item.value}">${item.name}</option>
 											</c:forEach>
@@ -99,7 +99,7 @@
 	                            <td>
 	                                <div class="selectDiv household-category">
 	                                    <span></span>
-	                                    <select class="household-category" id="householdCategory_pc" name="householdCategory">
+	                                    <select class="household-category" id="householdCategory" name="householdCategory">
 	                                    	<c:forEach items="${lowcategory}" var="item">
 					                        	<option value="${item.value}">${item.name}</option>
 											</c:forEach>
@@ -109,7 +109,7 @@
 	                            <td>
 	                                <div class="selectDiv household-category">
 	                                    <span>支出</span>
-	                                    <select class="household-type" id="householdType_pc" name="householdType"><option value="001">収入</option><option value="002">支出</option><option value="003">食費</option><option value="004">交通費</option><option value="005">ローン</option><option value="006">お小遣い</option><option value="007">外食</option><option value="008">光熱費</option></select>
+	                                    <select class="household-type" id="householdType" name="householdType"></select>
 	                                </div>
 	                            </td>
 	                            <td>
@@ -667,6 +667,15 @@
 	                $("div.selectDiv.searchTypeSelect").find("span").html($("select#searchTypeSelect").find("option:selected").html());
 	                _finance.search.search();
 	            });
+	            
+	            $("#householdCategory").on("change", function(){
+	            	debugger;
+	            	var type = $(this).find("option:selectd").val();
+	            	console.log(type);
+	            	var dom = $(".category-select[data-type="+type+"]").html();
+	            	console.log(dom);
+	            	$("#householdType").html(dom);
+	            });
 	        },
 	        search: function () {
 	            var year = parseInt($("#householdYear").val());
@@ -678,6 +687,7 @@
 	            var type = $("#searchTypeSelect").val();
 	            debugger;
 	            console.log("search!!");
+	            //TODO: This must be solved!.
 	            //_.data.initVal();
 	            //_.fn.sendAjax("Search", "year=" + year + "&month=" + month + "&day=" + day + "&type=" + type, _.data.searchData);
 	        },
