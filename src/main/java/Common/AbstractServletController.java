@@ -10,7 +10,7 @@ import Dao.MenuDao;
 import Model.Menu;
 
 public abstract class AbstractServletController extends AbstractController {
-	
+
 	protected void initMenu(ModelMap modelmap, HttpSession session) {
 		List<Menu> menuList = FactoryDao.getDao(MenuDao.class).getData();
 		List<MenuBean> menuBeanList = new ArrayList<>();
@@ -21,7 +21,7 @@ public abstract class AbstractServletController extends AbstractController {
 			MenuBean bean = new MenuBean();
 			bean.setIcon(item.getIcon());
 			bean.setLink(item.getLink());
-			bean.setName(Util.localization(item.getName(), getCurrentUser(session).getLanguaueType().getCode()));
+			bean.setName(Util.localization(item.getName(), session));
 			menuBeanList.add(bean);
 		}
 		modelmap.addAttribute("menu", menuBeanList);

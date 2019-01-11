@@ -142,28 +142,28 @@ public class MainController extends AbstractServletController {
 		for (LanguageType item : FactoryDao.getDao(LanguageTypeDao.class).getData()) {
 			SelectionBean bean = new SelectionBean();
 			bean.setValue(item.getCode());
-			bean.setName(Util.localization(item.getName(), getCurrentUser(session).getLanguaueType().getCode()));
+			bean.setName(Util.localization(item.getName(), session));
 			countryList.add(bean);
 		}
 		List<SelectionBean> groupList = new ArrayList<>();
 		for (Group item : FactoryDao.getDao(GroupDao.class).getData()) {
 			SelectionBean bean = new SelectionBean();
 			bean.setValue(item.getCode());
-			bean.setName(Util.localization(item.getName(), getCurrentUser(session).getLanguaueType().getCode()));
+			bean.setName(Util.localization(item.getName(), session));
 			groupList.add(bean);
 		}
 		List<SelectionBean> viewrolelist = new ArrayList<>();
 		for (Viewrole item : FactoryDao.getDao(ViewroleDao.class).getData()) {
 			SelectionBean bean = new SelectionBean();
 			bean.setValue(item.getCode());
-			bean.setName(Util.localization(item.getName(), getCurrentUser(session).getLanguaueType().getCode()));
+			bean.setName(Util.localization(item.getName(), session));
 			viewrolelist.add(bean);
 		}
 		List<SelectionBean> actionrolelist = new ArrayList<>();
 		for (Actionrole item : FactoryDao.getDao(ActionroleDao.class).getData()) {
 			SelectionBean bean = new SelectionBean();
 			bean.setValue(item.getCode());
-			bean.setName(Util.localization(item.getName(), getCurrentUser(session).getLanguaueType().getCode()));
+			bean.setName(Util.localization(item.getName(), session));
 			actionrolelist.add(bean);
 		}
 		modelmap.addAttribute("country", countryList);
@@ -208,7 +208,7 @@ public class MainController extends AbstractServletController {
 		Map<String, List<SelectionBean>> category = new HashMap<>();
 		for (LowCategory item : FactoryDao.getDao(LowCategoryDao.class).getData()) {
 			SelectionBean bean = new SelectionBean();
-			bean.setName(Util.localization(item.getName(), getCurrentUser(session).getLanguaueType().getCode()));
+			bean.setName(Util.localization(item.getName(), session));
 			bean.setValue(item.getCode());
 			lowcategory.add(bean);
 			if (!category.containsKey(item.getCode())) {
@@ -217,7 +217,7 @@ public class MainController extends AbstractServletController {
 			List<SelectionBean> sub = category.get(item.getCode());
 			for (Category item2 : item.getCategories()) {
 				SelectionBean bean2 = new SelectionBean();
-				bean2.setName(Util.localization(item2.getName(), getCurrentUser(session).getLanguaueType().getCode()));
+				bean2.setName(Util.localization(item2.getName(), session));
 				bean2.setValue(item2.getName());
 				sub.add(bean2);
 			}

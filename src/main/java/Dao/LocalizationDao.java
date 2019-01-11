@@ -27,7 +27,7 @@ public class LocalizationDao extends MasterDao<Localization> {
 	}
 
 	public String getLocalization(String name, String type) {
-		Optional<Localization> data = super.getData().stream().filter(x -> Util.StringEquals(x.getId().getKey(), name) && Util.StringEquals(x.getId().getType(), type)).findFirst();
+		Optional<Localization> data = super.getData().stream().filter(x -> Util.StringEqualsUpper(x.getId().getKey(), name) && Util.StringEqualsUpper(x.getId().getType(), type)).findFirst();
 		if (!data.isPresent()) {
 			return name;
 		} else {

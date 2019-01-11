@@ -1,3 +1,4 @@
+<%@page import="Common.Util"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="./particle/top.jsp"></jsp:include>
@@ -58,7 +59,7 @@
 							</c:forEach>
 	                    </select>
 	                </div>
-	                <label class="household-date">年</label>
+	                <label class="household-date"><%=Util.localization("year", session) %></label>
 	                <div class="selectDiv household-date month">
 	                    <span>${month}</span>
 	                    <select class="household-date month" id="householdMonth" name="householdMonth">
@@ -67,7 +68,7 @@
 							</c:forEach>
 	                    </select>
 	                </div>
-	                <label class="household-date">月</label>
+	                <label class="household-date"><%=Util.localization("month", session) %></label>
 	                <span class="fa fa-chevron-circle-right"></span>
 	            </div>
 	            <div class="space"></div>
@@ -75,11 +76,11 @@
 	                <table class="table-input pc-private">
 	                    <thead>
 	                        <tr>
-	                            <th>日</th>
-	                            <th>区分</th>
-	                            <th>カテ</th>
-	                            <th>内容</th>
-	                            <th>金額</th>
+	                            <th><%=Util.localization("day", session) %></th>
+	                            <th><%=Util.localization("type", session) %></th>
+	                            <th><%=Util.localization("category", session) %></th>
+	                            <th><%=Util.localization("contents", session) %></th>
+	                            <th><%=Util.localization("money", session) %></th>
 	                        </tr>
 	                    </thead>
 	                    <tbody>
@@ -108,21 +109,21 @@
 	                            </td>
 	                            <td>
 	                                <div class="selectDiv household-category">
-	                                    <span>支出</span>
+	                                    <span></span>
 	                                    <select class="household-type" id="householdType" name="householdType"></select>
 	                                </div>
 	                            </td>
 	                            <td>
-	                                <input name="householdContent" id="householdContent_pc" autocomplete="off" maxlength="40">
+	                                <input name="householdContent" id="householdContent" autocomplete="off" maxlength="40">
 	                            </td>
 	                            <td>
-	                                <input type="tel" pattern="[0-9]*" name="householdPrice" id="householdPrice_pc" autocomplete="off" maxlength="8">
+	                                <input type="number" name="householdPrice" id="householdPrice" autocomplete="off" maxlength="8">
 	                            </td>
 	                        </tr>
 	                        <tr>
 	                            <td colspan="5">
 	                                <div class="apply-area">
-	                                    <input type="button" value="登録" id="applySubmit_pc">
+	                                    <input type="button" value=<%=Util.localization("Save", session) %> id="applySubmit">
 	                                </div>
 	                                <div class="modify-area off">
 	                                    <input type="button" value="取消" id="cancelSubmit_pc">
@@ -133,9 +134,6 @@
 	                        </tr>
 	                    </tbody>
 	                </table>
-	                <div class="table-input mobile-private">
-	                    <input type="button" value="登録" id="apply_mobile">
-	                </div>
 	            </div>
 	        </form>
 	        <div class="space"></div>
@@ -412,139 +410,6 @@
 	        </table>
 	        <select id="select_000"><option value="001">収入</option><option value="002">支出</option><option value="003">食費</option><option value="004">交通費</option><option value="005">ローン</option><option value="006">お小遣い</option><option value="007">外食</option><option value="008">光熱費</option></select><select id="select_010"><option value="011">入金</option><option value="012">出金</option></select><select id="select_020"><option value="022">支出</option></select>
 	    </div>
-	    <div class="layout off">
-	        <div class="apply off">
-	            <div class="title">
-	                <label>登録</label>
-	                <span class="remove fa fa-close" aria-hidden="true"></span>
-	            </div>
-	            <div class="layout-main">
-	                <form id="apply_form_mobile">
-	                    <table>
-	                        <tbody>
-	                            <tr>
-	                                <th>日</th>
-	                                <td>
-	                                    <input type="hidden" id="householdYear_mobile" name="householdYear" value="">
-	                                    <input type="hidden" id="householdMonth_mobile" name="householdMonth" value="">
-	                                    <input type="hidden" id="householdIdx_mobile" name="householdIdx" value="">
-	                                    <input type="hidden" id="householdPdt_mobile" name="householdPdt" value="">
-	                                    <div class="selectDiv householdDay_mobile">
-	                                        <span>8</span>
-	                                        <select class="household-date day" id="householdDay_mobile" name="householdDay">
-	                                            <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
-	                                        </select>
-	                                    </div>
-	                                </td>
-	                            </tr>
-	                            <tr>
-	                                <th>カテゴリ</th>
-	                                <td>
-	                                    <div class="selectDiv householdCategory_mobile">
-	                                        <span>一般</span>
-	                                        <select class="household-category" id="householdCategory_mobile" name="householdCategory">
-	                                            <option value="000">一般</option><option value="010">貯蓄</option><option value="020">クレジット</option>
-	                                        </select>
-	                                    </div>
-	                                </td>
-	                            </tr>
-	                            <tr>
-	                                <th>区分</th>
-	                                <td>
-	                                    <div class="selectDiv householdType_mobile">
-	                                        <span>支出</span>
-	                                        <select class="household-type" id="householdType_mobile" name="householdType"><option value="001">収入</option><option value="002">支出</option><option value="003">食費</option><option value="004">交通費</option><option value="005">ローン</option><option value="006">お小遣い</option><option value="007">外食</option><option value="008">光熱費</option></select>
-	                                    </div>
-	                                    
-	                                </td>
-	                            </tr>
-	                            <tr>
-	                                <th>内容</th>
-	                                <td>
-	                                    <input type="text" name="householdContent" id="householdContent_mobile" autocomplete="off" maxlength="40">
-	                                </td>
-	                            </tr>
-	                            <tr>
-	                                <th>金額</th>
-	                                <td>
-	                                    <input type="tel" pattern="[0-9]*" name="householdPrice" id="householdPrice_mobile" autocomplete="off" maxlength="9">
-	                                    <input type="button" value="計算機" id="calc_mobile">
-	                                </td>
-	                            </tr>
-	                            <tr>
-	                                <td colspan="2">
-	                                    <label class="error_mobile"></label>
-	                                </td>
-	                            </tr>
-	                            <tr>
-	                                <td colspan="2">
-	                                    <div class="apply-area mobile-private">
-	                                        <input type="button" value="登録" id="applySubmit_mobile">
-	                                    </div>
-	                                    <div class="modify-area mobile-private">
-	                                        <input type="button" value="修正" id="modifySubmit_mobile">
-	                                        <input type="button" value="削除" id="deleteSubmit_mobile">
-	                                    </div>
-	                                </td>
-	                            </tr>
-	                        </tbody>
-	                    </table>
-	                </form>
-	            </div>
-	        </div>
-	        <div class="calc off">
-	            <div class="calcmain">
-	                <div class="title">
-	                    <label>計算機</label>
-	                    <span class="remove fa fa-close" aria-hidden="true"></span>
-	                </div>
-	                <table>
-	                    <tbody>
-	                        <tr>
-	                            <td colspan="2" class="calc-txt">
-	                                <input type="tel" pattern="[0-9]*" id="calc" autocomplete="off">
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td colspan="2" class="calc-sum">
-	                                <span id="operation"></span>
-	                                S : <input type="tel" pattern="[0-9]*" id="calc_sum" autocomplete="off" readonly="" disabled="disabled" maxlength="8">
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td>
-	                                <input type="button" id="calc_add" value="+">
-	                            </td>
-	                            <td>
-	                                <input type="button" id="calc_subtract" value="-">
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td>
-	                                <input type="button" id="calc_multiply" value="*">
-	                            </td>
-	                            <td>
-	                                <input type="button" id="calc_division" value="/">
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td>
-	                                <input type="button" id="calc_clear" value="C">
-	                            </td>
-	                            <td>
-	                                <input type="button" id="calc_result" value="=">
-	                            </td>
-	                        </tr>
-	                        <tr>
-	                            <td colspan="2">
-	                                <input type="button" id="calc_input" value="入力">
-	                            </td>
-	                        </tr>
-	                    </tbody>
-	                </table>
-	            </div>
-	        </div>
-	    </div>
 	    <div class="lodding lodding-off">
 	        <div class="lodding-background"></div>
 	        <div class="uil-battery-demo-css" style="-webkit-transform:scale(0.6)">
@@ -556,17 +421,17 @@
 	        </div>
 	    </div>
 	</div>
-<!-- from household copy -->	
+<!-- from household copy -->
+<!-- calculation -->
+<!-- https://www.desmos.com/scientific -->
 </div>
-<template class="categorymap">
-	<c:forEach items="${categorykey}" var="key">
-		<select class="category-select" data-type="${key}">
-		<c:forEach items="${categorymap.get(key)}" var="item">
-			<option value="${item.value}">${item.name}</option>
-		</c:forEach>
-		</div>
+<c:forEach items="${categorykey}" var="key">
+<template class="categorymap" data-type="${key}">
+	<c:forEach items="${categorymap.get(key)}" var="item">
+		<option value="${item.value}">${item.name}</option>
 	</c:forEach>
 </template>
+</c:forEach>
 
 <jsp:include page="./particle/bottom.jsp"></jsp:include>
 <script>
@@ -610,6 +475,51 @@
                 $(this).parent().find("span").html($(this).find("option:selected").html());
             });
 			_finance.search.init();
+			_finance.inputForm.init();
+		},
+		inputForm: {
+	        init: function () {
+	            this.initVal();
+	            this.setting();
+	        },
+	        initVal: function () {
+	        	
+	        },
+	        setting: function () {
+	        	$("#applySubmit").on("click", function(){
+	        		if(!_finance.inputForm.validate()){
+	        			return;
+	        		}
+	        		var data = {
+	        			date: _finance.inputForm.getHouseholdDate()
+	        		}
+	        		console.log(data);
+	        	});
+	        },
+	        getHouseholdDate(){
+	        	var year = parseInt($("#householdYear>option:selected").val());
+	        	var month = parseInt($("#householdMonth>option:selected").val()) - 1;
+	        	var day = parseInt($("#householdDay>option:selected").val());
+	        	return new Date(year,month,day);
+	        },
+	        validate: function () {
+	            var date = _finance.inputForm.getHouseholdDate();
+	            var contents = $("#householdContent").val();
+	            if (contents === null || contents.trim() === "") {
+	            	toastr.error("内容を入力してください。");
+	                return false;
+	            }
+	            var price = $("#householdPrice").val();
+	            if (price === null || price.trim() === "") {
+	            	toastr.error("金額を入力をしてください。");
+	                return false;
+	            }
+	            if (parseInt(price) < 0) {
+	            	toastr.error("金額を０円以上に入力してください。");
+	                return false;
+	            }
+	            return true;
+	        }
 		},
 		search: {
 	        init: function () {
@@ -621,7 +531,7 @@
 	            var date = new Date();
 	            $("#householdYear").val(date.getFullYear());
 	            $("#householdMonth").val(date.getMonth() + 1);
-	            $("#householdDay_pc").val(date.getDate());
+	            $("#householdDay").val(date.getDate());
 	            $("#householdDay_mobile").val(date.getDate());
 
 	            $("div.selectDiv").children("span").each(function () {
@@ -629,10 +539,6 @@
 	            });
 	        },
 	        setting: function () {
-	            $("select").on("change", function () {
-	                $(this).parent().find("span").html($(this).find("option:selected").html());
-	            });
-	            //date-left
 	            $("span.fa.fa-chevron-circle-left").on("click", function () {
 	            	_finance.search.addMonth(-1);
 	                var select = $("div.selectDiv.household-date.year");
@@ -641,7 +547,6 @@
 	                select.find("span").html(select.find("select").val());
 	                _finance.search.search();
 	            });
-	            //date-right
 	            $("span.fa.fa-chevron-circle-right").on("click", function () {
 	            	_finance.search.addMonth(1);
 	                var select = $("div.selectDiv.household-date.year");
@@ -650,7 +555,6 @@
 	                select.find("span").html(select.find("select").val());
 	                _finance.search.search();
 	            });
-	            //検索セレクトが値が変更すると発生
 	            $("div.main-date select, select#searchDaySelect, select#searchTypeSelect").on("change", function () {
 	            	_finance.search.search();
 	            });
@@ -660,7 +564,6 @@
 	            $("#householdMonth").on("change", function () {
 	                $("#householdMonthView").html($("#householdMonth").val());
 	            });
-	            //検索初期化
 	            $("input[type=button]#searchInit").on("click", function () {
 	                $("select#searchDaySelect,select#searchTypeSelect").val("");
 	                $("div.selectDiv.searchDaySelect").find("span").html($("select#searchDaySelect").find("option:selected").html());
@@ -668,14 +571,16 @@
 	                _finance.search.search();
 	            });
 	            
-	            $("#householdCategory").on("change", function(){
-	            	debugger;
-	            	var type = $(this).find("option:selectd").val();
-	            	console.log(type);
-	            	var dom = $(".category-select[data-type="+type+"]").html();
-	            	console.log(dom);
+	            function changeCategory(){
+	            	var type = $("#householdCategory").find("option:selected").val();
+	            	var dom = $(".categorymap[data-type="+type+"]").html();
 	            	$("#householdType").html(dom);
+	            	$("#householdType").trigger("change");
+	            }
+	            $("#householdCategory").on("change", function(){
+	            	changeCategory();
 	            });
+	            changeCategory();
 	        },
 	        search: function () {
 	            var year = parseInt($("#householdYear").val());
