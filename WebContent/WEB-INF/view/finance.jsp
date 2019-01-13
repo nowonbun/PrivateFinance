@@ -53,7 +53,7 @@
 	                <span class="fa fa-chevron-circle-left"></span>
 	                <div class="selectDiv household-date year">
 	                    <span>${year}</span>
-	                    <select class="household-date year" id="householdYear" name="householdYear">
+	                    <select class="household-date year" id="householdYear">
 		                    <c:forEach items="${yearlist}" var="item">
 								<option value="${item.value}">${item.name}</option>
 							</c:forEach>
@@ -62,7 +62,7 @@
 	                <label class="household-date"><%=Util.localization("year", session) %></label>
 	                <div class="selectDiv household-date month">
 	                    <span>${month}</span>
-	                    <select class="household-date month" id="householdMonth" name="householdMonth">
+	                    <select class="household-date month" id="householdMonth">
 	                        <c:forEach items="${monthlist}" var="item">
 	                        	<option value="${item.value}">${item.name}</option>
 							</c:forEach>
@@ -86,11 +86,10 @@
 	                    <tbody>
 	                        <tr>
 	                            <td>
-	                                <input type="hidden" id="householdIdx_pc" name="householdIdx" value="">
-	                                <input type="hidden" id="householdPdt_pc" name="householdPdt">
+	                                <input type="hidden" id="householdIdx">
 	                                <div class="selectDiv household-date day">
 	                                    <span></span>
-	                                    <select class="household-date day" id="householdDay" name="householdDay">
+	                                    <select class="household-date day" id="householdDay">
 	                                        <c:forEach items="${daylist}" var="item">
 					                        	<option value="${item.value}">${item.name}</option>
 											</c:forEach>
@@ -100,7 +99,7 @@
 	                            <td>
 	                                <div class="selectDiv household-category">
 	                                    <span></span>
-	                                    <select class="household-category" id="householdCategory" name="householdCategory">
+	                                    <select class="household-type" id="householdType">
 	                                    	<c:forEach items="${lowcategory}" var="item">
 					                        	<option value="${item.value}">${item.name}</option>
 											</c:forEach>
@@ -110,14 +109,14 @@
 	                            <td>
 	                                <div class="selectDiv household-category">
 	                                    <span></span>
-	                                    <select class="household-type" id="householdType" name="householdType"></select>
+	                                    <select class="household-category" id="householdCategory"></select>
 	                                </div>
 	                            </td>
 	                            <td>
-	                                <input name="householdContent" id="householdContent" autocomplete="off" maxlength="40">
+	                                <input type="text" id="householdContent" autocomplete="off" maxlength="40">
 	                            </td>
 	                            <td>
-	                                <input type="number" name="householdPrice" id="householdPrice" autocomplete="off" maxlength="8">
+	                                <input type="number" id="householdPrice" autocomplete="off" maxlength="8">
 	                            </td>
 	                        </tr>
 	                        <tr>
@@ -486,132 +485,153 @@
 	        	
 	        },
 	        setting: function () {
-	        	$("#applySubmit").on("click", function(){
-	        		if(!_finance.inputForm.validate()){
+	        	$("#applySubmit").on("click", function() {
+	        		if(!_finance.inputForm.validate()) {
 	        			return;
 	        		}
 	        		var data = {
-	        			date: _finance.inputForm.getHouseholdDate()
+	        			date: _finance.inputForm.getDateFormat(_finance.inputForm.getHouseholdDate()),
+	        			type: $("#householdType>option:selected").val(),
+	        			category: $("#householdCategory>option:selected").val(),
+	        			contents: $("#householdContent").val(),
+	        			price: $("#householdPrice").val()
 	        		}
-	        		console.log(data);
+	        		_finance.ajax("./setPaymentItem.ajax", data, function(data) {
+	        			toastr.success("格納しました。");
+					});
 	        	});
 	        },
-	        getHouseholdDate(){
+	        getHouseholdDate: function() {
 	        	var year = parseInt($("#householdYear>option:selected").val());
 	        	var month = parseInt($("#householdMonth>option:selected").val()) - 1;
 	        	var day = parseInt($("#householdDay>option:selected").val());
 	        	return new Date(year,month,day);
 	        },
-	        validate: function () {
-	            var date = _finance.inputForm.getHouseholdDate();
-	            var contents = $("#householdContent").val();
-	            if (contents === null || contents.trim() === "") {
-	            	toastr.error("内容を入力してください。");
-	                return false;
-	            }
-	            var price = $("#householdPrice").val();
-	            if (price === null || price.trim() === "") {
-	            	toastr.error("金額を入力をしてください。");
-	                return false;
-	            }
-	            if (parseInt(price) < 0) {
-	            	toastr.error("金額を０円以上に入力してください。");
-	                return false;
-	            }
-	            return true;
-	        }
+	        getDateFormat: function(date) {
+	        	var ret = date.getFullYear() + "/";
+	        	if(date.getMonth() + 1 < 10){
+	        		ret += "0" +  (date.getMonth() + 1);
+	        	} else {
+	        		ret += (date.getMonth() + 1);
+	        	}
+	        	ret += "/"
+	        	if(date.getDate() < 10){
+	        		ret += "0" + date.getDate();
+	        	} else {
+	        		ret += date.getDate();
+	        	}
+	        	return ret;
+			},
+			validate : function() {
+				var date = _finance.inputForm.getHouseholdDate();
+				var contents = $("#householdContent").val();
+				if (contents === null || contents.trim() === "") {
+					toastr.error("内容を入力してください。");
+					return false;
+				}
+				var price = $("#householdPrice").val();
+				if (price === null || price.trim() === "") {
+					toastr.error("金額を入力をしてください。");
+					return false;
+				}
+				if (parseInt(price) < 0) {
+					toastr.error("金額を０円以上に入力してください。");
+					return false;
+				}
+				return true;
+			}
 		},
-		search: {
-	        init: function () {
-	            this.setting();
-	            this.initVal();
-	            this.search();
-	        },
-	        initVal: function () {
-	            var date = new Date();
-	            $("#householdYear").val(date.getFullYear());
-	            $("#householdMonth").val(date.getMonth() + 1);
-	            $("#householdDay").val(date.getDate());
-	            $("#householdDay_mobile").val(date.getDate());
+		search : {
+			init : function() {
+				this.setting();
+				this.initVal();
+				this.search();
+			},
+			initVal : function() {
+				var date = new Date();
+				$("#householdYear").val(date.getFullYear());
+				$("#householdMonth").val(date.getMonth() + 1);
+				$("#householdDay").val(date.getDate());
+				$("#householdDay_mobile").val(date.getDate());
 
-	            $("div.selectDiv").children("span").each(function () {
-	                $(this).html($(this).parent().find("select").find("option:selected").html());
-	            });
-	        },
-	        setting: function () {
-	            $("span.fa.fa-chevron-circle-left").on("click", function () {
-	            	_finance.search.addMonth(-1);
-	                var select = $("div.selectDiv.household-date.year");
-	                select.find("span").html(select.find("select").val());
-	                var select = $("div.selectDiv.household-date.month");
-	                select.find("span").html(select.find("select").val());
-	                _finance.search.search();
-	            });
-	            $("span.fa.fa-chevron-circle-right").on("click", function () {
-	            	_finance.search.addMonth(1);
-	                var select = $("div.selectDiv.household-date.year");
-	                select.find("span").html(select.find("select").val());
-	                var select = $("div.selectDiv.household-date.month");
-	                select.find("span").html(select.find("select").val());
-	                _finance.search.search();
-	            });
-	            $("div.main-date select, select#searchDaySelect, select#searchTypeSelect").on("change", function () {
-	            	_finance.search.search();
-	            });
-	            $("#householdYear").on("change", function () {
-	                $("#householdYearView").html($("#householdYear").val());
-	            });
-	            $("#householdMonth").on("change", function () {
-	                $("#householdMonthView").html($("#householdMonth").val());
-	            });
-	            $("input[type=button]#searchInit").on("click", function () {
-	                $("select#searchDaySelect,select#searchTypeSelect").val("");
-	                $("div.selectDiv.searchDaySelect").find("span").html($("select#searchDaySelect").find("option:selected").html());
-	                $("div.selectDiv.searchTypeSelect").find("span").html($("select#searchTypeSelect").find("option:selected").html());
-	                _finance.search.search();
-	            });
-	            
-	            function changeCategory(){
-	            	var type = $("#householdCategory").find("option:selected").val();
-	            	var dom = $(".categorymap[data-type="+type+"]").html();
-	            	$("#householdType").html(dom);
-	            	$("#householdType").trigger("change");
-	            }
-	            $("#householdCategory").on("change", function(){
-	            	changeCategory();
-	            });
-	            changeCategory();
-	        },
-	        search: function () {
-	            var year = parseInt($("#householdYear").val());
-	            var month = parseInt($("#householdMonth").val());
-	            var day = parseInt($("#searchDaySelect").val());
-	            if (isNaN(day)) {
-	                day = "";
-	            }
-	            var type = $("#searchTypeSelect").val();
-	            debugger;
-	            console.log("search!!");
-	            //TODO: This must be solved!.
-	            //_.data.initVal();
-	            //_.fn.sendAjax("Search", "year=" + year + "&month=" + month + "&day=" + day + "&type=" + type, _.data.searchData);
-	        },
-	        addMonth: function (addmonth) {
-	            var year = parseInt($("#householdYear").val());
-	            var month = parseInt($("#householdMonth").val());
-	            month += addmonth;
-	            if (month < 1) {
-	                month += 12;
-	                year--;
-	            } else if (month > 12) {
-	                month -= 12;
-	                year++;
-	            }
-	            //householdDay
-	            $("#householdYear").val(year);
-	            $("#householdMonth").val(month);
-	        }
-	    }
+				$("div.selectDiv").children("span").each(function() {
+					$(this).html($(this).parent().find("select").find("option:selected").html());
+				});
+			},
+			setting : function() {
+				$("span.fa.fa-chevron-circle-left").on("click", function() {
+					_finance.search.addMonth(-1);
+					var select = $("div.selectDiv.household-date.year");
+					select.find("span").html(select.find("select").val());
+					var select = $("div.selectDiv.household-date.month");
+					select.find("span").html(select.find("select").val());
+					_finance.search.search();
+				});
+				$("span.fa.fa-chevron-circle-right").on("click", function() {
+					_finance.search.addMonth(1);
+					var select = $("div.selectDiv.household-date.year");
+					select.find("span").html(select.find("select").val());
+					var select = $("div.selectDiv.household-date.month");
+					select.find("span").html(select.find("select").val());
+					_finance.search.search();
+				});
+				$("div.main-date select, select#searchDaySelect, select#searchTypeSelect").on("change", function() {
+					_finance.search.search();
+				});
+				$("#householdYear").on("change", function() {
+					$("#householdYearView").html($("#householdYear").val());
+				});
+				$("#householdMonth").on("change", function() {
+					$("#householdMonthView").html($("#householdMonth").val());
+				});
+				$("input[type=button]#searchInit").on("click", function() {
+					$("select#searchDaySelect,select#searchTypeSelect").val("");
+					$("div.selectDiv.searchDaySelect").find("span").html($("select#searchDaySelect").find("option:selected").html());
+					$("div.selectDiv.searchTypeSelect").find("span").html($("select#searchTypeSelect").find("option:selected").html());
+					_finance.search.search();
+				});
+
+				function changeCategory() {
+					var type = $("#householdType").find("option:selected").val();
+					var dom = $(".categorymap[data-type=" + type + "]").html();
+					$("#householdCategory").html(dom);
+					$("#householdCategory").trigger("change");
+				}
+				$("#householdType").on("change", function() {
+					changeCategory();
+				});
+				changeCategory();
+			},
+			search : function() {
+				var year = parseInt($("#householdYear").val());
+				var month = parseInt($("#householdMonth").val());
+				var day = parseInt($("#searchDaySelect").val());
+				if (isNaN(day)) {
+					day = "";
+				}
+				var type = $("#searchTypeSelect").val();
+				debugger;
+				console.log("search!!");
+				//TODO: This must be solved!.
+				//_.data.initVal();
+				//_.fn.sendAjax("Search", "year=" + year + "&month=" + month + "&day=" + day + "&type=" + type, _.data.searchData);
+			},
+			addMonth : function(addmonth) {
+				var year = parseInt($("#householdYear").val());
+				var month = parseInt($("#householdMonth").val());
+				month += addmonth;
+				if (month < 1) {
+					month += 12;
+					year--;
+				} else if (month > 12) {
+					month -= 12;
+					year++;
+				}
+				//householdDay
+				$("#householdYear").val(year);
+				$("#householdMonth").val(month);
+			}
+		}
 	});
 </script>
 <jsp:include page="./particle/bottom2.jsp"></jsp:include>

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -218,7 +217,7 @@ public class MainController extends AbstractServletController {
 			for (Category item2 : item.getCategories()) {
 				SelectionBean bean2 = new SelectionBean();
 				bean2.setName(Util.localization(item2.getName(), session));
-				bean2.setValue(item2.getName());
+				bean2.setValue(Integer.toString(item2.getIdx()));
 				sub.add(bean2);
 			}
 		}
