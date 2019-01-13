@@ -1,5 +1,7 @@
 package Controller.Ajax;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import Common.AbstractAjaxController;
 import Common.FactoryDao;
+import Common.Util;
 import Dao.ViewroleDao;
+import Model.Payment;
 
 @Controller
 public class PaymentController extends AbstractAjaxController {
@@ -21,16 +25,32 @@ public class PaymentController extends AbstractAjaxController {
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("PFNV"))) {
 			res.setStatus(403);
 		}
-		String date = req.getParameter("date");
-		String type = req.getParameter("type");
-		String category = req.getParameter("category");
-		String contents = req.getParameter("contents");
-		String price = req.getParameter("price");
+		String pDate = req.getParameter("date");
+		String pType = req.getParameter("type");
+		String pCategory = req.getParameter("category");
+		String pContents = req.getParameter("contents");
+		String pPrice = req.getParameter("price");
 		
-		System.out.println(date);
-		System.out.println(type);
-		System.out.println(category);
-		System.out.println(contents);
-		System.out.println(price);
+		if(Util.StringIsEmptyOrNull(pDate)) {
+			res.setStatus(403);
+			return;
+		}
+		if(Util.StringIsEmptyOrNull(pType)) {
+			res.setStatus(403);
+			return;
+		}
+		if(Util.StringIsEmptyOrNull(pCategory)) {
+			res.setStatus(403);
+			return;
+		}
+		if(Util.StringIsEmptyOrNull(pContents)) {
+			res.setStatus(403);
+			return;
+		}
+		if(Util.StringIsEmptyOrNull(pPrice)) {
+			res.setStatus(403);
+			return;
+		}
+		
 	}
 }
