@@ -482,7 +482,7 @@
 	            this.setting();
 	        },
 	        initVal: function () {
-	        	
+	        	//this
 	        },
 	        setting: function () {
 	        	$("#applySubmit").on("click", function() {
@@ -497,7 +497,10 @@
 	        			price: $("#householdPrice").val()
 	        		}
 	        		_finance.ajax("./setPaymentItem.ajax", data, function(data) {
-	        			toastr.success("格納しました。");
+	        			if(data.ret){
+	        				_finance.inputForm.initVal();
+	        				toastr.success("格納しました。");	
+	        			}
 					});
 	        	});
 	        },

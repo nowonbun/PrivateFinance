@@ -1,11 +1,20 @@
 package Common;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import Dao.LocalizationDao;
 import Model.User;
 
 public class Util {
+
+	private final static DateFormat yyyyMMddFormat = new SimpleDateFormat("yyyy/MM/dd");
+
 	public static boolean StringEquals(String val1, String val2) {
 		if (val1 == null) {
 			return false;
@@ -15,7 +24,7 @@ public class Util {
 		}
 		return val1.equals(val2);
 	}
-	
+
 	public static boolean StringEqualsUpper(String val1, String val2) {
 		if (val1 == null) {
 			return false;
@@ -38,11 +47,22 @@ public class Util {
 
 	public static String localization(String name, HttpSession session) {
 		User user = (User) session.getAttribute(Define.USER_SESSION_NAME);
-		if(user == null) {
+		if (user == null) {
 			return name;
 		} else {
 			return FactoryDao.getDao(LocalizationDao.class).getLocalization(name, user.getLanguaueType().getCode());
 		}
-		
+	}
+
+	public static Date getDateFromString(String pDate) {
+		try {
+			return yyyyMMddFormat.parse(pDate);
+		} catch (ParseException e) {
+			return null;
+		}
+	}
+
+	public static Date getNow() {
+		return Calendar.getInstance().getTime();
 	}
 }
