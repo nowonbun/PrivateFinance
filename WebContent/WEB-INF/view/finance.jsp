@@ -482,7 +482,8 @@
 	            this.setting();
 	        },
 	        initVal: function () {
-	        	//this
+	        	$("#householdContent").val("");
+	        	$("#householdPrice").val("");
 	        },
 	        setting: function () {
 	        	$("#applySubmit").on("click", function() {
