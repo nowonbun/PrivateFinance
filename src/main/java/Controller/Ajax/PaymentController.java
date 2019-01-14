@@ -1,6 +1,8 @@
 package Controller.Ajax;
 
 import java.math.BigDecimal;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -73,5 +75,17 @@ public class PaymentController extends AbstractAjaxController {
 			res.setStatus(403);
 			return;
 		}
+	}
+	@RequestMapping(value = "/getPaymentItem.ajax", method = RequestMethod.POST)
+	public void getPaymentItem(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("PFNV"))) {
+			res.setStatus(403);
+		}
+		String pDate = req.getParameter("date");
+		if (Util.StringIsEmptyOrNull(pDate)) {
+			res.setStatus(403);
+			return;
+		}
+		Date date = Util.getDateFromString(pDate);
 	}
 }
