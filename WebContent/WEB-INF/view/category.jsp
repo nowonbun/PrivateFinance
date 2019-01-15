@@ -34,140 +34,150 @@
 .hide {
 	display: none;
 }
+
+.container-finance{
+	max-width: 769px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
 </style>
 <div class="container-fluid">
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="./main.html">Dashboard</a></li>
 		<li class="breadcrumb-item active">Category</li>
 	</ol>
-	<div class="card mb-3">
-		<div class="card-header">
-			<i class="fas fa-book"></i> Income category
-		</div>
-		<div class="card-body">
-			<div class="custom-table income-table">
-				<div class="custom-table-row row">
-					<div class="custom-table-col col-12 col-sm-10">Name</div>
-					<div class="custom-table-col col-12 col-sm-2"></div>
-				</div>
-				<div class="income-list-result list-result">
-					<c:forEach items="${income}" var="item">
-						<div class="custom-table-row row">
-							<input type="hidden" class="item-id" value="${item.id }">
-							<div class="custom-table-col col-12 col-sm-10 no-padding">
-								<input type="text" class="form-control item-name" value="${item.name }">
+	<div class="container-finance">
+		<div class="card mb-3">
+			<div class="card-header">
+				<i class="fas fa-book"></i> Income category
+			</div>
+			<div class="card-body">
+				<div class="custom-table income-table">
+					<div class="custom-table-row row">
+						<div class="custom-table-col col-12 col-sm-10">Name</div>
+						<div class="custom-table-col col-12 col-sm-2"></div>
+					</div>
+					<div class="income-list-result list-result">
+						<c:forEach items="${income}" var="item">
+							<div class="custom-table-row row">
+								<input type="hidden" class="item-id" value="${item.id }">
+								<div class="custom-table-col col-12 col-sm-10 no-padding">
+									<input type="text" class="form-control item-name" value="${item.name }">
+								</div>
+								<div class="custom-table-col col-12 col-sm-2 no-padding btn-col">
+									<select class="form-control type-selection">
+										<c:if test="${item.del eq 1}">
+											<option value="1" selected>Active</option>
+											<option value="2">Delete</option>    
+										</c:if>
+										<c:if test="${item.del eq 2}">
+											<option value="1">Active</option>
+											<option value="2" selected>Delete</option>    
+										</c:if>
+									</select>
+								</div>
 							</div>
-							<div class="custom-table-col col-12 col-sm-2 no-padding btn-col">
-								<select class="form-control type-selection">
-									<c:if test="${item.del eq 1}">
-										<option value="1" selected>Active</option>
-										<option value="2">Delete</option>    
-									</c:if>
-									<c:if test="${item.del eq 2}">
-										<option value="1">Active</option>
-										<option value="2" selected>Delete</option>    
-									</c:if>
-								</select>
-							</div>
+						</c:forEach>
+					</div>
+					<div class="custom-table-row row" style="padding: 5px;">
+						<div class="custom-table-col col-12 no-padding">
+							<button type="button" class="btn btn-success add-btn" style="width: 100%">ADD</button>
 						</div>
-					</c:forEach>
-				</div>
-				<div class="custom-table-row row" style="padding: 5px;">
-					<div class="custom-table-col col-12 no-padding">
-						<button type="button" class="btn btn-success add-btn" style="width: 100%">ADD</button>
 					</div>
 				</div>
 			</div>
+			<div class="card-footer small text-muted">&nbsp;</div>
 		</div>
-		<div class="card-footer small text-muted">&nbsp;</div>
-	</div>
-
-	<div class="card mb-3">
-		<div class="card-header">
-			<i class="fas fa-book-dead"></i> Expenditure category
-		</div>
-		<div class="card-body">
-			<div class="custom-table income-table">
-				<div class="custom-table-row row">
-					<div class="custom-table-col col-12 col-sm-10">Name</div>
-					<div class="custom-table-col col-12 col-sm-2"></div>
-				</div>
-				<div class="expenditure-list-result list-result">
-					<c:forEach items="${expenditure}" var="item">
-						<div class="custom-table-row row">
-							<input type="hidden" class="item-id" value="${item.id }">
-							<div class="custom-table-col col-12 col-sm-10 no-padding">
-								<input type="text" class="form-control item-name" value="${item.name }">
+	
+		<div class="card mb-3">
+			<div class="card-header">
+				<i class="fas fa-book-dead"></i> Expenditure category
+			</div>
+			<div class="card-body">
+				<div class="custom-table income-table">
+					<div class="custom-table-row row">
+						<div class="custom-table-col col-12 col-sm-10">Name</div>
+						<div class="custom-table-col col-12 col-sm-2"></div>
+					</div>
+					<div class="expenditure-list-result list-result">
+						<c:forEach items="${expenditure}" var="item">
+							<div class="custom-table-row row">
+								<input type="hidden" class="item-id" value="${item.id }">
+								<div class="custom-table-col col-12 col-sm-10 no-padding">
+									<input type="text" class="form-control item-name" value="${item.name }">
+								</div>
+								<div class="custom-table-col col-12 col-sm-2 no-padding btn-col">
+									<select class="form-control type-selection">
+										<c:if test="${item.del eq 1}">
+											<option value="1" selected>Active</option>
+											<option value="2">Delete</option>    
+										</c:if>
+										<c:if test="${item.del eq 2}">
+											<option value="1">Active</option>
+											<option value="2" selected>Delete</option>    
+										</c:if>
+									</select>
+								</div>
 							</div>
-							<div class="custom-table-col col-12 col-sm-2 no-padding btn-col">
-								<select class="form-control type-selection">
-									<c:if test="${item.del eq 1}">
-										<option value="1" selected>Active</option>
-										<option value="2">Delete</option>    
-									</c:if>
-									<c:if test="${item.del eq 2}">
-										<option value="1">Active</option>
-										<option value="2" selected>Delete</option>    
-									</c:if>
-								</select>
-							</div>
+						</c:forEach>
+					</div>
+					<div class="custom-table-row row" style="padding: 5px;">
+						<div class="custom-table-col col-12 no-padding">
+							<button type="button" class="btn btn-success add-btn" style="width: 100%">ADD</button>
 						</div>
-					</c:forEach>
-				</div>
-				<div class="custom-table-row row" style="padding: 5px;">
-					<div class="custom-table-col col-12 no-padding">
-						<button type="button" class="btn btn-success add-btn" style="width: 100%">ADD</button>
 					</div>
 				</div>
 			</div>
+			<div class="card-footer small text-muted">&nbsp;</div>
 		</div>
-		<div class="card-footer small text-muted">&nbsp;</div>
-	</div>
-
-	<div class="card mb-3">
-		<div class="card-header">
-			<i class="fas fa-piggy-bank"></i> Saving category
-		</div>
-		<div class="card-body">
-			<div class="custom-table income-table">
-				<div class="custom-table-row row">
-					<div class="custom-table-col col-12 col-sm-10">Name</div>
-					<div class="custom-table-col col-12 col-sm-2"></div>
-				</div>
-				<div class="saving-list-result list-result">
-					<c:forEach items="${saving}" var="item">
-						<div class="custom-table-row row">
-							<input type="hidden" class="item-id" value="${item.id }">
-							<div class="custom-table-col col-12 col-sm-10 no-padding">
-								<input type="text" class="form-control item-name" value="${item.name }">
+	
+		<div class="card mb-3">
+			<div class="card-header">
+				<i class="fas fa-piggy-bank"></i> Saving category
+			</div>
+			<div class="card-body">
+				<div class="custom-table income-table">
+					<div class="custom-table-row row">
+						<div class="custom-table-col col-12 col-sm-10">Name</div>
+						<div class="custom-table-col col-12 col-sm-2"></div>
+					</div>
+					<div class="saving-list-result list-result">
+						<c:forEach items="${saving}" var="item">
+							<div class="custom-table-row row">
+								<input type="hidden" class="item-id" value="${item.id }">
+								<div class="custom-table-col col-12 col-sm-10 no-padding">
+									<input type="text" class="form-control item-name" value="${item.name }">
+								</div>
+								<div class="custom-table-col col-12 col-sm-2 no-padding btn-col">
+									<select class="form-control type-selection">
+										<c:if test="${item.del eq 1}">
+											<option value="1" selected>Active</option>
+											<option value="2">Delete</option>    
+										</c:if>
+										<c:if test="${item.del eq 2}">
+											<option value="1">Active</option>
+											<option value="2" selected>Delete</option>    
+										</c:if>
+									</select>
+								</div>
 							</div>
-							<div class="custom-table-col col-12 col-sm-2 no-padding btn-col">
-								<select class="form-control type-selection">
-									<c:if test="${item.del eq 1}">
-										<option value="1" selected>Active</option>
-										<option value="2">Delete</option>    
-									</c:if>
-									<c:if test="${item.del eq 2}">
-										<option value="1">Active</option>
-										<option value="2" selected>Delete</option>    
-									</c:if>
-								</select>
-							</div>
+						</c:forEach>
+					</div>
+					<div class="custom-table-row row" style="padding: 5px;">
+						<div class="custom-table-col col-12 no-padding">
+							<button type="button" class="btn btn-success add-btn" style="width: 100%">ADD</button>
 						</div>
-					</c:forEach>
-				</div>
-				<div class="custom-table-row row" style="padding: 5px;">
-					<div class="custom-table-col col-12 no-padding">
-						<button type="button" class="btn btn-success add-btn" style="width: 100%">ADD</button>
 					</div>
 				</div>
 			</div>
+			<div class="card-footer small text-muted">&nbsp;</div>
 		</div>
-		<div class="card-footer small text-muted">&nbsp;</div>
-	</div>
-	<div class="row mr-0">
-		<div class="ml-auto">
-			<button type="button" class="btn btn-success save-button">SAVE</button>
+		<div class="row mr-0">
+			<div class="ml-auto">
+				<button type="button" class="btn btn-success save-button">SAVE</button>
+			</div>
 		</div>
 	</div>
 </div>

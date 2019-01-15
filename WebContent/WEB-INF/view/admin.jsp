@@ -52,142 +52,151 @@
 	{
 	height: 38px !important;
 }
+.container-finance{
+	max-width: 769px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
 </style>
 <div class="container-fluid">
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="./main.html">Dashboard</a></li>
 		<li class="breadcrumb-item active">Admin</li>
 	</ol>
-	<div class="card mb-3">
-		<div class="card-header">
-			<i class="fas fa-table"></i> User management
-		</div>
-		<div class="card-body">
-			<div class="custom-table user-table">
-				<div class="custom-table-row row">
-					<div class="custom-table-col col-12 col-sm-6 col-md-3">Email</div>
-					<div class="custom-table-col col-12 col-sm-6 col-md-3">Name</div>
-					<div class="custom-table-col col-12 col-sm-6 col-md-2">Group</div>
-					<div class="custom-table-col col-12 col-sm-6 col-md-2">Country</div>
-					<div class="custom-table-col col-12 col-sm-6 col-md-1"></div>
-					<div class="custom-table-col col-12 col-sm-6 col-md-1"></div>
+	<div class="container-finance">
+		<div class="card mb-3">
+			<div class="card-header">
+				<i class="fas fa-table"></i> User management
+			</div>
+			<div class="card-body">
+				<div class="custom-table user-table">
+					<div class="custom-table-row row">
+						<div class="custom-table-col col-12 col-sm-6 col-md-3">Email</div>
+						<div class="custom-table-col col-12 col-sm-6 col-md-3">Name</div>
+						<div class="custom-table-col col-12 col-sm-6 col-md-2">Group</div>
+						<div class="custom-table-col col-12 col-sm-6 col-md-2">Country</div>
+						<div class="custom-table-col col-12 col-sm-6 col-md-1"></div>
+						<div class="custom-table-col col-12 col-sm-6 col-md-1"></div>
+					</div>
 				</div>
 			</div>
+			<div class="card-footer small text-muted">&nbsp;</div>
 		</div>
-		<div class="card-footer small text-muted">&nbsp;</div>
-	</div>
-	<div class="card mb-3">
-		<div class="card-header" style="padding-top: 5px; padding-bottom: 5px;">
-			<span style="float: left; padding-top: 8px;"><i class="fas fa-table"></i> View-role management</span>
-			<button type="button" class="btn btn-success view-role-save-btn" style="float: right;" disabled>SAVE</button>
-		</div>
-		<div class="card-body">
-			<div class="row">
-				<div class="col-12 col-md-5 col-xl-3 mb-3">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<div class="input-group-text">
-								<input type="radio" name="searchTypeView" value="0" checked>
+		<div class="card mb-3">
+			<div class="card-header" style="padding-top: 5px; padding-bottom: 5px;">
+				<span style="float: left; padding-top: 8px;"><i class="fas fa-table"></i> View-role management</span>
+				<button type="button" class="btn btn-success view-role-save-btn" style="float: right;" disabled>SAVE</button>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-12 col-md-5 col-xl-3 mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<input type="radio" name="searchTypeView" value="0" checked>
+								</div>
+								<span class="input-group-text">Group</span>
 							</div>
-							<span class="input-group-text">Group</span>
+							<select class="form-control" id="groupViewSelect">
+								<c:forEach items="${group}" var="item">
+									<option value="${item.value}">${item.name}</option>
+								</c:forEach>
+							</select>
 						</div>
-						<select class="form-control" id="groupViewSelect">
-							<c:forEach items="${group}" var="item">
-								<option value="${item.value}">${item.name}</option>
-							</c:forEach>
-						</select>
 					</div>
-				</div>
-				<div class="col-12 col-md-5 col-xl-5 mb-3">
-					<div class="input-group view-select-user">
-						<div class="input-group-prepend">
-							<div class="input-group-text">
-								<input type="radio" name="searchTypeView" value="1">
+					<div class="col-12 col-md-5 col-xl-5 mb-3">
+						<div class="input-group view-select-user">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<input type="radio" name="searchTypeView" value="1">
+								</div>
+								<span class="input-group-text">User</span>
 							</div>
-							<span class="input-group-text">User</span>
+							<select class="form-control view-role-user" id="userViewSelect"></select>
 						</div>
-						<select class="form-control view-role-user" id="userViewSelect"></select>
+					</div>
+					<div class="col-4 col-md-1 col-xl-1 mb-3">
+						<button type="button" class="btn btn-primary view-role-btn">SEARCH</button>
 					</div>
 				</div>
-				<div class="col-4 col-md-1 col-xl-1 mb-3">
-					<button type="button" class="btn btn-primary view-role-btn">SEARCH</button>
-				</div>
-			</div>
-			<div class="custom-table view-role-result hide">
-				<div class="custom-table-row row">
-					<div class="custom-table-col col-12 col-sm-10">Role</div>
-					<div class="custom-table-col col-12 col-sm-2">Delete</div>
-				</div>
-				<div class="view-role-list-result"></div>
-				<div class="custom-table-row row" style="padding: 5px;">
-					<div class="custom-table-col col-12 no-padding">
-						<button type="button" class="btn btn-success view-role-add-btn" style="width: 100%">ADD</button>
+				<div class="custom-table view-role-result hide">
+					<div class="custom-table-row row">
+						<div class="custom-table-col col-12 col-sm-10">Role</div>
+						<div class="custom-table-col col-12 col-sm-2">Delete</div>
+					</div>
+					<div class="view-role-list-result"></div>
+					<div class="custom-table-row row" style="padding: 5px;">
+						<div class="custom-table-col col-12 no-padding">
+							<button type="button" class="btn btn-success view-role-add-btn" style="width: 100%">ADD</button>
+						</div>
 					</div>
 				</div>
 			</div>
+			<div class="card-footer small text-muted">&nbsp;</div>
 		</div>
-		<div class="card-footer small text-muted">&nbsp;</div>
-	</div>
-	<div class="card mb-3">
-		<div class="card-header" style="padding-top: 5px; padding-bottom: 5px;">
-			<span style="float: left; padding-top: 8px;"><i class="fas fa-table"></i> Action-role management</span>
-			<button type="button" class="btn btn-success action-role-save-btn" style="float: right;" disabled>SAVE</button>
-		</div>
-		<div class="card-body">
-			<div class="row">
-				<div class="col-12 col-md-5 col-xl-3 mb-3">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<div class="input-group-text">
-								<input type="radio" name="searchTypeAction" value="0" checked>
+		<div class="card mb-3">
+			<div class="card-header" style="padding-top: 5px; padding-bottom: 5px;">
+				<span style="float: left; padding-top: 8px;"><i class="fas fa-table"></i> Action-role management</span>
+				<button type="button" class="btn btn-success action-role-save-btn" style="float: right;" disabled>SAVE</button>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-12 col-md-5 col-xl-3 mb-3">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<input type="radio" name="searchTypeAction" value="0" checked>
+								</div>
+								<span class="input-group-text">Group</span>
 							</div>
-							<span class="input-group-text">Group</span>
+							<select class="form-control" id="groupActionSelect">
+								<c:forEach items="${group}" var="item">
+									<option value="${item.value}">${item.name}</option>
+								</c:forEach>
+							</select>
 						</div>
-						<select class="form-control" id="groupActionSelect">
-							<c:forEach items="${group}" var="item">
-								<option value="${item.value}">${item.name}</option>
-							</c:forEach>
-						</select>
 					</div>
-				</div>
-				<div class="col-12 col-md-5 col-xl-5 mb-3">
-					<div class="input-group action-select-user">
-						<div class="input-group-prepend">
-							<div class="input-group-text">
-								<input type="radio" name="searchTypeAction" value="1">
+					<div class="col-12 col-md-5 col-xl-5 mb-3">
+						<div class="input-group action-select-user">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<input type="radio" name="searchTypeAction" value="1">
+								</div>
+								<span class="input-group-text">User</span>
 							</div>
-							<span class="input-group-text">User</span>
+							<select class="form-control action-role-user" id="userActionSelect"></select>
 						</div>
-						<select class="form-control action-role-user" id="userActionSelect"></select>
+					</div>
+					<div class="col-3 col-md-1 col-xl-1 mb-3">
+						<button type="button" class="btn btn-primary action-role-btn">SEARCH</button>
 					</div>
 				</div>
-				<div class="col-3 col-md-1 col-xl-1 mb-3">
-					<button type="button" class="btn btn-primary action-role-btn">SEARCH</button>
-				</div>
-			</div>
-			<div class="custom-table action-role-result hide">
-				<div class="custom-table-row row">
-					<div class="custom-table-col col-12 col-sm-10">View</div>
-					<div class="custom-table-col col-12 col-sm-2">Delete</div>
-				</div>
-				<div class="action-role-list-result"></div>
-				<div class="custom-table-row row" style="padding: 5px;">
-					<div class="custom-table-col col-12 no-padding">
-						<button type="button" class="btn btn-success action-role-add-btn" style="width: 100%">ADD</button>
+				<div class="custom-table action-role-result hide">
+					<div class="custom-table-row row">
+						<div class="custom-table-col col-12 col-sm-10">View</div>
+						<div class="custom-table-col col-12 col-sm-2">Delete</div>
+					</div>
+					<div class="action-role-list-result"></div>
+					<div class="custom-table-row row" style="padding: 5px;">
+						<div class="custom-table-col col-12 no-padding">
+							<button type="button" class="btn btn-success action-role-add-btn" style="width: 100%">ADD</button>
+						</div>
 					</div>
 				</div>
 			</div>
+			<div class="card-footer small text-muted">&nbsp;</div>
 		</div>
-		<div class="card-footer small text-muted">&nbsp;</div>
-	</div>
-	<div class="card mb-3">
-		<div class="card-header" style="padding-top: 5px; padding-bottom: 5px;">
-			<span style="float: left; padding-top: 8px;"><i class="fa fa-refresh fa-spin" style="font-size: 14px"></i> Master refresh</span>
+		<div class="card mb-3">
+			<div class="card-header" style="padding-top: 5px; padding-bottom: 5px;">
+				<span style="float: left; padding-top: 8px;"><i class="fa fa-refresh fa-spin" style="font-size: 14px"></i> Master refresh</span>
+			</div>
+			<div class="card-body">
+				<button type="button" class="btn btn-success master-refresh">Refresh</button>
+			</div>
+			<div class="card-footer small text-muted">&nbsp;</div>
 		</div>
-		<div class="card-body">
-			<button type="button" class="btn btn-success master-refresh">Refresh</button>
-		</div>
-		<div class="card-footer small text-muted">&nbsp;</div>
 	</div>
 </div>
 <template class="countrySelect"> </template>
