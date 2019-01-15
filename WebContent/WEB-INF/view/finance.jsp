@@ -176,7 +176,7 @@
 	                <label>一般</label>
 	                <label>TOTAL : <span id="totalMoney1" class="money-plus">￥177,057</span></label>
 	            </div>
-	            <table class="table-data table-data1 mobile-off">
+	            <table class="table-data table-data1 payment-list mobile-off">
 	                <thead>
 	                    <tr>
 	                        <th>日</th>
@@ -435,7 +435,15 @@
 	</c:forEach>
 </template>
 </c:forEach>
-
+<template class="payment-item">
+	<tr class="">
+	    <td class="payment-day"></span><input type="hidden" class="payment-value" value=""></td>
+	    <td class="payment-type"></td>
+	    <td class="payment-category"></td>
+	    <td class="payment-contents"></td>
+	    <td><span class="payment-money"></span></td>
+	</tr>
+</template>
 <jsp:include page="./particle/bottom.jsp"></jsp:include>
 <script>
 	var _finance = (function(obj) {
@@ -619,11 +627,21 @@
 				}
 				var type = $("#searchTypeSelect").val();
 				*/
-				var data = {
+				let data = {
         			date: _finance.inputForm.getDateFormat(_finance.inputForm.getHouseholdDate())
         		};
         		_finance.ajax("./getPaymentItem.ajax", data, function(data) {
         			console.log(data);
+        			for(let i=0;i<data.length;i++){
+        				let $dom = $($(".payment-item").html());
+        				$dom.find(".payment-day").append(data[i].day);
+        				$dom.find(".payment-type").append(data[i].type_disp);
+        				$dom.find(".payment-category").append(data[i].category_disp);
+        				$dom.find(".payment-contents").append(data[i].contents);
+        				$dom.find(".payment-money").append(data[i].money);
+        				$(".payment-list").append($dom);
+        				console.log($dom);
+        			}
 				});
 				//
 				//TODO: This must be solved!.
