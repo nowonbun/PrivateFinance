@@ -16,7 +16,7 @@ public class PaymentDao extends TransactionDao<Payment> {
 		return transaction((em) -> {
 			try {
 				String qy = "SELECT p FROM Payment p "
-						+ "WHERE YEAR(p.date) = :year and MONTH(p.date) = :month and isdeleted = false";
+						+ "WHERE FUNC('YEAR',p.date) = :year and FUNC('MONTH',p.date) = :month and p.isdeleted = false";
 				Query query = em.createQuery(qy);
 				query.setParameter("year", year);
 				query.setParameter("month", month);

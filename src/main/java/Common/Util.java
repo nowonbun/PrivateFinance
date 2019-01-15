@@ -65,4 +65,22 @@ public class Util {
 	public static Date getNow() {
 		return Calendar.getInstance().getTime();
 	}
+
+	public static int getYear(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return cal.get(Calendar.YEAR);
+	}
+
+	public static int getMonth(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return cal.get(Calendar.MONTH) + 1;
+	}
+
+	public static int getDay(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return cal.get(Calendar.DAY_OF_MONTH);
+	}
 }

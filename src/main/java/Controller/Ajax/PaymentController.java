@@ -1,7 +1,9 @@
 package Controller.Ajax;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import Bean.ObjectBean;
+import Bean.PaymentBean;
 import Common.AbstractAjaxController;
 import Common.FactoryDao;
 import Common.Util;
@@ -87,5 +90,21 @@ public class PaymentController extends AbstractAjaxController {
 			return;
 		}
 		Date date = Util.getDateFromString(pDate);
+		int year = Util.getYear(date);
+		int month = Util.getMonth(date);
+		
+		List<Payment> list = FactoryDao.getDao(PaymentDao.class).getDataByYearMonth(year, month);
+		List<PaymentBean> ret = new ArrayList<>();
+		
+		for(Payment item : list) {
+			PaymentBean bean = new PaymentBean();
+			bean.setIdx(item.getIdx());
+			bean.setDay(String.valueOf(Util.getDay(item.getDate())));
+			bean.setType_disp(item.getLowCategory().getName());
+			bean.setCategory_disp(item.getCategory().getName());
+			bean.setContents(item.getContents());
+			bean.setMoney_disp(String.valueOf(item.getMoney()));
+		}
+		//TODO
 	}
 }
