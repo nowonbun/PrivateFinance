@@ -104,7 +104,8 @@ public class PaymentController extends AbstractAjaxController {
 			bean.setCategory_disp(item.getCategory().getName());
 			bean.setContents(item.getContents());
 			bean.setMoney_disp(String.valueOf(item.getMoney()));
+			ret.add(bean);
 		}
-		//TODO
+		returnAjax(res, ret);
 	}
 }

@@ -500,7 +500,7 @@
 	        			category: $("#householdCategory>option:selected").val(),
 	        			contents: $("#householdContent").val(),
 	        			price: $("#householdPrice").val()
-	        		}
+	        		};
 	        		_finance.ajax("./setPaymentItem.ajax", data, function(data) {
 	        			if(data.ret){
 	        				_finance.inputForm.initVal();
@@ -611,15 +611,21 @@
 				changeCategory();
 			},
 			search : function() {
-				var year = parseInt($("#householdYear").val());
+				/*var year = parseInt($("#householdYear").val());
 				var month = parseInt($("#householdMonth").val());
 				var day = parseInt($("#searchDaySelect").val());
 				if (isNaN(day)) {
 					day = "";
 				}
 				var type = $("#searchTypeSelect").val();
-				debugger;
-				console.log("search!!");
+				*/
+				var data = {
+        			date: _finance.inputForm.getDateFormat(_finance.inputForm.getHouseholdDate())
+        		};
+        		_finance.ajax("./getPaymentItem.ajax", data, function(data) {
+        			console.log(data);
+				});
+				//
 				//TODO: This must be solved!.
 				//_.data.initVal();
 				//_.fn.sendAjax("Search", "year=" + year + "&month=" + month + "&day=" + day + "&type=" + type, _.data.searchData);
