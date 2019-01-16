@@ -18,6 +18,9 @@ div.selectDiv span{
     padding-bottom: 30px;
     margin-top: 5px;
 }
+div.selectDiv span.bp2{
+    padding-bottom: 20px;
+}
 
 div.selectDiv.searchDaySelect{
     width:70px;

@@ -52,7 +52,7 @@
 	            <div class="main-date">
 	                <span class="fa fa-chevron-circle-left"></span>
 	                <div class="selectDiv household-date year">
-	                    <span>${year}</span>
+	                    <span class="bp2">${year}</span>
 	                    <select class="household-date year" id="householdYear">
 		                    <c:forEach items="${yearlist}" var="item">
 								<option value="${item.value}">${item.name}</option>
@@ -61,7 +61,7 @@
 	                </div>
 	                <label class="household-date"><%=Util.localization("year", session) %></label>
 	                <div class="selectDiv household-date month">
-	                    <span>${month}</span>
+	                    <span class="bp2">${month}</span>
 	                    <select class="household-date month" id="householdMonth">
 	                        <c:forEach items="${monthlist}" var="item">
 	                        	<option value="${item.value}">${item.name}</option>
@@ -149,7 +149,7 @@
 	                <input type="button" id="searchInit" value="検索初期">
 	                <label><%=Util.localization("day", session) %> : </label>
 	                <div class="selectDiv searchDaySelect">
-	                    <span style="padding-bottom:20px"></span>
+	                    <span class="bp2"></span>
 	                    <select id="searchDaySelect">
 	                        <option value="">=全体=</option>
 	                        <c:forEach items="${daylist}" var="item">
@@ -159,7 +159,7 @@
 	                </div>
 	                <label><%=Util.localization("type", session) %> : </label>
 	                <div class="selectDiv searchTypeSelect">
-	                    <span></span>
+	                    <span class="bp2"></span>
 	                    <select id="searchTypeSelect">
 	                        <option value="">=全体=</option>
 	                        <c:forEach items="${lowcategory}" var="item">
@@ -256,6 +256,7 @@
 		return obj;
 	})({
 		ajax : function(url, data, cb) {
+			_finance.loading.show();
 			$.ajax({
 				url : url,
 				type : "POST",
@@ -263,6 +264,7 @@
 				data : data,
 				success : function(data, textStatus, jqXHR) {
 					cb.call(this, data);
+					_finance.loading.hide();
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					console.log(jqXHR);
@@ -295,6 +297,14 @@
             });
 			_finance.search.init();
 			_finance.inputForm.init();
+		},
+		loading : {
+			show: function(){
+				$(".lodding").removeClass("lodding-off");
+			},
+			hide: function(){
+				$(".lodding").addClass("lodding-off");
+			}
 		},
 		inputForm: {
 	        init: function () {
@@ -386,19 +396,9 @@
 			setting : function() {
 				$("span.fa.fa-chevron-circle-left").on("click", function() {
 					_finance.search.addMonth(-1);
-					let select = $("div.selectDiv.household-date.year");
-					select.find("span").html(select.find("select").val());
-					let select = $("div.selectDiv.household-date.month");
-					select.find("span").html(select.find("select").val());
-					_finance.search.search();
 				});
 				$("span.fa.fa-chevron-circle-right").on("click", function() {
 					_finance.search.addMonth(1);
-					let select = $("div.selectDiv.household-date.year");
-					select.find("span").html(select.find("select").val());
-					let select = $("div.selectDiv.household-date.month");
-					select.find("span").html(select.find("select").val());
-					_finance.search.search();
 				});
 				$("div.main-date select, select#searchDaySelect, select#searchTypeSelect").on("change", function() {
 					_finance.search.search();
@@ -522,7 +522,9 @@
 					year++;
 				}
 				$("#householdYear").val(year);
+				$("#householdYear").trigger("change");
 				$("#householdMonth").val(month);
+				$("#householdMonth").trigger("change");
 			}
 		}
 	});
