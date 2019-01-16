@@ -138,20 +138,20 @@
 	        <div class="space"></div>
 	        <div class="main-data">
 	            <div class="total-data data-income">
-	                <label>収入</label>
-	                <span id="Income" class="money-plus">￥481,619</span>
+	                <label><%=Util.localization("Income", session) %></label>
+	                <span class="income-total money-plus"></span>
 	            </div>
 	            <div class="total-data data-expend">
-	                <label>支出</label>
-	                <span id="expend" class="money-minus">￥304,562</span>
+	                <label><%=Util.localization("Expenditure", session) %></label>
+	                <span class="expenditure-total money-minus"></span>
 	            </div>
 	            <div class="search-data">
 	                <input type="button" id="searchInit" value="検索初期">
 	                <label><%=Util.localization("day", session) %> : </label>
 	                <div class="selectDiv searchDaySelect">
-	                    <span>全体</span>
+	                    <span style="padding-bottom:20px"></span>
 	                    <select id="searchDaySelect">
-	                        <option value="">全体</option>
+	                        <option value="">=全体=</option>
 	                        <c:forEach items="${daylist}" var="item">
 	                        	<option value="${item.value}">${item.name}</option>
 							</c:forEach>
@@ -159,7 +159,7 @@
 	                </div>
 	                <label><%=Util.localization("type", session) %> : </label>
 	                <div class="selectDiv searchTypeSelect">
-	                    <span>=全体=</span>
+	                    <span></span>
 	                    <select id="searchTypeSelect">
 	                        <option value="">=全体=</option>
 	                        <c:forEach items="${lowcategory}" var="item">
@@ -173,164 +173,20 @@
 	                    <span class="fa fa-square fa-plus-square"></span>
 	                    <span class="fa fa-square fa-minus-square off"></span>
 	                </label>
-	                <label>一般</label>
-	                <label>TOTAL : <span id="totalMoney1" class="money-plus">￥177,057</span></label>
+	                <label><%=Util.localization("Finence", session) %></label>
+	                <label>TOTAL : <span class="payment-total"></span></label>
 	            </div>
 	            <table class="table-data table-data1 payment-list mobile-off">
 	                <thead>
 	                    <tr>
-	                        <th>日</th>
-	                        <th>カテゴリ</th>
-	                        <th>区分</th>
-	                        <th>内容</th>
-	                        <th>金額</th>
+	                        <th><%=Util.localization("day", session) %></th>
+                            <th><%=Util.localization("type", session) %></th>
+                            <th><%=Util.localization("category", session) %></th>
+                            <th><%=Util.localization("contents", session) %></th>
+                            <th><%=Util.localization("money", session) %></th>
 	                    </tr>
 	                </thead>
-	                <tbody>
-	                <tr class="">
-	                    <td>4日<input type="hidden" value="3687,4,000,002,家賃,-130000,20190104233014000"></td>
-	                    <td>一般</td>
-	                    <td>支出</td>
-	                    <td>家賃</td>
-	                    <td><span class="money-minus">￥130,000</span></td>
-	                </tr>
-	            
-	                <tr class="">
-	                    <td>4日<input type="hidden" value="3688,4,000,002,交通費,-90000,20190104233040000"></td>
-	                    <td>一般</td>
-	                    <td>支出</td>
-	                    <td>交通費</td>
-	                    <td><span class="money-minus">￥90,000</span></td>
-	                </tr>
-	            
-	                <tr class="">
-	                    <td>4日<input type="hidden" value="3689,4,000,002,おっつ,-5400,20190104233159000"></td>
-	                    <td>一般</td>
-	                    <td>支出</td>
-	                    <td>おっつ</td>
-	                    <td><span class="money-minus">￥5,400</span></td>
-	                </tr>
-	            
-	                <tr class="">
-	                    <td>5日<input type="hidden" value="3690,5,000,002,アトリエ,-6000,20190105004403000"></td>
-	                    <td>一般</td>
-	                    <td>支出</td>
-	                    <td>アトリエ</td>
-	                    <td><span class="money-minus">￥6,000</span></td>
-	                </tr>
-	            
-	                <tr class="">
-	                    <td>5日<input type="hidden" value="3691,5,000,002,保険,-5000,20190105004419000"></td>
-	                    <td>一般</td>
-	                    <td>支出</td>
-	                    <td>保険</td>
-	                    <td><span class="money-minus">￥5,000</span></td>
-	                </tr>
-	            
-	                <tr class="">
-	                    <td>5日<input type="hidden" value="3692,5,000,002,給食費,-8000,20190105004431000"></td>
-	                    <td>一般</td>
-	                    <td>支出</td>
-	                    <td>給食費</td>
-	                    <td><span class="money-minus">￥8,000</span></td>
-	                </tr>
-	            
-	                <tr class="">
-	                    <td>5日<input type="hidden" value="3693,5,000,002,ジェーコム,-6664,20190105004451000"></td>
-	                    <td>一般</td>
-	                    <td>支出</td>
-	                    <td>ジェーコム</td>
-	                    <td><span class="money-minus">￥6,664</span></td>
-	                </tr>
-	            
-	                <tr class="">
-	                    <td>5日<input type="hidden" value="3694,5,000,002,ジェーコム,-756,20190105004500000"></td>
-	                    <td>一般</td>
-	                    <td>支出</td>
-	                    <td>ジェーコム</td>
-	                    <td><span class="money-minus">￥756</span></td>
-	                </tr>
-	            
-	                <tr class="">
-	                    <td>5日<input type="hidden" value="3695,5,000,002,ファム,-216,20190105004525000"></td>
-	                    <td>一般</td>
-	                    <td>支出</td>
-	                    <td>ファム</td>
-	                    <td><span class="money-minus">￥216</span></td>
-	                </tr>
-	            
-	                <tr class="">
-	                    <td>5日<input type="hidden" value="3696,5,000,002,アルバ,-540,20190105004625000"></td>
-	                    <td>一般</td>
-	                    <td>支出</td>
-	                    <td>アルバ</td>
-	                    <td><span class="money-minus">￥540</span></td>
-	                </tr>
-	            
-	                <tr class="">
-	                    <td>5日<input type="hidden" value="3697,5,000,002,アマゾン,-1296,20190105004638000"></td>
-	                    <td>一般</td>
-	                    <td>支出</td>
-	                    <td>アマゾン</td>
-	                    <td><span class="money-minus">￥1,296</span></td>
-	                </tr>
-	            
-	                <tr class="">
-	                    <td>5日<input type="hidden" value="3698,5,000,002,アマゾン,-690,20190105004647000"></td>
-	                    <td>一般</td>
-	                    <td>支出</td>
-	                    <td>アマゾン</td>
-	                    <td><span class="money-minus">￥690</span></td>
-	                </tr>
-	            
-	                <tr class="">
-	                    <td>5日<input type="hidden" value="3699,5,000,002,雑誌,-800,20190105004705000"></td>
-	                    <td>一般</td>
-	                    <td>支出</td>
-	                    <td>雑誌</td>
-	                    <td><span class="money-minus">￥800</span></td>
-	                </tr>
-	            
-	                <tr class="">
-	                    <td>5日<input type="hidden" value="3700,5,000,002,アマゾン,-3900,20190105004723000"></td>
-	                    <td>一般</td>
-	                    <td>支出</td>
-	                    <td>アマゾン</td>
-	                    <td><span class="money-minus">￥3,900</span></td>
-	                </tr>
-	            
-	                <tr class="">
-	                    <td>5日<input type="hidden" value="3701,5,000,002,お小遣いスンヨプ亜弥,-20000,20190105004957000"></td>
-	                    <td>一般</td>
-	                    <td>支出</td>
-	                    <td>お小遣いスンヨプ亜弥</td>
-	                    <td><span class="money-minus">￥20,000</span></td>
-	                </tr>
-	            
-	                <tr class="">
-	                    <td>5日<input type="hidden" value="3702,5,000,002,洗濯機,-10000,20190105005635000"></td>
-	                    <td>一般</td>
-	                    <td>支出</td>
-	                    <td>洗濯機</td>
-	                    <td><span class="money-minus">￥10,000</span></td>
-	                </tr>
-	            
-	                <tr class="">
-	                    <td>5日<input type="hidden" value="3703,5,000,002,太陽光,-15300,20190105010944000"></td>
-	                    <td>一般</td>
-	                    <td>支出</td>
-	                    <td>太陽光</td>
-	                    <td><span class="money-minus">￥15,300</span></td>
-	                </tr>
-	            
-	                <tr class="">
-	                    <td>31日<input type="hidden" value="3686,31,000,001,お給料,481619,20190104232949000"></td>
-	                    <td>一般</td>
-	                    <td>収入</td>
-	                    <td>お給料</td>
-	                    <td><span class="money-plus">￥481,619</span></td>
-	                </tr>
-	            </tbody>
+	                <tbody></tbody>
 	            </table>
 	            <div class="caption"><sup>&nbsp;</sup></div>
 	            <div class="account-data title-data">
@@ -338,80 +194,22 @@
 	                    <span class="fa fa-square fa-plus-square"></span>
 	                    <span class="fa fa-square fa-minus-square off"></span>
 	                </label>
-	                <label>貯蓄</label>
-	                <label>TOTAL : <span id="totalMoney2" class="money-plus">￥568,411</span></label>
+	                <label><%=Util.localization("Saving", session) %></label>
+	                <label>TOTAL : <span class="saving-total"></span></label>
 	            </div>
-	            <table class="table-data table-data2 mobile-off">
+	            <table class="table-data table-data2 saving-list mobile-off">
 	                <thead>
 	                    <tr>
-	                        <th>日</th>
-	                        <th>区分</th>
-	                        <th>内容</th>
-	                        <th>金額</th>
+	                        <th><%=Util.localization("day", session) %></th>
+                            <th><%=Util.localization("category", session) %></th>
+                            <th><%=Util.localization("contents", session) %></th>
+                            <th><%=Util.localization("money", session) %></th>
 	                    </tr>
 	                </thead>
-	                <tbody>
-	                <tr class="nothing result-data2">
-	                    <td colspan="4">データがありません。</td>
-	                </tr>
-	            </tbody>
+	                <tbody></tbody>
 	            </table>
 	            <div class="caption"><sup>「貯蓄のTotal」は現在まで金額の合算である。</sup></div>
 	        </div>
-	    </div>
-	    <div class="template">
-	        <table class="template-data1">
-	            <tbody>
-	                <tr class="##HOVER##">
-	                    <td>##DATE##日<input type="hidden" value="##DATA##"></td>
-	                    <td>##CATEGORY##</td>
-	                    <td>##TYPE##</td>
-	                    <td>##CONTENTS##</td>
-	                    <td><span class="##CLASS##">##PRICE##</span></td>
-	                </tr>
-	            </tbody>
-	        </table>
-	        <table class="template-data1-nothing">
-	            <tbody>
-	                <tr class="nothing result-data1">
-	                    <td colspan="5">データがありません。</td>
-	                </tr>
-	            </tbody>
-	        </table>
-	        <table class="template-data2">
-	            <tbody>
-	                <tr>
-	                    <td>##DATE##日</td>
-	                    <td>##TYPE##</td>
-	                    <td>##CONTENTS##</td>
-	                    <td><span class="##CLASS##">##PRICE##</span></td>
-	                </tr>
-	            </tbody>
-	        </table>
-	        <table class="template-data2-nothing">
-	            <tbody>
-	                <tr class="nothing result-data2">
-	                    <td colspan="4">データがありません。</td>
-	                </tr>
-	            </tbody>
-	        </table>
-	        <table class="template-data3">
-	            <tbody>
-	                <tr>
-	                    <td>##DATE##日</td>
-	                    <td>##CONTENTS##</td>
-	                    <td><span class="##CLASS##">##PRICE##</span></td>
-	                </tr>
-	            </tbody>
-	        </table>
-	        <table class="template-data3-nothing">
-	            <tbody>
-	                <tr class="nothing result-data3">
-	                    <td colspan="3">データがありません。</td>
-	                </tr>
-	            </tbody>
-	        </table>
-	        <select id="select_000"><option value="001">収入</option><option value="002">支出</option><option value="003">食費</option><option value="004">交通費</option><option value="005">ローン</option><option value="006">お小遣い</option><option value="007">外食</option><option value="008">光熱費</option></select><select id="select_010"><option value="011">入金</option><option value="012">出金</option></select><select id="select_020"><option value="022">支出</option></select>
 	    </div>
 	    <div class="lodding lodding-off">
 	        <div class="lodding-background"></div>
@@ -436,7 +234,7 @@
 </template>
 </c:forEach>
 <template class="payment-item">
-	<tr class="">
+	<tr class="payment-row">
 	    <td class="payment-day"></span><input type="hidden" class="payment-value" value=""></td>
 	    <td class="payment-type"></td>
 	    <td class="payment-category"></td>
@@ -444,6 +242,13 @@
 	    <td><span class="payment-money"></span></td>
 	</tr>
 </template>
+<template class="search-no-result">
+	<tr class="nothing">
+	    <td>データがありません。</td>
+	</tr>
+</template>
+<input type="hidden" class="day-mark" value="<%=Util.localization("day", session) %>">
+<input type="hidden" class="sign-mark" value="￥">
 <jsp:include page="./particle/bottom.jsp"></jsp:include>
 <script>
 	var _finance = (function(obj) {
@@ -481,6 +286,9 @@
 			}
 			return false;
 		},
+		numberWithCommas : function(x) {
+		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		},
 		onLoad : function() {
 			$("select").on("change", function () {
                 $(this).parent().find("span").html($(this).find("option:selected").html());
@@ -502,7 +310,7 @@
 	        		if(!_finance.inputForm.validate()) {
 	        			return;
 	        		}
-	        		var data = {
+	        		let data = {
 	        			date: _finance.inputForm.getDateFormat(_finance.inputForm.getHouseholdDate()),
 	        			type: $("#householdType>option:selected").val(),
 	        			category: $("#householdCategory>option:selected").val(),
@@ -512,19 +320,20 @@
 	        		_finance.ajax("./setPaymentItem.ajax", data, function(data) {
 	        			if(data.ret){
 	        				_finance.inputForm.initVal();
+	        				_finance.search.search();
 	        				toastr.success("格納しました。");	
 	        			}
 					});
 	        	});
 	        },
 	        getHouseholdDate: function() {
-	        	var year = parseInt($("#householdYear>option:selected").val());
-	        	var month = parseInt($("#householdMonth>option:selected").val()) - 1;
-	        	var day = parseInt($("#householdDay>option:selected").val());
+	        	let year = parseInt($("#householdYear>option:selected").val());
+	        	let month = parseInt($("#householdMonth>option:selected").val()) - 1;
+	        	let day = parseInt($("#householdDay>option:selected").val());
 	        	return new Date(year,month,day);
 	        },
 	        getDateFormat: function(date) {
-	        	var ret = date.getFullYear() + "/";
+	        	let ret = date.getFullYear() + "/";
 	        	if(date.getMonth() + 1 < 10){
 	        		ret += "0" +  (date.getMonth() + 1);
 	        	} else {
@@ -539,13 +348,13 @@
 	        	return ret;
 			},
 			validate : function() {
-				var date = _finance.inputForm.getHouseholdDate();
-				var contents = $("#householdContent").val();
+				let date = _finance.inputForm.getHouseholdDate();
+				let contents = $("#householdContent").val();
 				if (contents === null || contents.trim() === "") {
 					toastr.error("内容を入力してください。");
 					return false;
 				}
-				var price = $("#householdPrice").val();
+				let price = $("#householdPrice").val();
 				if (price === null || price.trim() === "") {
 					toastr.error("金額を入力をしてください。");
 					return false;
@@ -564,7 +373,7 @@
 				this.search();
 			},
 			initVal : function() {
-				var date = new Date();
+				let date = new Date();
 				$("#householdYear").val(date.getFullYear());
 				$("#householdMonth").val(date.getMonth() + 1);
 				$("#householdDay").val(date.getDate());
@@ -577,17 +386,17 @@
 			setting : function() {
 				$("span.fa.fa-chevron-circle-left").on("click", function() {
 					_finance.search.addMonth(-1);
-					var select = $("div.selectDiv.household-date.year");
+					let select = $("div.selectDiv.household-date.year");
 					select.find("span").html(select.find("select").val());
-					var select = $("div.selectDiv.household-date.month");
+					let select = $("div.selectDiv.household-date.month");
 					select.find("span").html(select.find("select").val());
 					_finance.search.search();
 				});
 				$("span.fa.fa-chevron-circle-right").on("click", function() {
 					_finance.search.addMonth(1);
-					var select = $("div.selectDiv.household-date.year");
+					let select = $("div.selectDiv.household-date.year");
 					select.find("span").html(select.find("select").val());
-					var select = $("div.selectDiv.household-date.month");
+					let select = $("div.selectDiv.household-date.month");
 					select.find("span").html(select.find("select").val());
 					_finance.search.search();
 				});
@@ -608,8 +417,8 @@
 				});
 
 				function changeCategory() {
-					var type = $("#householdType").find("option:selected").val();
-					var dom = $(".categorymap[data-type=" + type + "]").html();
+					let type = $("#householdType").find("option:selected").val();
+					let dom = $(".categorymap[data-type=" + type + "]").html();
 					$("#householdCategory").html(dom);
 					$("#householdCategory").trigger("change");
 				}
@@ -619,38 +428,91 @@
 				changeCategory();
 			},
 			search : function() {
-				/*var year = parseInt($("#householdYear").val());
-				var month = parseInt($("#householdMonth").val());
-				var day = parseInt($("#searchDaySelect").val());
-				if (isNaN(day)) {
-					day = "";
-				}
-				var type = $("#searchTypeSelect").val();
-				*/
+				$(".payment-list>tbody").html("");
+				$(".saving-list>tbody").html("");
+				$(".income-total").html("");
+    			$(".expenditure-total").html("");
+				$(".payment-total").html("");
+				$(".payment-total").removeClass("money-plus");	
+				$(".payment-total").removeClass("money-minus");
+				$(".payment-total").removeClass("money-zero");
+				$(".saving-total").html("");
+				$(".saving-total").removeClass("money-plus");	
+				$(".saving-total").removeClass("money-minus");
+				$(".saving-total").removeClass("money-zero");
 				let data = {
         			date: _finance.inputForm.getDateFormat(_finance.inputForm.getHouseholdDate())
         		};
         		_finance.ajax("./getPaymentItem.ajax", data, function(data) {
         			console.log(data);
-        			for(let i=0;i<data.length;i++){
+        			for(let i=0;i<data.financelist.length;i++){
+        				let node = data.financelist[i];
+         				let $dom = $($(".payment-item").html());
+         				$dom.find(".payment-value").val(JSON.stringify(node));
+        				$dom.find(".payment-day").append(node.day+$(".day-mark").val());
+        				$dom.find(".payment-type").append(node.type_disp);
+        				$dom.find(".payment-category").append(node.category_disp);
+        				$dom.find(".payment-contents").append(node.contents);
+        				$dom.find(".payment-money").append($(".sign-mark").val()+_finance.numberWithCommas(node.money_disp));
+        				if(node.sign > 0){
+        					$dom.find(".payment-money").addClass("money-plus");	
+        				} else if(node.sign < 0){
+        					$dom.find(".payment-money").addClass("money-minus");
+        				} else {
+        					$dom.find(".payment-money").addClass("money-zero");
+        				}
+        				$(".payment-list>tbody").append($dom);
+        			}
+        			if(data.financelist.length <= 0) {
+        				let $dom = $($(".search-no-result").html());
+        				$dom.find("td").attr("colspan",4);
+        				$(".saving-list>tbody").append($dom);
+        			}
+        			for(let i=0;i<data.savinglist.length;i++){
+        				let node = data.savinglist[i];
         				let $dom = $($(".payment-item").html());
-        				$dom.find(".payment-day").append(data[i].day);
-        				$dom.find(".payment-type").append(data[i].type_disp);
-        				$dom.find(".payment-category").append(data[i].category_disp);
-        				$dom.find(".payment-contents").append(data[i].contents);
-        				$dom.find(".payment-money").append(data[i].money);
-        				$(".payment-list").append($dom);
-        				console.log($dom);
+        				$dom.find(".payment-day").append(node.day+$(".day-mark").val());
+        				$dom.find(".payment-type").remove();
+        				$dom.find(".payment-category").append(node.category_disp);
+        				$dom.find(".payment-contents").append(node.contents);
+        				$dom.find(".payment-money").append($(".sign-mark").val()+_finance.numberWithCommas(node.money_disp));
+        				if(node.sign < 0){
+        					$dom.find(".payment-money").addClass("money-plus");	
+        				} else if(node.sign > 0){
+        					$dom.find(".payment-money").addClass("money-minus");
+        				} else {
+        					$dom.find(".payment-money").addClass("money-zero");
+        				}
+        				$(".saving-list>tbody").append($dom);
+        			}
+        			if(data.savinglist.length <= 0) {
+        				let $dom = $($(".search-no-result").html());
+        				$dom.find("td").attr("colspan",4);
+        				$(".saving-list>tbody").append($dom);
+        			}
+        			$(".income-total").append($(".sign-mark").val()+_finance.numberWithCommas(data.incomeTotal));
+        			$(".expenditure-total").append($(".sign-mark").val()+_finance.numberWithCommas(data.expenditureTotal));
+        			$(".payment-total").append($(".sign-mark").val()+_finance.numberWithCommas(data.financeTotal));
+        			if(data.financesign > 0){
+        				$(".payment-total").addClass("money-plus");	
+        			} else if (data.financesign < 0){
+        				$(".payment-total").addClass("money-minus");
+        			} else {
+        				$(".payment-total").addClass("money-zero");
+        			}
+        			$(".saving-total").append($(".sign-mark").val()+_finance.numberWithCommas(data.savingTotal));
+        			if(data.savingsign > 0){
+        				$(".saving-total").addClass("money-plus");	
+        			} else if (data.savingsign < 0){
+        				$(".saving-total").addClass("money-minus");
+        			} else {
+        				$(".saving-total").addClass("money-zero");
         			}
 				});
-				//
-				//TODO: This must be solved!.
-				//_.data.initVal();
-				//_.fn.sendAjax("Search", "year=" + year + "&month=" + month + "&day=" + day + "&type=" + type, _.data.searchData);
 			},
 			addMonth : function(addmonth) {
-				var year = parseInt($("#householdYear").val());
-				var month = parseInt($("#householdMonth").val());
+				let year = parseInt($("#householdYear").val());
+				let month = parseInt($("#householdMonth").val());
 				month += addmonth;
 				if (month < 1) {
 					month += 12;
@@ -659,7 +521,6 @@
 					month -= 12;
 					year++;
 				}
-				//householdDay
 				$("#householdYear").val(year);
 				$("#householdMonth").val(month);
 			}

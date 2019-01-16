@@ -119,18 +119,6 @@ div.template {
     display: none;
 }
 
-span.money-plus {
-    color: black;
-}
-
-span.money-minus {
-    color: red;
-}
-
-span.money-zero {
-    color: black;
-}
-
 input[type=button].signout{
     float: right;
     border: 0px;
@@ -185,32 +173,6 @@ div.search-data{
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
-}
-
-div.selectDiv{
-    display:inline-block;
-    position:relative;
-    display:inline-block;
-}
-
-div.selectDiv span{
-    font-size : 13pt;
-    border-bottom: 2px solid #67b4ec;
-    width:100%;
-    display: block;
-    height: 25px;
-    padding-bottom: 30px;
-    margin-top: 5px;
-}
-
-div.selectDiv.searchDaySelect{
-    width:50px;
-    text-align:center;
-}
-
-div.selectDiv.searchTypeSelect{
-    width:70px;
-    text-align:center;
 }
 
 div.total-data {

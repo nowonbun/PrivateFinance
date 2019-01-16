@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import Bean.FinanceBean;
 import Bean.ObjectBean;
 import Bean.PaymentBean;
 import Common.AbstractAjaxController;
@@ -68,7 +70,7 @@ public class PaymentController extends AbstractAjaxController {
 			payment.setMoney(money);
 			payment.setCreater(super.getCurrentUser(session));
 			payment.setCreateddate(Util.getNow());
-			
+
 			FactoryDao.getDao(PaymentDao.class).update(payment);
 
 			ObjectBean bean = new ObjectBean();
@@ -79,6 +81,7 @@ public class PaymentController extends AbstractAjaxController {
 			return;
 		}
 	}
+
 	@RequestMapping(value = "/getPaymentItem.ajax", method = RequestMethod.POST)
 	public void getPaymentItem(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("PFNV"))) {
@@ -92,20 +95,52 @@ public class PaymentController extends AbstractAjaxController {
 		Date date = Util.getDateFromString(pDate);
 		int year = Util.getYear(date);
 		int month = Util.getMonth(date);
-		
+
 		List<Payment> list = FactoryDao.getDao(PaymentDao.class).getDataByYearMonth(year, month);
-		List<PaymentBean> ret = new ArrayList<>();
+		FinanceBean ret = new FinanceBean();
+		ret.setFinancelist(new ArrayList<>());
+		ret.setSavinglist(new ArrayList<>());
 		
-		for(Payment item : list) {
+		BigDecimal incomeTotal = BigDecimal.ZERO;
+		BigDecimal expenditureTotal = BigDecimal.ZERO;
+		BigDecimal savingTotal = BigDecimal.ZERO;
+		for (Payment item : list) {
 			PaymentBean bean = new PaymentBean();
 			bean.setIdx(item.getIdx());
 			bean.setDay(String.valueOf(Util.getDay(item.getDate())));
-			bean.setType_disp(item.getLowCategory().getName());
+			bean.setType_code(item.getLowCategory().getCode());
+			bean.setType_disp(Util.localization(item.getLowCategory().getName(), session));
+			bean.setCategory_code(String.valueOf(item.getCategory().getIdx()));
 			bean.setCategory_disp(item.getCategory().getName());
 			bean.setContents(item.getContents());
 			bean.setMoney_disp(String.valueOf(item.getMoney()));
-			ret.add(bean);
+			if (LowCategoryDao.INCOME.equals(item.getLowCategory().getCode())) {
+				bean.setSign(1);
+				incomeTotal = incomeTotal.add(item.getMoney());
+			} else if (LowCategoryDao.EXPENDITURE.equals(item.getLowCategory().getCode())){
+				bean.setSign(-1);
+				expenditureTotal = expenditureTotal.add(item.getMoney());
+			} else if(LowCategoryDao.SAVING.equals(item.getLowCategory().getCode())) {
+				bean.setSign(-1);
+				expenditureTotal = expenditureTotal.add(item.getMoney());
+				savingTotal = savingTotal.add(item.getMoney());
+				ret.getSavinglist().add(bean);
+			} else if (LowCategoryDao.WITHDRAW.equals(item.getLowCategory().getCode())) {
+				bean.setSign(1);
+				incomeTotal = incomeTotal.add(item.getMoney());
+				savingTotal = savingTotal.subtract(item.getMoney());
+				ret.getSavinglist().add(bean);
+			}
+			ret.getFinancelist().add(bean);
 		}
+		
+		BigDecimal total = incomeTotal.subtract(expenditureTotal);
+		ret.setFinancesign(total.compareTo(BigDecimal.ZERO));
+		ret.setFinanceTotal(total.abs().toString());
+		ret.setSavingsign(savingTotal.compareTo(BigDecimal.ZERO));
+		ret.setSavingTotal(savingTotal.abs().toString());
+		ret.setIncomeTotal(incomeTotal.toString());
+		ret.setExpenditureTotal(expenditureTotal.toString());
 		returnAjax(res, ret);
 	}
 }

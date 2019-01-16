@@ -10,6 +10,12 @@ import Common.Util;
 import Model.LowCategory;
 
 public class LowCategoryDao extends MasterDao<LowCategory> {
+	
+	public static final String INCOME = "i";
+	public static final String EXPENDITURE = "e";
+	public static final String SAVING = "s";
+	public static final String WITHDRAW = "w";
+	
 	protected LowCategoryDao() {
 		super(LowCategory.class);
 	}

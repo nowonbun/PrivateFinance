@@ -14,6 +14,7 @@ public class PaymentBean {
 	private String contents;
 	private BigDecimal money;
 	private String money_disp;
+	private int sign;
 
 	public int getIdx() {
 		return idx;
@@ -93,6 +94,14 @@ public class PaymentBean {
 
 	public void setDay(String day) {
 		this.day = day;
+	}
+
+	public int getSign() {
+		return sign;
+	}
+
+	public void setSign(int sign) {
+		this.sign = sign;
 	}
 
 }

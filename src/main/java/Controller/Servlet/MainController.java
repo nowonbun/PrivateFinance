@@ -47,9 +47,10 @@ public class MainController extends AbstractServletController {
 		}
 		super.initMenu(modelmap, session);
 
-		modelmap.addAttribute("income", getCategoryList("i"));
-		modelmap.addAttribute("expenditure", getCategoryList("e"));
-		modelmap.addAttribute("saving", getCategoryList("s"));
+		modelmap.addAttribute("income", getCategoryList(LowCategoryDao.INCOME));
+		modelmap.addAttribute("expenditure", getCategoryList(LowCategoryDao.EXPENDITURE));
+		modelmap.addAttribute("saving", getCategoryList(LowCategoryDao.SAVING));
+		modelmap.addAttribute("withdraw", getCategoryList(LowCategoryDao.WITHDRAW));
 
 		return "category";
 	}
@@ -79,13 +80,15 @@ public class MainController extends AbstractServletController {
 		String income = req.getParameter("income");
 		String expenditure = req.getParameter("expenditure");
 		String saving = req.getParameter("saving");
-		if (income == null || expenditure == null || saving == null) {
+		String withdraw = req.getParameter("withdraw");
+		if (income == null || expenditure == null || saving == null || withdraw == null) {
 			res.setStatus(403);
 			return "";
 		}
-		updateCategory(convertCategoryItem(income), "i");
-		updateCategory(convertCategoryItem(expenditure), "e");
-		updateCategory(convertCategoryItem(saving), "s");
+		updateCategory(convertCategoryItem(income), LowCategoryDao.INCOME);
+		updateCategory(convertCategoryItem(expenditure), LowCategoryDao.EXPENDITURE);
+		updateCategory(convertCategoryItem(saving), LowCategoryDao.SAVING);
+		updateCategory(convertCategoryItem(withdraw), LowCategoryDao.WITHDRAW);
 
 		modelmap.addAttribute("categoryupdated", true);
 		return category(modelmap, session, req, res);
@@ -182,6 +185,7 @@ public class MainController extends AbstractServletController {
 		super.initMenu(modelmap, session);
 
 		List<SelectionBean> yearlist = new ArrayList<>();
+		//TODO: This data should be get by properties
 		for (int i = 2014; i <= 2020; i++) {
 			SelectionBean bean = new SelectionBean();
 			bean.setName(String.valueOf(i));

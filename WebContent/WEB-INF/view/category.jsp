@@ -174,6 +174,49 @@
 			</div>
 			<div class="card-footer small text-muted">&nbsp;</div>
 		</div>
+		
+		<div class="card mb-3">
+			<div class="card-header">
+				<i class="fas fa-piggy-bank"></i> Withdraw category
+			</div>
+			<div class="card-body">
+				<div class="custom-table income-table">
+					<div class="custom-table-row row">
+						<div class="custom-table-col col-12 col-sm-10">Name</div>
+						<div class="custom-table-col col-12 col-sm-2"></div>
+					</div>
+					<div class="withdraw-list-result list-result">
+						<c:forEach items="${withdraw}" var="item">
+							<div class="custom-table-row row">
+								<input type="hidden" class="item-id" value="${item.id }">
+								<div class="custom-table-col col-12 col-sm-10 no-padding">
+									<input type="text" class="form-control item-name" value="${item.name }">
+								</div>
+								<div class="custom-table-col col-12 col-sm-2 no-padding btn-col">
+									<select class="form-control type-selection">
+										<c:if test="${item.del eq 1}">
+											<option value="1" selected>Active</option>
+											<option value="2">Delete</option>    
+										</c:if>
+										<c:if test="${item.del eq 2}">
+											<option value="1">Active</option>
+											<option value="2" selected>Delete</option>    
+										</c:if>
+									</select>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+					<div class="custom-table-row row" style="padding: 5px;">
+						<div class="custom-table-col col-12 no-padding">
+							<button type="button" class="btn btn-success add-btn" style="width: 100%">ADD</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer small text-muted">&nbsp;</div>
+		</div>
+		
 		<div class="row mr-0">
 			<div class="ml-auto">
 				<button type="button" class="btn btn-success save-button">SAVE</button>
@@ -199,6 +242,7 @@
 	<input type="hidden" name="income">
 	<input type="hidden" name="expenditure"> 
 	<input type="hidden" name="saving">
+	<input type="hidden" name="withdraw">
 </form>
 <jsp:include page="./particle/bottom.jsp"></jsp:include>
 <script>
@@ -242,6 +286,17 @@
 					});
 				});
 				$("input[name=saving]").val(JSON.stringify(data));
+				
+				data = new Array;
+				$(".withdraw-list-result .custom-table-row").each(function() {
+					data.push({
+						id : $(this).find(".item-id").val(),
+						name : $(this).find(".item-name").val(),
+						del : $(this).find(".type-selection option:selected").val()
+					});
+				});
+				$("input[name=withdraw]").val(JSON.stringify(data));
+				
 				$("form").submit();
 			});
 			$(document).on("change", ".add-selection", function() {
