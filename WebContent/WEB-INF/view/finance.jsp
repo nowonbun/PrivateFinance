@@ -377,6 +377,7 @@
 			}
 		},
 		search : {
+			isSelect:false,
 			init : function() {
 				this.setting();
 				this.initVal();
@@ -465,8 +466,8 @@
         			}
         			if(data.financelist.length <= 0) {
         				let $dom = $($(".search-no-result").html());
-        				$dom.find("td").attr("colspan",4);
-        				$(".saving-list>tbody").append($dom);
+        				$dom.find("td").attr("colspan",5);
+        				$(".payment-list>tbody").append($dom);
         			}
         			for(let i=0;i<data.savinglist.length;i++){
         				let node = data.savinglist[i];
@@ -522,9 +523,10 @@
 					year++;
 				}
 				$("#householdYear").val(year);
-				$("#householdYear").trigger("change");
+				$("#householdYearView").html($("#householdYear").val());
 				$("#householdMonth").val(month);
-				$("#householdMonth").trigger("change");
+				$("#householdMonthView").html($("#householdMonth").val());
+				_finance.search.search();
 			}
 		}
 	});
