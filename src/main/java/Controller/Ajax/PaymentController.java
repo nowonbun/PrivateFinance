@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -92,11 +93,20 @@ public class PaymentController extends AbstractAjaxController {
 			res.setStatus(403);
 			return;
 		}
+		String pDay = req.getParameter("day");
+		String pType = req.getParameter("type");
 		Date date = Util.getDateFromString(pDate);
 		int year = Util.getYear(date);
 		int month = Util.getMonth(date);
 
 		List<Payment> list = FactoryDao.getDao(PaymentDao.class).getDataByYearMonth(year, month);
+		if(!Util.StringIsEmptyOrNull(pDay)) {
+			int day = Integer.parseInt(pDay);
+			list = list.stream().filter(x -> Util.getDay(x.getDate()) == day).collect(Collectors.toList());
+		}
+		if(!Util.StringIsEmptyOrNull(pType)) {
+			list = list.stream().filter(x -> Util.StringEquals(x.getLowCategory().getCode(), pType)).collect(Collectors.toList());
+		}
 		FinanceBean ret = new FinanceBean();
 		ret.setFinancelist(new ArrayList<>());
 		ret.setSavinglist(new ArrayList<>());

@@ -442,7 +442,9 @@
 				$(".saving-total").removeClass("money-minus");
 				$(".saving-total").removeClass("money-zero");
 				let data = {
-        			date: _finance.inputForm.getDateFormat(_finance.inputForm.getHouseholdDate())
+        			date: _finance.inputForm.getDateFormat(_finance.inputForm.getHouseholdDate()),
+        			day: $("#searchDaySelect>option:selected").val(),
+        			type: $("#searchTypeSelect>option:selected").val()
         		};
         		_finance.ajax("./getPaymentItem.ajax", data, function(data) {
         			console.log(data);
