@@ -29,6 +29,21 @@ public class PaymentDao extends TransactionDao<Payment> {
 		});
 	}
 	
+	@SuppressWarnings("unchecked")
+	public Payment getDataByIdx(int idx){
+		return transaction((em) -> {
+			try {
+				String qy = "SELECT p FROM Payment p "
+						+ "WHERE p.idx =:idx ";
+				Query query = em.createQuery(qy);
+				query.setParameter("idx", idx);
+				return (Payment) query.getSingleResult();
+			} catch (NoResultException e) {
+				return null;
+			}
+		});
+	}
+	
 	public Number getFullTotal(LowCategory lc) {
 		return transaction((em) -> {
 			try {

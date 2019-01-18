@@ -286,7 +286,7 @@
 		},
 		inputForm : {
 			init : function() {
-				this.initVal();
+				//this.initVal();
 				this.setting();
 			},
 			clear : function(){
@@ -323,8 +323,19 @@
 					_finance.inputForm.clear();
 				});
 				$("#deleteSubmit").on("click", function(){
-					//TODO: this stop
-					//$("#householdIdx").val()
+					if (!_finance.inputForm.validate(true)) {
+						return;
+					}
+					let data = {
+						idx : $("#householdIdx").val()
+					};
+					_finance.ajax("./deletePaymentItem.ajax", data, function(data) {
+						if (data.ret) {
+							_finance.inputForm.clear();
+							_finance.search.search();
+							toastr.success("削除しました。");
+						}
+					});
 				});
 				$(".payment-list>tbody").on("click", ".payment-row", function() {
 					_finance.inputForm.clear();

@@ -93,6 +93,28 @@ public class PaymentController extends AbstractAjaxController {
 		}
 		return true;
 	}
+	
+	@RequestMapping(value = "/deletePaymentItem.ajax", method = RequestMethod.POST)
+	public void deletePaymentItem(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("PFNV"))) {
+			res.setStatus(403);
+		}
+		String pIdx = req.getParameter("idx");
+		if (Util.StringIsEmptyOrNull(pIdx)) {
+			res.setStatus(403);
+			return;
+		}
+		int idx = Integer.parseInt(pIdx);
+		Payment payment = FactoryDao.getDao(PaymentDao.class).getDataByIdx(idx);
+		ObjectBean bean = new ObjectBean();
+		bean.setRet(false);
+		if(payment!=null) {
+			payment.setIsdeleted(true);
+			FactoryDao.getDao(PaymentDao.class).update(payment);
+			bean.setRet(true);
+		}
+		returnAjax(res, bean);
+	}
 
 	@RequestMapping(value = "/getPaymentItem.ajax", method = RequestMethod.POST)
 	public void getPaymentItem(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
