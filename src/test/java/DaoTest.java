@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -6,13 +7,17 @@ import Common.Util;
 import Dao.LocalizationDao;
 import Dao.LowCategoryDao;
 import Dao.MenuDao;
+import Dao.PaymentDao;
 import Model.Localization;
 import Model.LowCategory;
 import Model.Menu;
 
 public class DaoTest {
 	public static void main(String... arg) {
-		List<Menu> list = FactoryDao.getDao(MenuDao.class).getData();
+		LowCategory lc =  FactoryDao.getDao(LowCategoryDao.class).getLowCategory("i");
+		Number a = FactoryDao.getDao(PaymentDao.class).getFullTotal(lc);
+		System.out.println(a);
+		/*List<Menu> list = FactoryDao.getDao(MenuDao.class).getData();
 		for (Menu item : list) {
 			System.out.println(item.getName());
 		}
@@ -23,6 +28,6 @@ public class DaoTest {
 		}else {
 			System.out.println(data.get().getValue());
 			
-		}
+		}*/
 	}
 }

@@ -32,6 +32,21 @@ div.selectDiv.searchTypeSelect{
     text-align:center;
 }
 
+.off {
+    display: none;
+}
+
+/*payment total*/
+div.main-data > div.total-data.data-income{
+    background-color: rgba(234, 83, 118, 0.48);
+}
+div.main-data > div.total-data.data-expend{
+    background-color: rgba(83, 116, 234, 0.48);
+}
+div.main-data > div.total-data.data-saving{
+    background-color: rgba(43, 167, 77, 0.34);
+}
+
 /*payment*/
 .payment-row{
 	font-size: 0.75rem;
@@ -47,4 +62,9 @@ span.money-minus {
 
 span.money-zero {
     color: black;
+}
+
+/*payment list*/
+table.table-data1 > tbody > tr.click{
+    background-color:rgba(243, 176, 229, 0.72);
 }

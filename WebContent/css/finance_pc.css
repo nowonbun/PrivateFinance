@@ -128,13 +128,6 @@ div.total-data {
     padding-bottom: 5px;
 }
 
-div.main-data > div.total-data.data-income{
-    background-color: rgba(234, 83, 118, 0.48);
-}
-div.main-data > div.total-data.data-expend{
-    background-color: rgba(83, 116, 234, 0.48);
-}
-
 div.normal-data{
     background-color: rgba(108, 108, 255, 0.29);
 }
@@ -181,9 +174,7 @@ table.table-data1 > tbody > tr:not(.nothing):not(.credit):hover{
     cursor:pointer;
 }
 
-table.table-data1 > tbody > tr.click{
-    background-color:rgba(243, 176, 229, 0.72);
-}
+
 
 table.table-data1 > tbody > tr > td,
 table.table-data2 > tbody > tr > td,

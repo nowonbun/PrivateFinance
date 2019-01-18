@@ -7,6 +7,8 @@ public class FinanceBean {
 	private String expenditureTotal;
 	private int savingsign;
 	private String savingTotal;
+	private int fullSavingsign;
+	private String fullSavingTotal;
 	private int financesign;
 	private String financeTotal;
 	private List<PaymentBean> financelist;
@@ -74,6 +76,22 @@ public class FinanceBean {
 
 	public void setFinancesign(int financesign) {
 		this.financesign = financesign;
+	}
+
+	public int getFullSavingsign() {
+		return fullSavingsign;
+	}
+
+	public void setFullSavingsign(int fullSavingsign) {
+		this.fullSavingsign = fullSavingsign;
+	}
+
+	public String getFullSavingTotal() {
+		return fullSavingTotal;
+	}
+
+	public void setFullSavingTotal(String fullSavingTotal) {
+		this.fullSavingTotal = fullSavingTotal;
 	}
 
 }

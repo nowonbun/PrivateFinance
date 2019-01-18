@@ -115,10 +115,6 @@ div.template {
     display: none;
 }
 
-.off {
-    display: none;
-}
-
 input[type=button].signout{
     float: right;
     border: 0px;
