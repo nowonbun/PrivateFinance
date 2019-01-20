@@ -93,7 +93,62 @@ public class PaymentController extends AbstractAjaxController {
 		}
 		return true;
 	}
-	
+
+	@RequestMapping(value = "/modifyPaymentItem.ajax", method = RequestMethod.POST)
+	public void modifyPaymentItem(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("PFNV"))) {
+			res.setStatus(403);
+		}
+		String pIdx = req.getParameter("idx");
+		String pDate = req.getParameter("date");
+		String pType = req.getParameter("type");
+		String pCategory = req.getParameter("category");
+		String pContents = req.getParameter("contents");
+		String pPrice = req.getParameter("price");
+		if (Util.StringIsEmptyOrNull(pIdx)) {
+			res.setStatus(403);
+			return;
+		}
+		if (Util.StringIsEmptyOrNull(pDate)) {
+			res.setStatus(403);
+			return;
+		}
+		if (Util.StringIsEmptyOrNull(pType)) {
+			res.setStatus(403);
+			return;
+		}
+		if (Util.StringIsEmptyOrNull(pCategory)) {
+			res.setStatus(403);
+			return;
+		}
+		if (Util.StringIsEmptyOrNull(pContents)) {
+			res.setStatus(403);
+			return;
+		}
+		if (Util.StringIsEmptyOrNull(pPrice)) {
+			res.setStatus(403);
+			return;
+		}
+		int idx = Integer.parseInt(pIdx);
+		Payment payment = FactoryDao.getDao(PaymentDao.class).getDataByIdx(idx);
+		ObjectBean bean = new ObjectBean();
+		bean.setRet(false);
+		if (payment != null) {
+			payment.setDate(Util.getDateFromString(pDate));
+			payment.setLowCategory(FactoryDao.getDao(LowCategoryDao.class).getLowCategory(pType));
+			int category = Integer.parseInt(pCategory);
+			payment.setCategory(FactoryDao.getDao(CategoryDao.class).getCategory(category));
+			payment.setContents(pContents);
+			BigDecimal money = new BigDecimal(pPrice);
+			payment.setMoney(money);
+			payment.setCreater(super.getCurrentUser(session));
+			payment.setCreateddate(Util.getNow());
+			FactoryDao.getDao(PaymentDao.class).update(payment);
+			bean.setRet(true);
+		}
+		returnAjax(res, bean);
+	}
+
 	@RequestMapping(value = "/deletePaymentItem.ajax", method = RequestMethod.POST)
 	public void deletePaymentItem(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("PFNV"))) {
@@ -108,7 +163,7 @@ public class PaymentController extends AbstractAjaxController {
 		Payment payment = FactoryDao.getDao(PaymentDao.class).getDataByIdx(idx);
 		ObjectBean bean = new ObjectBean();
 		bean.setRet(false);
-		if(payment!=null) {
+		if (payment != null) {
 			payment.setIsdeleted(true);
 			FactoryDao.getDao(PaymentDao.class).update(payment);
 			bean.setRet(true);
@@ -157,7 +212,7 @@ public class PaymentController extends AbstractAjaxController {
 			bean.setMoney_disp(String.valueOf(item.getMoney()));
 			if (LowCategoryDao.INCOME.equals(item.getLowCategory().getCode())) {
 				incomeTotal = incomeTotal.add(item.getMoney());
-				if(!isSearchCondition(item,day,pType)) {
+				if (!isSearchCondition(item, day, pType)) {
 					continue;
 				}
 				bean.setSign(1);
@@ -173,7 +228,7 @@ public class PaymentController extends AbstractAjaxController {
 				total = total.subtract(item.getMoney());
 			} else if (LowCategoryDao.SAVING.equals(item.getLowCategory().getCode())) {
 				expenditureTotal = expenditureTotal.add(item.getMoney());
-				if(!isSearchCondition(item,day,pType)) {
+				if (!isSearchCondition(item, day, pType)) {
 					continue;
 				}
 				bean.setSign(-1);
@@ -182,7 +237,7 @@ public class PaymentController extends AbstractAjaxController {
 				ret.getSavinglist().add(bean);
 			} else if (LowCategoryDao.WITHDRAW.equals(item.getLowCategory().getCode())) {
 				incomeTotal = incomeTotal.add(item.getMoney());
-				if(!isSearchCondition(item,day,pType)) {
+				if (!isSearchCondition(item, day, pType)) {
 					continue;
 				}
 				bean.setSign(1);

@@ -301,7 +301,7 @@
 			},
 			setting : function() {
 				$("#applySubmit").on("click", function() {
-					if (!_finance.inputForm.validate(false)) {
+					if (!_finance.inputForm.validate(false, false)) {
 						return;
 					}
 					let data = {
@@ -322,8 +322,28 @@
 				$("#cancelSubmit").on("click", function(){
 					_finance.inputForm.clear();
 				});
+				$("#modifySubmit").on("click", function(){
+					if (!_finance.inputForm.validate(true, false)) {
+						return;
+					}
+					let data = {
+						idx : $("#householdIdx").val(),
+						date : _finance.inputForm.getDateFormat(_finance.inputForm.getHouseholdDate()),
+						type : $("#householdType>option:selected").val(),
+						category : $("#householdCategory>option:selected").val(),
+						contents : $("#householdContent").val(),
+						price : $("#householdPrice").val()
+					};
+					_finance.ajax("./modifyPaymentItem.ajax", data, function(data) {
+						if (data.ret) {
+							_finance.inputForm.clear();
+							_finance.search.search();
+							toastr.success("修正しました。");
+						}
+					});
+				});
 				$("#deleteSubmit").on("click", function(){
-					if (!_finance.inputForm.validate(true)) {
+					if (!_finance.inputForm.validate(true, true)) {
 						return;
 					}
 					let data = {
@@ -376,7 +396,7 @@
 				}
 				return ret;
 			},
-			validate : function(isIdx) {
+			validate : function(isIdx, isDelete) {
 				let date = _finance.inputForm.getHouseholdDate();
 				if(isIdx){
 					let idx = $("#householdIdx").val();
@@ -384,6 +404,9 @@
 						toastr.error("Itemを選択してください。");
 						return false;
 					}	
+				}
+				if(isDelete){
+					return;
 				}
 				let contents = $("#householdContent").val();
 				if (contents === null || contents.trim() === "") {
