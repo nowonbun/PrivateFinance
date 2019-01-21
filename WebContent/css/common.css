@@ -95,20 +95,11 @@ span.money-zero {
 table.table-input{
     width:100%;
 }
-table.table-input > tbody > tr > th:nth-child(1) {
-    width: 9%;
+table.table-input > tbody > tr > th {
+    width: 30%;
 }
-table.table-input > tbody > tr > th:nth-child(2) {
-    width: 10.5%;
-}
-table.table-input > tbody > tr > th:nth-child(3) {
-    width: 15.5%;
-}
-table.table-input > tbody > tr > th:nth-child(4) {
-    width: 37.5%;
-}
-table.table-input > tbody > tr > th:nth-child(5) {
-    width: 32.5%;
+table.table-input > tbody > tr > td {
+    width: 70%;
 }
 table.table-input > tbody > tr > th {
     text-align: center;

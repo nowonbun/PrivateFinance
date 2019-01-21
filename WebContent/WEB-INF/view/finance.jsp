@@ -73,22 +73,19 @@
 						<tbody>
 							<tr>
 								<th><%=Util.localization("day", session)%></th>
-								<th><%=Util.localization("type", session)%></th>
-								<th><%=Util.localization("category", session)%></th>
-								<th><%=Util.localization("contents", session)%></th>
-								<th><%=Util.localization("money", session)%></th>
-							</tr>
-						
-						
-							<tr>
-								<td><input type="hidden" id="householdIdx">
+								<td>
+									<input type="hidden" id="householdIdx">
 									<div class="selectDiv household-date day">
 										<span></span> <select class="household-date day" id="householdDay">
 											<c:forEach items="${daylist}" var="item">
 												<option value="${item.value}">${item.name}</option>
 											</c:forEach>
 										</select>
-									</div></td>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th><%=Util.localization("type", session)%></th>
 								<td>
 									<div class="selectDiv household-category">
 										<span></span> <select class="household-type" id="householdType">
@@ -98,16 +95,29 @@
 										</select>
 									</div>
 								</td>
+							</tr>
+							<tr>
+								<th><%=Util.localization("category", session)%></th>
 								<td>
 									<div class="selectDiv household-category">
 										<span></span> <select class="household-category" id="householdCategory"></select>
 									</div>
 								</td>
-								<td><input type="text" id="householdContent" autocomplete="off" maxlength="40"></td>
-								<td><input type="number" id="householdPrice" autocomplete="off" maxlength="8"></td>
 							</tr>
 							<tr>
-								<td colspan="5">
+								<th><%=Util.localization("contents", session)%></th>
+								<td>
+									<input type="text" id="householdContent" autocomplete="off" maxlength="40">
+								</td>
+							</tr>
+							<tr>
+								<th><%=Util.localization("money", session)%></th>
+								<td>
+									<input type="number" id="householdPrice" autocomplete="off" maxlength="8">
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
 									<div class="apply-area">
 										<input type="button" value=<%=Util.localization("Save", session)%> id="applySubmit">
 									</div>
