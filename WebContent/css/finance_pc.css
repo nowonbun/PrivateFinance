@@ -1,13 +1,14 @@
+/*
 .mobile-private{
     display : none;
-}
+}*/
 div.container {
     max-width: 769px;
     display: inline-block;
     padding-left:15px;
     padding-right:15px;
 }
-
+/*
 table.table-input{
     width:100%;
 }
@@ -31,8 +32,8 @@ table.table-input > thead > tr > th {
     background-color: #b7def1;
     border: 1px solid;
     font-size: 10pt;
-}
-div.search-data > label{
+}*/
+/*div.search-data > label{
     font-size: 20px;
     margin-left: 30px;
     margin-right: 10px;
@@ -47,8 +48,8 @@ div.search-data > select {
     color: black;
     padding-left: 5px;
     padding-right: 5px;
-}
-
+}*/
+/*
 table.table-input > tbody > tr:nth-child(1){
     height:40px;
 }
@@ -107,7 +108,7 @@ table.table-input div.modify-area > input {
 table.table-input div.modify-area > input:nth-child(3) {
     background-color: rgba(234, 83, 118, 0.48);
 }
-
+*/
 
 div.normal-data > label:nth-child(3),
 div.account-data > label:nth-child(3),
@@ -176,12 +177,12 @@ table.table-data1 > tbody > tr:not(.nothing):not(.credit):hover{
 
 
 
-table.table-data1 > tbody > tr > td,
+/*table.table-data1 > tbody > tr > td,
 table.table-data2 > tbody > tr > td,
 table.table-data3 > tbody > tr > td {
     border: 1px solid;
-}
-
+}*/
+/*
 table.table-data1 > tbody > tr > td:nth-child(4),
 table.table-data2 > tbody > tr > td:nth-child(3),
 table.table-data3 > tbody > tr > td:nth-child(2) {
@@ -193,8 +194,8 @@ table.table-data2 > tbody > tr > td:nth-child(4),
 table.table-data3 > tbody > tr > td:nth-child(3) {
     text-align:right;
     padding-right:5px;
-}
-
+}*/
+/*
 table.table-data1 > thead > tr > th,
 table.table-data2 > thead > tr > th,
 table.table-data3 > thead > tr > th {
@@ -202,7 +203,7 @@ table.table-data3 > thead > tr > th {
     background-color: #b7def1;
     border: 1px solid;
     font-size: 10pt;
-}
+}*/
 table.table-data3 > thead > tr > th:nth-child(1) {
     width: 9%;
 }
@@ -225,10 +226,10 @@ input[type=button]#searchInit{
     padding-left:5px;
     padding-right:5px;
 }
-
+/*
 div.household-date.day{
     width:100%;
 }
 div.household-category{
     width:100%;
-}
+}*/

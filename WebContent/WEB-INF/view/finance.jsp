@@ -70,7 +70,7 @@
 				<div class="space"></div>
 				<div class="main-input">
 					<table class="table-input">
-						<thead>
+						<tbody>
 							<tr>
 								<th><%=Util.localization("day", session)%></th>
 								<th><%=Util.localization("type", session)%></th>
@@ -78,8 +78,8 @@
 								<th><%=Util.localization("contents", session)%></th>
 								<th><%=Util.localization("money", session)%></th>
 							</tr>
-						</thead>
-						<tbody>
+						
+						
 							<tr>
 								<td><input type="hidden" id="householdIdx">
 									<div class="selectDiv household-date day">
@@ -112,9 +112,7 @@
 										<input type="button" value=<%=Util.localization("Save", session)%> id="applySubmit">
 									</div>
 									<div class="modify-area off">
-										<input type="button" value="取消" id="cancelSubmit"> 
-										<input type="button" value="修正" id="modifySubmit"> 
-										<input type="button" value="削除" id="deleteSubmit">
+										<input type="button" value="取消" id="cancelSubmit"> <input type="button" value="修正" id="modifySubmit"> <input type="button" value="削除" id="deleteSubmit">
 									</div>
 								</td>
 							</tr>
@@ -154,10 +152,9 @@
 					</div>
 				</div>
 				<div class="normal-data title-data">
-					<label class="mobile-private"> <span class="fa fa-square fa-plus-square"></span> <span class="fa fa-square fa-minus-square off"></span>
-					</label> <label><%=Util.localization("Finence", session)%></label> <label>TOTAL : <span class="payment-total"></span></label>
+					<label><%=Util.localization("Finence", session)%></label> <label>TOTAL : <span class="payment-total"></span></label>
 				</div>
-				<table class="table-data table-data1 payment-list mobile-off">
+				<table class="table-data table-data1 payment-list">
 					<thead>
 						<tr>
 							<th><%=Util.localization("day", session)%></th>
@@ -173,10 +170,9 @@
 					<sup>&nbsp;</sup>
 				</div>
 				<div class="account-data title-data">
-					<label class="mobile-private"> <span class="fa fa-square fa-plus-square"></span> <span class="fa fa-square fa-minus-square off"></span>
-					</label> <label><%=Util.localization("Saving", session)%></label> <label>TOTAL : <span class="saving-total"></span></label>
+					<label><%=Util.localization("Saving", session)%></label> <label>TOTAL : <span class="saving-total"></span></label>
 				</div>
-				<table class="table-data table-data2 saving-list mobile-off">
+				<table class="table-data table-data2 saving-list">
 					<thead>
 						<tr>
 							<th><%=Util.localization("day", session)%></th>
@@ -289,15 +285,15 @@
 				//this.initVal();
 				this.setting();
 			},
-			clear : function(){
-				$("table.table-data1 > tbody > tr.click").each(function () {
-	                $(this).removeClass("click");
-	            });
+			clear : function() {
+				$("table.table-data1 > tbody > tr.click").each(function() {
+					$(this).removeClass("click");
+				});
 				$("table.table-input div.apply-area").removeClass("off");
-	            $("table.table-input div.modify-area").addClass("off");
-	            $("#householdIdx").val("");
-	            $("#householdContent").val("");
-	            $("#householdPrice").val("");
+				$("table.table-input div.modify-area").addClass("off");
+				$("#householdIdx").val("");
+				$("#householdContent").val("");
+				$("#householdPrice").val("");
 			},
 			setting : function() {
 				$("#applySubmit").on("click", function() {
@@ -319,10 +315,10 @@
 						}
 					});
 				});
-				$("#cancelSubmit").on("click", function(){
+				$("#cancelSubmit").on("click", function() {
 					_finance.inputForm.clear();
 				});
-				$("#modifySubmit").on("click", function(){
+				$("#modifySubmit").on("click", function() {
 					if (!_finance.inputForm.validate(true, false)) {
 						return;
 					}
@@ -342,7 +338,7 @@
 						}
 					});
 				});
-				$("#deleteSubmit").on("click", function(){
+				$("#deleteSubmit").on("click", function() {
 					if (!_finance.inputForm.validate(true, true)) {
 						return;
 					}
@@ -363,16 +359,16 @@
 					let data = JSON.parse(payment);
 					$(this).addClass("click");
 					$("table.table-input div.apply-area").addClass("off");
-		            $("table.table-input div.modify-area").removeClass("off");
-		            $("#householdIdx").val(data.idx);
-		            $("#householdDay").val(data.day);
-		            $("#householdDay").trigger("change");
-		            $("#householdType").val(data.type_code);
-		            $("#householdType").trigger("change");
-		            $("#householdCategory").val(data.category_code);
-		            $("#householdCategory").trigger("change");
-		            $("#householdContent").val(data.contents);
-		            $("#householdPrice").val(data.money_disp);
+					$("table.table-input div.modify-area").removeClass("off");
+					$("#householdIdx").val(data.idx);
+					$("#householdDay").val(data.day);
+					$("#householdDay").trigger("change");
+					$("#householdType").val(data.type_code);
+					$("#householdType").trigger("change");
+					$("#householdCategory").val(data.category_code);
+					$("#householdCategory").trigger("change");
+					$("#householdContent").val(data.contents);
+					$("#householdPrice").val(data.money_disp);
 				});
 			},
 			getHouseholdDate : function() {
@@ -398,14 +394,14 @@
 			},
 			validate : function(isIdx, isDelete) {
 				let date = _finance.inputForm.getHouseholdDate();
-				if(isIdx){
+				if (isIdx) {
 					let idx = $("#householdIdx").val();
 					if (idx === null || idx.trim() === "") {
 						toastr.error("Itemを選択してください。");
 						return false;
-					}	
+					}
 				}
-				if(isDelete){
+				if (isDelete) {
 					return;
 				}
 				let contents = $("#householdContent").val();

@@ -3,6 +3,14 @@ body{
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+.off {
+    display: none;
+}
+/*
+table { border-collapse: collapse; }
+tr { display: block; float: left; }
+th, td { display: block; border: 1px solid black; }*/
+
 div.selectDiv{
     display:inline-block;
     position:relative;
@@ -31,9 +39,28 @@ div.selectDiv.searchTypeSelect{
     width:70px;
     text-align:center;
 }
+div.search-data > label{
+    font-size: 20px;
+    margin-left: 30px;
+    margin-right: 10px;
+}
+div.search-data > select {
+    font-size: 20px;
+    text-align: center;
+    text-align-last: center;
+    border: 0px;
+    border-bottom: 2px solid #67b4ec;
+    background-color: #fff;
+    color: black;
+    padding-left: 5px;
+    padding-right: 5px;
+}
 
-.off {
-    display: none;
+div.household-date.day{
+    width:100%;
+}
+div.household-category{
+    width:100%;
 }
 
 /*payment total*/
@@ -64,7 +91,137 @@ span.money-zero {
     color: black;
 }
 
+/*payment input*/
+table.table-input{
+    width:100%;
+}
+table.table-input > tbody > tr > th:nth-child(1) {
+    width: 9%;
+}
+table.table-input > tbody > tr > th:nth-child(2) {
+    width: 10.5%;
+}
+table.table-input > tbody > tr > th:nth-child(3) {
+    width: 15.5%;
+}
+table.table-input > tbody > tr > th:nth-child(4) {
+    width: 37.5%;
+}
+table.table-input > tbody > tr > th:nth-child(5) {
+    width: 32.5%;
+}
+table.table-input > tbody > tr > th {
+    text-align: center;
+    background-color: #b7def1;
+    border: 1px solid;
+    font-size: 10pt;
+}
+
+table.table-input > tbody > tr:nth-child(1){
+    height:40px;
+}
+
+table.table-input > tbody > tr > td {
+    text-align: center;
+    border: 1px solid;
+}
+
+table.table-input > tbody > tr > td > select {
+    font-size: 12pt;
+    text-align: center;
+    text-align-last: center;
+    border: 0px;
+    border-bottom: 2px solid #67b4ec;
+    background-color: #fff;
+    color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+table.table-input > tbody > tr > td > input {
+    width: 100%;
+    height: 35px;
+    font-size: 15pt;
+    padding-left:5px;
+    padding-right:5px;
+}
+
+table.table-input > tbody > tr > td > input:focus {
+    border-color: blue;
+}
+
+table.table-input div.apply-area > input {
+    width: 100%;
+    background-color: rgba(183, 222, 241, 0.48);
+    /* margin-top: 5px; */
+    /* margin-bottom: 5px; */
+    font-size: 10pt;
+    font-weight: bold;
+    height: 35px;
+    padding: 0px;
+}
+
+table.table-input div.modify-area > input {
+    width: 32%;
+    background-color: rgba(183, 222, 241, 0.48);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 11pt;
+    font-weight: bold;
+    height: 23px;
+    padding: 0px;
+}
+
+table.table-input div.modify-area > input:nth-child(3) {
+    background-color: rgba(234, 83, 118, 0.48);
+}
+
 /*payment list*/
 table.table-data1 > tbody > tr.click{
     background-color:rgba(243, 176, 229, 0.72);
+}
+
+div.title-data > label:nth-child(2),
+div.total-data > span {
+    float: right;
+    margin-right: 10px;
+}
+
+table.table-data1 > thead > tr > th,
+table.table-data2 > thead > tr > th,
+table.table-data3 > thead > tr > th {
+    text-align: center;
+    background-color: #b7def1;
+    border: 1px solid;
+    font-size: 10pt;
+}
+
+table.table-data1 > tbody > tr > td,
+table.table-data2 > tbody > tr > td,
+table.table-data3 > tbody > tr > td {
+    border: 1px solid;
+}
+
+table.table-data1 > tbody > tr > td:nth-child(4),
+table.table-data2 > tbody > tr > td:nth-child(3),
+table.table-data3 > tbody > tr > td:nth-child(2) {
+    text-align:left;
+    padding-left:5px;
+}
+table.table-data1 > tbody > tr > td:nth-child(5),
+table.table-data2 > tbody > tr > td:nth-child(4),
+table.table-data3 > tbody > tr > td:nth-child(3) {
+    text-align:right;
+    padding-right:5px;
+}
+
+@media screen and (max-width: 768px) {
+	table.table-data > thead > tr > th {
+	    text-align: center;
+	    background-color: #b7def1;
+	    font-size: 9pt;
+	}
+	table.table-data > tbody > tr > td {
+	    font-size: 8pt;
+	}
 }

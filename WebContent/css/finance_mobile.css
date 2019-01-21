@@ -14,9 +14,9 @@ div.main {
 }
 
 /* The mobile only disappear style.  */
-.mobile-off {
+/*.mobile-off {
     display: none;
-}
+}*/
 
 /* The minimum size of main screen.*/
 div.container {
@@ -52,18 +52,18 @@ div.total-data {
     padding-bottom: 5px;
 }
 /* The folding button style */
-div.title-data > label:nth-child(1) {
+/*div.title-data > label:nth-child(1) {
     float: left;
     margin-left: 10px;
     cursor: pointer;
-}
+}*/
 
 /* The total amount style.*/
-div.title-data > label:nth-child(3),
+/*div.title-data > label:nth-child(2),
 div.total-data > span {
     float: right;
     margin-right: 10px;
-}
+}*/
 
 /* The generic menu style.*/
 div.normal-data {
@@ -96,21 +96,21 @@ table.table-data > tbody > tr {
     height: 40px;
 }
 
-table.table-data > thead > tr > th {
+/*table.table-data > thead > tr > th {
     text-align: center;
     background-color: #b7def1;
     border-bottom: 1px solid;
     border-left: 1px dotted;
     border-right: 1px dotted;
     font-size: 9pt;
-}
-table.table-data > tbody > tr > td {
+}*/
+/*table.table-data > tbody > tr > td {
     border-bottom: 1px solid;
     border-left: 1px dotted;
     border-right: 1px dotted;
     font-size: 8pt;
-}
-
+}*/
+/*
 table.table-data1 > tbody > tr > td:nth-child(4),
 table.table-data2 > tbody > tr > td:nth-child(3),
 table.table-data3 > tbody > tr > td:nth-child(2) {
@@ -123,7 +123,7 @@ table.table-data2 > tbody > tr > td:nth-child(4),
 table.table-data3 > tbody > tr > td:nth-child(3) {
     text-align: right;
     padding-right: 1px;
-}
+}*/
 
 /* The generic data style.*/
 /* The account data style*/
