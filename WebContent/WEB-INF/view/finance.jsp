@@ -193,9 +193,6 @@
 					</thead>
 					<tbody></tbody>
 				</table>
-				<div class="caption">
-					<sup>「貯蓄のTotal」は現在まで金額の合算である。</sup>
-				</div>
 			</div>
 		</div>
 		<div class="lodding lodding-off">
@@ -253,7 +250,7 @@
 				error : function(jqXHR, textStatus, errorThrown) {
 					console.log(jqXHR);
 					console.log(errorThrown);
-					toastr.error("system error!");
+					toastr.error("<%=Util.localization("systemError", session)%>");
 				},
 				complete : function(jqXHR, textStatus) {
 					_finance.loading.hide();
@@ -292,7 +289,6 @@
 		},
 		inputForm : {
 			init : function() {
-				//this.initVal();
 				this.setting();
 			},
 			clear : function() {
@@ -321,7 +317,9 @@
 						if (data.ret) {
 							_finance.inputForm.clear();
 							_finance.search.search();
-							toastr.success("格納しました。");
+							toastr.success("<%=Util.localization("SaveOK", session)%>");
+						} else {
+							toastr.success("<%=Util.localization("SaveNG", session)%>");
 						}
 					});
 				});
@@ -344,7 +342,9 @@
 						if (data.ret) {
 							_finance.inputForm.clear();
 							_finance.search.search();
-							toastr.success("修正しました。");
+							toastr.success("<%=Util.localization("ModifyOK", session)%>");
+						} else {
+							toastr.success("<%=Util.localization("ModifyNG", session)%>");
 						}
 					});
 				});
@@ -359,7 +359,9 @@
 						if (data.ret) {
 							_finance.inputForm.clear();
 							_finance.search.search();
-							toastr.success("削除しました。");
+							toastr.success("<%=Util.localization("DeleteOK", session)%>");
+						} else {
+							toastr.success("<%=Util.localization("DeleteNG", session)%>");
 						}
 					});
 				});
