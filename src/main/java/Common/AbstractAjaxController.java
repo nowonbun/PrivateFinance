@@ -7,9 +7,11 @@ public abstract class AbstractAjaxController extends AbstractController {
 	protected void returnAjax(HttpServletResponse res, Object data) {
 		try {
 			res.setContentType("content-type: application/json; charset=utf-8");
-			res.getWriter().println(JsonConverter.create(data));
+			String ret = JsonConverter.create(data);
+			getLogger().info(ret);
+			res.getWriter().println(ret);
 		} catch (Throwable e) {
-			e.printStackTrace();
+			getLogger().error(e);
 		}
 	}
 }

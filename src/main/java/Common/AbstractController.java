@@ -1,12 +1,22 @@
 package Common;
 
 import javax.servlet.http.HttpSession;
-
+import org.apache.log4j.Logger;
 import Model.Group;
 import Model.User;
 import Model.Viewrole;
 
 public class AbstractController {
+	
+	private Logger logger = null;
+	
+	protected Logger getLogger() {
+		if(logger == null) {
+			logger = LoggerManager.getLogger(this.getClass());
+		}
+		return logger;
+	}
+	
 	protected User getCurrentUser(HttpSession session) {
 		return (User) session.getAttribute(Define.USER_SESSION_NAME);
 	}

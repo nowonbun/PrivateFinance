@@ -34,14 +34,16 @@ import Model.Viewrole;
 public class MainController extends AbstractServletController {
 	@RequestMapping(value = "/main.html")
 	public String main(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] main.html");
 		super.initMenu(modelmap, session);
-
 		return "main";
 	}
 
 	@RequestMapping(value = "/category.html")
 	public String category(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] category.html");
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("CTGV"))) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The user do not have the CTGV of role permission.");
 			res.setStatus(403);
 			return "";
 		}
@@ -73,7 +75,9 @@ public class MainController extends AbstractServletController {
 
 	@RequestMapping(value = "/saveCategory.html", method = RequestMethod.POST)
 	public String saveCategory(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] saveCategory.html");
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("CTGV"))) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The user do not have the CTGV of role permission.");
 			res.setStatus(403);
 			return "";
 		}
@@ -81,7 +85,12 @@ public class MainController extends AbstractServletController {
 		String expenditure = req.getParameter("expenditure");
 		String saving = req.getParameter("saving");
 		String withdraw = req.getParameter("withdraw");
+		getLogger().info("[" + getCurrentUser(session).getId() + "] income - " + income);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] expenditure - " + expenditure);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] saving - " + saving);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] withdraw - " + withdraw);
 		if (income == null || expenditure == null || saving == null || withdraw == null) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null!");
 			res.setStatus(403);
 			return "";
 		}
@@ -185,7 +194,7 @@ public class MainController extends AbstractServletController {
 		super.initMenu(modelmap, session);
 
 		List<SelectionBean> yearlist = new ArrayList<>();
-		//TODO: This data should be get by properties
+		// TODO: This data should be get by properties
 		for (int i = 2014; i <= 2020; i++) {
 			SelectionBean bean = new SelectionBean();
 			bean.setName(String.valueOf(i));
