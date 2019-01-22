@@ -14,9 +14,12 @@ import Model.Menu;
 
 public class DaoTest {
 	public static void main(String... arg) {
-		LowCategory lc =  FactoryDao.getDao(LowCategoryDao.class).getLowCategory("i");
+		String aa = "aaa";
+		String bb = null;
+		System.out.println(aa +bb);
+		/*LowCategory lc =  FactoryDao.getDao(LowCategoryDao.class).getLowCategory("i");
 		Number a = FactoryDao.getDao(PaymentDao.class).getFullTotal(lc);
-		System.out.println(a);
+		System.out.println(a);*/
 		/*List<Menu> list = FactoryDao.getDao(MenuDao.class).getData();
 		for (Menu item : list) {
 			System.out.println(item.getName());

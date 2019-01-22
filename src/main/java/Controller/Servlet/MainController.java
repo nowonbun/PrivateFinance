@@ -16,6 +16,7 @@ import Bean.SelectionBean;
 import Common.AbstractServletController;
 import Common.FactoryDao;
 import Common.JsonConverter;
+import Common.PropertyMap;
 import Common.Util;
 import Dao.ActionroleDao;
 import Dao.CategoryDao;
@@ -144,7 +145,9 @@ public class MainController extends AbstractServletController {
 
 	@RequestMapping(value = "/admin.html")
 	public String admin(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] admin.html");
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("ADMN"))) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The user do not have the ADMN of role permission.");
 			res.setStatus(403);
 			return "";
 		}
@@ -187,29 +190,36 @@ public class MainController extends AbstractServletController {
 
 	@RequestMapping(value = "/finance.html")
 	public String finance(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] admin.html");
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("PFNV"))) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The user do not have the PFNV of role permission.");
 			res.setStatus(403);
 			return "";
 		}
 		super.initMenu(modelmap, session);
 
 		List<SelectionBean> yearlist = new ArrayList<>();
-		// TODO: This data should be get by properties
-		for (int i = 2014; i <= 2020; i++) {
+		int yearstart = PropertyMap.getInstance().getPropertyInt("config", "year-start");
+		int yearend = PropertyMap.getInstance().getPropertyInt("config", "year-end");
+		for (int i = yearstart; i <= yearend; i++) {
 			SelectionBean bean = new SelectionBean();
 			bean.setName(String.valueOf(i));
 			bean.setValue(String.valueOf(i));
 			yearlist.add(bean);
 		}
 		List<SelectionBean> monthlist = new ArrayList<>();
-		for (int i = 1; i <= 12; i++) {
+		int monthstart = PropertyMap.getInstance().getPropertyInt("config", "month-start");
+		int monthend = PropertyMap.getInstance().getPropertyInt("config", "month-end");
+		for (int i = monthstart; i <= monthend; i++) {
 			SelectionBean bean = new SelectionBean();
 			bean.setName(String.valueOf(i));
 			bean.setValue(String.valueOf(i));
 			monthlist.add(bean);
 		}
 		List<SelectionBean> daylist = new ArrayList<>();
-		for (int i = 1; i <= 31; i++) {
+		int daystart = PropertyMap.getInstance().getPropertyInt("config", "day-start");
+		int dayend = PropertyMap.getInstance().getPropertyInt("config", "day-end");
+		for (int i = daystart; i <= dayend; i++) {
 			SelectionBean bean = new SelectionBean();
 			bean.setName(String.valueOf(i));
 			bean.setValue(String.valueOf(i));

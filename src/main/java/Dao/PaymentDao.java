@@ -29,7 +29,6 @@ public class PaymentDao extends TransactionDao<Payment> {
 		});
 	}
 	
-	@SuppressWarnings("unchecked")
 	public Payment getDataByIdx(int idx){
 		return transaction((em) -> {
 			try {

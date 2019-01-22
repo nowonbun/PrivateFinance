@@ -36,4 +36,13 @@ public class PropertyMap {
 			return null;
 		}
 	}
+
+	public int getPropertyInt(String session, String key) {
+		String data = getProperty(session, key);
+		try {
+			return Integer.parseInt(data);
+		}catch(Throwable e) {
+			return 0;
+		}
+	}
 }

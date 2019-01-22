@@ -28,8 +28,11 @@ public class PaymentController extends AbstractAjaxController {
 
 	@RequestMapping(value = "/setPaymentItem.ajax", method = RequestMethod.POST)
 	public void setPaymentItem(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] setPaymentItem.ajax");
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("PFNV"))) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The user do not have the PFNV of role permission.");
 			res.setStatus(403);
+			return;
 		}
 		String pDate = req.getParameter("date");
 		String pType = req.getParameter("type");
@@ -37,23 +40,33 @@ public class PaymentController extends AbstractAjaxController {
 		String pContents = req.getParameter("contents");
 		String pPrice = req.getParameter("price");
 
+		getLogger().info("[" + getCurrentUser(session).getId() + "] date - " + pDate);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] type - " + pType);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] category - " + pCategory);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] contents - " + pContents);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] price - " + pPrice);
 		if (Util.StringIsEmptyOrNull(pDate)) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null! : date");
 			res.setStatus(403);
 			return;
 		}
 		if (Util.StringIsEmptyOrNull(pType)) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null! : type");
 			res.setStatus(403);
 			return;
 		}
 		if (Util.StringIsEmptyOrNull(pCategory)) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null! : category");
 			res.setStatus(403);
 			return;
 		}
 		if (Util.StringIsEmptyOrNull(pContents)) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null! : contents");
 			res.setStatus(403);
 			return;
 		}
 		if (Util.StringIsEmptyOrNull(pPrice)) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null! : price");
 			res.setStatus(403);
 			return;
 		}
@@ -75,6 +88,8 @@ public class PaymentController extends AbstractAjaxController {
 			bean.setRet(true);
 			returnAjax(res, bean);
 		} catch (Throwable e) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] exception!");
+			getLogger().error(e);
 			res.setStatus(403);
 			return;
 		}
@@ -96,7 +111,9 @@ public class PaymentController extends AbstractAjaxController {
 
 	@RequestMapping(value = "/modifyPaymentItem.ajax", method = RequestMethod.POST)
 	public void modifyPaymentItem(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] modifyPaymentItem.ajax");
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("PFNV"))) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The user do not have the PFNV of role permission.");
 			res.setStatus(403);
 		}
 		String pIdx = req.getParameter("idx");
@@ -105,6 +122,12 @@ public class PaymentController extends AbstractAjaxController {
 		String pCategory = req.getParameter("category");
 		String pContents = req.getParameter("contents");
 		String pPrice = req.getParameter("price");
+		getLogger().info("[" + getCurrentUser(session).getId() + "] idx - " + pIdx);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] date - " + pDate);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] type - " + pType);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] category - " + pCategory);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] contents - " + pContents);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] price - " + pPrice);
 		if (Util.StringIsEmptyOrNull(pIdx)) {
 			res.setStatus(403);
 			return;
