@@ -39,6 +39,11 @@ body{
 	display: none;
 }
 
+.finance{
+	max-width:750px;
+	text-align: center;
+}
+
 /*search*/
 span.fa{
     cursor: pointer;
