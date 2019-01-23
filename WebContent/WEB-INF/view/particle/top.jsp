@@ -51,6 +51,9 @@ body.sidebar-toggled footer.sticky-footer {
 </head>
 <body id="page-top" class="sidebar-toggled">
 	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+		<button class="btn btn-link btn-sm text-white" id="sidebarToggle" href="#">
+			<i class="fas fa-bars"></i>
+		</button>
 		<a class="navbar-brand mr-1" href="index.html">Start Bootstrap</a>
 		<ul class="navbar-nav ml-auto ml-auto mr-0 mr-md-3 my-0">
 			<li class="nav-item dropdown no-arrow">

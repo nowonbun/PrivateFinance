@@ -13,171 +13,169 @@
 	</ol>
 	<!-- from household copy -->
 	<div class="finance">
-		<div class="container">
-			<div class="main-date">
-				<span class="fa fa-chevron-circle-left"></span>
-				<div class="selectDiv household-date year">
-					<span class="bp2">${year}</span> 
-					<select class="household-date year" id="householdYear">
-						<c:forEach items="${yearlist}" var="item">
-							<option value="${item.value}">${item.name}</option>
-						</c:forEach>
-					</select>
-				</div>
-				<label class="household-date"><%=Util.localization("year", session)%></label>
-				<div class="selectDiv household-date month">
-					<span class="bp2">${month}</span> <select class="household-date month" id="householdMonth">
-						<c:forEach items="${monthlist}" var="item">
-							<option value="${item.value}">${item.name}</option>
-						</c:forEach>
-					</select>
-				</div>
-				<label class="household-date"><%=Util.localization("month", session)%></label> <span class="fa fa-chevron-circle-right"></span>
+		<div class="main-date">
+			<span class="fa fa-chevron-circle-left"></span>
+			<div class="selectDiv household-date year">
+				<span class="bp2">${year}</span> 
+				<select class="household-date year" id="householdYear">
+					<c:forEach items="${yearlist}" var="item">
+						<option value="${item.value}">${item.name}</option>
+					</c:forEach>
+				</select>
 			</div>
-			<div class="space"></div>
-			<div class="main-input">
-				<table class="table-input">
-					<tbody>
-						<tr>
-							<th><%=Util.localization("day", session)%></th>
-							<td>
-								<input type="hidden" id="householdIdx">
-								<div class="selectDiv household-date day">
-									<span></span> <select class="household-date day" id="householdDay">
-										<c:forEach items="${daylist}" var="item">
-											<option value="${item.value}">${item.name}</option>
-										</c:forEach>
-									</select>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<th><%=Util.localization("type", session)%></th>
-							<td>
-								<div class="selectDiv household-category">
-									<span></span> <select class="household-type" id="householdType">
-										<c:forEach items="${lowcategory}" var="item">
-											<option value="${item.value}">${item.name}</option>
-										</c:forEach>
-									</select>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<th><%=Util.localization("category", session)%></th>
-							<td>
-								<div class="selectDiv household-category">
-									<span></span> <select class="household-category" id="householdCategory"></select>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<th><%=Util.localization("contents", session)%></th>
-							<td>
-								<input type="text" id="householdContent" autocomplete="off" maxlength="40">
-							</td>
-						</tr>
-						<tr>
-							<th><%=Util.localization("money", session)%></th>
-							<td>
-								<input type="number" id="householdPrice" autocomplete="off" maxlength="8">
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<div class="apply-area">
-									<input type="button" value=<%=Util.localization("Save", session)%> id="applySubmit">
-								</div>
-								<div class="modify-area off">
-									<input type="button" value="取消" id="cancelSubmit"> 
-									<input type="button" value="修正" id="modifySubmit"> 
-									<input type="button" value="削除" id="deleteSubmit">
-								</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+			<label class="household-date"><%=Util.localization("year", session)%></label>
+			<div class="selectDiv household-date month">
+				<span class="bp2">${month}</span> <select class="household-date month" id="householdMonth">
+					<c:forEach items="${monthlist}" var="item">
+						<option value="${item.value}">${item.name}</option>
+					</c:forEach>
+				</select>
 			</div>
-			<div class="space"></div>
-			<div class="main-data">
-				<div class="total-data data-income">
-					<label><%=Util.localization("Income", session)%></label> <span class="income-total money-plus"></span>
-				</div>
-				<div class="total-data data-expend">
-					<label><%=Util.localization("Expenditure", session)%></label> <span class="expenditure-total money-minus"></span>
-				</div>
-				<div class="total-data data-saving">
-					<label><%=Util.localization("Saving", session)%></label> <span class="saving-full-total"></span>
-				</div>
-				<div class="search-data">
-					<input type="button" id="searchInit" value="検索初期"> <label><%=Util.localization("day", session)%> : </label>
-					<div class="selectDiv searchDaySelect">
-						<span class="bp2"></span> <select id="searchDaySelect">
-							<option value="">=全体=</option>
-							<c:forEach items="${daylist}" var="item">
-								<option value="${item.value}">${item.name}</option>
-							</c:forEach>
-						</select>
-					</div>
-					<label><%=Util.localization("type", session)%> : </label>
-					<div class="selectDiv searchTypeSelect">
-						<span class="bp2"></span> <select id="searchTypeSelect">
-							<option value="">=全体=</option>
-							<c:forEach items="${lowcategory}" var="item">
-								<option value="${item.value}">${item.name}</option>
-							</c:forEach>
-						</select>
-					</div>
-				</div>
-				<div class="normal-data title-data">
-					<label><%=Util.localization("Finence", session)%></label> <label>TOTAL : <span class="payment-total"></span></label>
-				</div>
-				<table class="table-data table-data1 payment-list">
-					<thead>
-						<tr>
-							<th><%=Util.localization("day", session)%></th>
-							<th><%=Util.localization("type", session)%></th>
-							<th><%=Util.localization("category", session)%></th>
-							<th><%=Util.localization("contents", session)%></th>
-							<th><%=Util.localization("money", session)%></th>
-						</tr>
-					</thead>
-					<tbody></tbody>
-				</table>
-				<div class="caption">
-					<sup>&nbsp;</sup>
-				</div>
-				<div class="account-data title-data">
-					<label><%=Util.localization("Saving", session)%></label> <label>TOTAL : <span class="saving-total"></span></label>
-				</div>
-				<table class="table-data table-data2 saving-list">
-					<thead>
-						<tr>
-							<th><%=Util.localization("day", session)%></th>
-							<th><%=Util.localization("category", session)%></th>
-							<th><%=Util.localization("contents", session)%></th>
-							<th><%=Util.localization("money", session)%></th>
-						</tr>
-					</thead>
-					<tbody></tbody>
-				</table>
-			</div>
+			<label class="household-date"><%=Util.localization("month", session)%></label> <span class="fa fa-chevron-circle-right"></span>
 		</div>
-		<div class="lodding lodding-off">
-			<div class="lodding-background"></div>
-			<div class="uil-battery-demo-css" style="-webkit-transform: scale(0.6)">
-				<div class="outer"></div>
-				<div class="inner"></div>
-				<div class="inner"></div>
-				<div class="inner"></div>
-				<div class="inner"></div>
+		<div class="space"></div>
+		<div class="main-input">
+			<table class="table-input">
+				<tbody>
+					<tr>
+						<th><%=Util.localization("day", session)%></th>
+						<td>
+							<input type="hidden" id="householdIdx">
+							<div class="selectDiv household-date day">
+								<span></span> <select class="household-date day" id="householdDay">
+									<c:forEach items="${daylist}" var="item">
+										<option value="${item.value}">${item.name}</option>
+									</c:forEach>
+								</select>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th><%=Util.localization("type", session)%></th>
+						<td>
+							<div class="selectDiv household-category">
+								<span></span> <select class="household-type" id="householdType">
+									<c:forEach items="${lowcategory}" var="item">
+										<option value="${item.value}">${item.name}</option>
+									</c:forEach>
+								</select>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th><%=Util.localization("category", session)%></th>
+						<td>
+							<div class="selectDiv household-category">
+								<span></span> <select class="household-category" id="householdCategory"></select>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th><%=Util.localization("contents", session)%></th>
+						<td>
+							<input type="text" id="householdContent" autocomplete="off" maxlength="40">
+						</td>
+					</tr>
+					<tr>
+						<th><%=Util.localization("money", session)%></th>
+						<td>
+							<input type="number" id="householdPrice" autocomplete="off" maxlength="8">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<div class="apply-area">
+								<input type="button" value=<%=Util.localization("Save", session)%> id="applySubmit">
+							</div>
+							<div class="modify-area off">
+								<input type="button" value="取消" id="cancelSubmit"> 
+								<input type="button" value="修正" id="modifySubmit"> 
+								<input type="button" value="削除" id="deleteSubmit">
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="space"></div>
+		<div class="main-data">
+			<div class="total-data data-income">
+				<label><%=Util.localization("Income", session)%></label> <span class="income-total money-plus"></span>
 			</div>
+			<div class="total-data data-expend">
+				<label><%=Util.localization("Expenditure", session)%></label> <span class="expenditure-total money-minus"></span>
+			</div>
+			<div class="total-data data-saving">
+				<label><%=Util.localization("Saving", session)%></label> <span class="saving-full-total"></span>
+			</div>
+			<div class="search-data">
+				<input type="button" id="searchInit" value="検索初期"> <label><%=Util.localization("day", session)%> : </label>
+				<div class="selectDiv searchDaySelect">
+					<span class="bp2"></span> <select id="searchDaySelect">
+						<option value="">=全体=</option>
+						<c:forEach items="${daylist}" var="item">
+							<option value="${item.value}">${item.name}</option>
+						</c:forEach>
+					</select>
+				</div>
+				<label><%=Util.localization("type", session)%> : </label>
+				<div class="selectDiv searchTypeSelect">
+					<span class="bp2"></span> <select id="searchTypeSelect">
+						<option value="">=全体=</option>
+						<c:forEach items="${lowcategory}" var="item">
+							<option value="${item.value}">${item.name}</option>
+						</c:forEach>
+					</select>
+				</div>
+			</div>
+			<div class="normal-data title-data">
+				<label><%=Util.localization("Finence", session)%></label> <label>TOTAL : <span class="payment-total"></span></label>
+			</div>
+			<table class="table-data table-data1 payment-list">
+				<thead>
+					<tr>
+						<th><%=Util.localization("day", session)%></th>
+						<th><%=Util.localization("type", session)%></th>
+						<th><%=Util.localization("category", session)%></th>
+						<th><%=Util.localization("contents", session)%></th>
+						<th><%=Util.localization("money", session)%></th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+			<div class="caption">
+				<sup>&nbsp;</sup>
+			</div>
+			<div class="account-data title-data">
+				<label><%=Util.localization("Saving", session)%></label> <label>TOTAL : <span class="saving-total"></span></label>
+			</div>
+			<table class="table-data table-data2 saving-list">
+				<thead>
+					<tr>
+						<th><%=Util.localization("day", session)%></th>
+						<th><%=Util.localization("category", session)%></th>
+						<th><%=Util.localization("contents", session)%></th>
+						<th><%=Util.localization("money", session)%></th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
 		</div>
 	</div>
-	<!-- from household copy -->
-	<!-- calculation -->
-	<!-- https://www.desmos.com/scientific -->
+	<div class="lodding lodding-off">
+		<div class="lodding-background"></div>
+		<div class="uil-battery-demo-css" style="-webkit-transform: scale(0.6)">
+			<div class="outer"></div>
+			<div class="inner"></div>
+			<div class="inner"></div>
+			<div class="inner"></div>
+			<div class="inner"></div>
+		</div>
+	</div>
 </div>
+<!-- from household copy -->
+<!-- calculation -->
+<!-- https://www.desmos.com/scientific -->
 <c:forEach items="${categorykey}" var="key">
 	<template class="categorymap" data-type="${key}"> <c:forEach items="${categorymap.get(key)}" var="item">
 		<option value="${item.value}">${item.name}</option>

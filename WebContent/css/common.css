@@ -254,6 +254,23 @@ table.table-data3 > tbody > tr > td:nth-child(3) {
 	div.selectDiv span {
 	    font-size: 10pt;
 	}
+	.breadcrumb{
+		display:none;
+	}
+	.sidebar{
+	    display: block;
+	    position: absolute;
+	    height: 100%;
+	    z-index: 100;
+	    left:-50px;
+	}
+	.sidebar.toggled{
+		left:0px;
+	}
+	.container-fluid{
+		padding-left:5px;
+		padding-right:5px;
+	}
 	select {
     	font-size: 12px;
 	}
