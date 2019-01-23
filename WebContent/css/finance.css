@@ -68,7 +68,7 @@ div.main-date {
     margin-top: 20px;
 }
 
-select.household-date {
+/*select.household-date {
     font-size: 20px;
     text-align: center;
     text-align-last: center;
@@ -78,7 +78,7 @@ select.household-date {
     color: black;
     padding-left: 5px;
     padding-right: 5px;
-}
+}*/
 /* The select style of date in register screen */
 div.household-date.year {
     width: 60px;
@@ -88,11 +88,11 @@ div.household-date.month {
     width: 40px;
 }
 
-label.household-date {
+/*label.household-date {
     font-size: 12pt;
     margin-left: 10px;
     margin-right: 10px;
-}
+}*/
 /* The arrow style in date*/
 span.main-date-arrow {
     font-size: 18px;
@@ -103,12 +103,13 @@ span.main-date-arrow {
 span.main-date-arrow:hover {
     color: #67b4ec;
 }
+/*
 span.fa{
     font-size: 20px;
     margin-left: 10px;
     margin-right: 20px;
     cursor: pointer;
-}
+}*/
 
 /*common style*/
 div.template {

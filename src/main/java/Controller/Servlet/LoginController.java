@@ -28,15 +28,15 @@ public class LoginController extends AbstractServletController {
 
 	@RequestMapping(value = "/login.html", method = RequestMethod.POST)
 	public String login(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
-		getLogger().info("[" + getCurrentUser(session).getId() + "] login.html");
+		getLogger().info("login.html");
 		String id = req.getParameter("id");
 		String email = req.getParameter("email");
 		String name = req.getParameter("name");
-		getLogger().info("[" + getCurrentUser(session).getId() + "] id - " + id);
-		getLogger().info("[" + getCurrentUser(session).getId() + "] email - " + email);
-		getLogger().info("[" + getCurrentUser(session).getId() + "] name - " + name);
+		getLogger().info("id - " + id);
+		getLogger().info("email - " + email);
+		getLogger().info("name - " + name);
 		if (Util.StringIsEmptyOrNull(id) || Util.StringIsEmptyOrNull(email) || Util.StringIsEmptyOrNull(name)) {
-			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null!");
+			getLogger().error("The parameter is null!");
 			res.setStatus(403);
 			return null;
 		}
@@ -54,7 +54,7 @@ public class LoginController extends AbstractServletController {
 		}
 
 		if (!Util.StringEquals(user.getEmail(), email)) {
-			getLogger().error("[" + getCurrentUser(session).getId() + "] The id and email is not match!");
+			getLogger().error("The id and email is not match!");
 			res.setStatus(403);
 			return null;
 		}

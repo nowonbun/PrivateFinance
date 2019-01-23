@@ -8,7 +8,8 @@ public abstract class AbstractAjaxController extends AbstractController {
 		try {
 			res.setContentType("content-type: application/json; charset=utf-8");
 			String ret = JsonConverter.create(data);
-			getLogger().info(ret);
+			//TODO: The log is too many.
+			//getLogger().info(ret);
 			res.getWriter().println(ret);
 		} catch (Throwable e) {
 			getLogger().error(e);

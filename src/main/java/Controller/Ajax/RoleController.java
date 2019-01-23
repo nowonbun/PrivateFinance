@@ -30,13 +30,18 @@ import Model.Viewrole;
 public class RoleController extends AbstractAjaxController {
 	@RequestMapping(value = "/getViewRole.ajax", method = RequestMethod.POST)
 	public void getViewRole(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] getViewRole.ajax");
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("ADMN"))) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The user do not have the ADMN of role permission.");
 			res.setStatus(403);
 			return;
 		}
 		String type = req.getParameter("type");
 		String name = req.getParameter("name");
+		getLogger().info("[" + getCurrentUser(session).getId() + "] type - " + type);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] name - " + name);
 		if (type == null || name == null) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null!");
 			res.setStatus(403);
 			return;
 		}
@@ -76,13 +81,18 @@ public class RoleController extends AbstractAjaxController {
 
 	@RequestMapping(value = "/getActionRole.ajax", method = RequestMethod.POST)
 	public void getActionRole(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] getActionRole.ajax");
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("ADMN"))) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The user do not have the ADMN of role permission.");
 			res.setStatus(403);
 			return;
 		}
 		String type = req.getParameter("type");
 		String name = req.getParameter("name");
+		getLogger().info("[" + getCurrentUser(session).getId() + "] type - " + type);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] name - " + name);
 		if (type == null || name == null) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null!");
 			res.setStatus(403);
 			return;
 		}
@@ -122,14 +132,20 @@ public class RoleController extends AbstractAjaxController {
 
 	@RequestMapping(value = "/saveViewRole.ajax", method = RequestMethod.POST)
 	public void saveViewRole(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] saveViewRole.ajax");
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("ADMN"))) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The user do not have the ADMN of role permission.");
 			res.setStatus(403);
 			return;
 		}
 		String type = req.getParameter("type");
 		String name = req.getParameter("name");
 		String data = req.getParameter("data");
+		getLogger().info("[" + getCurrentUser(session).getId() + "] type - " + type);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] name - " + name);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] data - " + data);
 		if (type == null || name == null || data == null) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null!");
 			res.setStatus(403);
 			return;
 		}
@@ -175,14 +191,20 @@ public class RoleController extends AbstractAjaxController {
 	
 	@RequestMapping(value = "/saveActionRole.ajax", method = RequestMethod.POST)
 	public void saveActionRole(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] saveActionRole.ajax");
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("ADMN"))) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The user do not have the ADMN of role permission.");
 			res.setStatus(403);
 			return;
 		}
 		String type = req.getParameter("type");
 		String name = req.getParameter("name");
 		String data = req.getParameter("data");
+		getLogger().info("[" + getCurrentUser(session).getId() + "] type - " + type);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] name - " + name);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] data - " + data);
 		if (type == null || name == null || data == null) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null!");
 			res.setStatus(403);
 			return;
 		}

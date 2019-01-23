@@ -27,7 +27,9 @@ import Model.User;
 public class UserController extends AbstractAjaxController {
 	@RequestMapping(value = "/getUserList.ajax")
 	public void getUserList(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] getUserList.ajax");
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("ADMN"))) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The user do not have the ADMN of role permission.");
 			res.setStatus(403);
 			return;
 		}
@@ -51,11 +53,19 @@ public class UserController extends AbstractAjaxController {
 
 	@RequestMapping(value = "/getUser.ajax")
 	public void getUser(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] getUser.ajax");
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("ADMN"))) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The user do not have the ADMN of role permission.");
 			res.setStatus(403);
 			return;
 		}
 		String q = req.getParameter("q");
+		getLogger().info("[" + getCurrentUser(session).getId() + "] q - " + q);
+		if (q == null) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null!");
+			res.setStatus(403);
+			return;
+		}
 		List<User> userlist = FactoryDao.getDao(UserDao.class).getUserLikeEmail(q);
 		Select2AjaxBean ret = new Select2AjaxBean();
 		ret.setResults(new ArrayList<>());
@@ -70,7 +80,9 @@ public class UserController extends AbstractAjaxController {
 
 	@RequestMapping(value = "/modifyUser.ajax")
 	public void modifyUser(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] modifyUser.ajax");
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("ADMN"))) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The user do not have the ADMN of role permission.");
 			res.setStatus(403);
 			return;
 		}
@@ -79,7 +91,12 @@ public class UserController extends AbstractAjaxController {
 		String country = req.getParameter("country");
 		String[] group = req.getParameterMap().get("group[]");
 
+		getLogger().info("[" + getCurrentUser(session).getId() + "] id - " + id);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] name - " + name);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] country - " + country);
+		getLogger().info("[" + getCurrentUser(session).getId() + "] group - " + group);
 		if (id == null || name == null || country == null || group == null) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null!");
 			res.setStatus(403);
 			return;
 		}
@@ -103,12 +120,16 @@ public class UserController extends AbstractAjaxController {
 
 	@RequestMapping(value = "/deleteOrActiveUser.ajax")
 	public void deleteOrActiveUser(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] deleteOrActiveUser.ajax");
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("ADMN"))) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The user do not have the ADMN of role permission.");
 			res.setStatus(403);
 			return;
 		}
 		String id = req.getParameter("id");
+		getLogger().info("[" + getCurrentUser(session).getId() + "] id - " + id);
 		if (id == null) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null!");
 			res.setStatus(403);
 			return;
 		}
@@ -127,7 +148,9 @@ public class UserController extends AbstractAjaxController {
 
 	@RequestMapping(value = "/resetMaster.ajax")
 	public void resetMaster(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] resetMaster.ajax");
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("ADMN"))) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The user do not have the ADMN of role permission.");
 			res.setStatus(403);
 			return;
 		}

@@ -2,39 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="./particle/top.jsp"></jsp:include>
-<style>
-.custom-table {
-	border: 1px solid #000;
-	box-shadow: 0px 1.2px 1px 1.4px rgba(0, 0, 0, 0.1), 0px 1.4px 2px 1.8px rgba(0, 0, 0, 0.1), 0px 1.8px 3px 2.2px rgba(0, 0, 0, 0.1);
-}
-
-.custom-table .custom-table-row {
-	margin: 0px;
-	border-bottom: 1px solid #000;
-}
-
-.custom-table .custom-table-col {
-	text-align: center;
-	border: 1px dotted #e4e4e4;
-	padding: 0.375rem 0.75rem;
-}
-
-.custom-table .custom-table-col.no-padding {
-	padding: 0px;
-}
-
-.custom-table .custom-table-col .user-btn {
-	margin-top: 3px;
-}
-
-.btn-col button {
-	width: 100%;
-}
-
-.hide {
-	display: none;
-}
-</style>
 <link rel="stylesheet" href="./css/finance.css" />
 <link rel="stylesheet" media="screen and (max-width:768px)" href="./css/finance_mobile.css" />
 <link rel="stylesheet" media="screen and (min-width:769px)" href="./css/finance_pc.css" />
@@ -47,89 +14,90 @@
 	<!-- from household copy -->
 	<div class="finance">
 		<div class="container">
-			<form id="applyPc">
-				<div class="main-date">
-					<span class="fa fa-chevron-circle-left"></span>
-					<div class="selectDiv household-date year">
-						<span class="bp2">${year}</span> <select class="household-date year" id="householdYear">
-							<c:forEach items="${yearlist}" var="item">
-								<option value="${item.value}">${item.name}</option>
-							</c:forEach>
-						</select>
-					</div>
-					<label class="household-date"><%=Util.localization("year", session)%></label>
-					<div class="selectDiv household-date month">
-						<span class="bp2">${month}</span> <select class="household-date month" id="householdMonth">
-							<c:forEach items="${monthlist}" var="item">
-								<option value="${item.value}">${item.name}</option>
-							</c:forEach>
-						</select>
-					</div>
-					<label class="household-date"><%=Util.localization("month", session)%></label> <span class="fa fa-chevron-circle-right"></span>
+			<div class="main-date">
+				<span class="fa fa-chevron-circle-left"></span>
+				<div class="selectDiv household-date year">
+					<span class="bp2">${year}</span> 
+					<select class="household-date year" id="householdYear">
+						<c:forEach items="${yearlist}" var="item">
+							<option value="${item.value}">${item.name}</option>
+						</c:forEach>
+					</select>
 				</div>
-				<div class="space"></div>
-				<div class="main-input">
-					<table class="table-input">
-						<tbody>
-							<tr>
-								<th><%=Util.localization("day", session)%></th>
-								<td>
-									<input type="hidden" id="householdIdx">
-									<div class="selectDiv household-date day">
-										<span></span> <select class="household-date day" id="householdDay">
-											<c:forEach items="${daylist}" var="item">
-												<option value="${item.value}">${item.name}</option>
-											</c:forEach>
-										</select>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th><%=Util.localization("type", session)%></th>
-								<td>
-									<div class="selectDiv household-category">
-										<span></span> <select class="household-type" id="householdType">
-											<c:forEach items="${lowcategory}" var="item">
-												<option value="${item.value}">${item.name}</option>
-											</c:forEach>
-										</select>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th><%=Util.localization("category", session)%></th>
-								<td>
-									<div class="selectDiv household-category">
-										<span></span> <select class="household-category" id="householdCategory"></select>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th><%=Util.localization("contents", session)%></th>
-								<td>
-									<input type="text" id="householdContent" autocomplete="off" maxlength="40">
-								</td>
-							</tr>
-							<tr>
-								<th><%=Util.localization("money", session)%></th>
-								<td>
-									<input type="number" id="householdPrice" autocomplete="off" maxlength="8">
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<div class="apply-area">
-										<input type="button" value=<%=Util.localization("Save", session)%> id="applySubmit">
-									</div>
-									<div class="modify-area off">
-										<input type="button" value="取消" id="cancelSubmit"> <input type="button" value="修正" id="modifySubmit"> <input type="button" value="削除" id="deleteSubmit">
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+				<label class="household-date"><%=Util.localization("year", session)%></label>
+				<div class="selectDiv household-date month">
+					<span class="bp2">${month}</span> <select class="household-date month" id="householdMonth">
+						<c:forEach items="${monthlist}" var="item">
+							<option value="${item.value}">${item.name}</option>
+						</c:forEach>
+					</select>
 				</div>
-			</form>
+				<label class="household-date"><%=Util.localization("month", session)%></label> <span class="fa fa-chevron-circle-right"></span>
+			</div>
+			<div class="space"></div>
+			<div class="main-input">
+				<table class="table-input">
+					<tbody>
+						<tr>
+							<th><%=Util.localization("day", session)%></th>
+							<td>
+								<input type="hidden" id="householdIdx">
+								<div class="selectDiv household-date day">
+									<span></span> <select class="household-date day" id="householdDay">
+										<c:forEach items="${daylist}" var="item">
+											<option value="${item.value}">${item.name}</option>
+										</c:forEach>
+									</select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th><%=Util.localization("type", session)%></th>
+							<td>
+								<div class="selectDiv household-category">
+									<span></span> <select class="household-type" id="householdType">
+										<c:forEach items="${lowcategory}" var="item">
+											<option value="${item.value}">${item.name}</option>
+										</c:forEach>
+									</select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th><%=Util.localization("category", session)%></th>
+							<td>
+								<div class="selectDiv household-category">
+									<span></span> <select class="household-category" id="householdCategory"></select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th><%=Util.localization("contents", session)%></th>
+							<td>
+								<input type="text" id="householdContent" autocomplete="off" maxlength="40">
+							</td>
+						</tr>
+						<tr>
+							<th><%=Util.localization("money", session)%></th>
+							<td>
+								<input type="number" id="householdPrice" autocomplete="off" maxlength="8">
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<div class="apply-area">
+									<input type="button" value=<%=Util.localization("Save", session)%> id="applySubmit">
+								</div>
+								<div class="modify-area off">
+									<input type="button" value="取消" id="cancelSubmit"> 
+									<input type="button" value="修正" id="modifySubmit"> 
+									<input type="button" value="削除" id="deleteSubmit">
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 			<div class="space"></div>
 			<div class="main-data">
 				<div class="total-data data-income">
@@ -414,7 +382,7 @@
 					}
 				}
 				if (isDelete) {
-					return;
+					return true;
 				}
 				let contents = $("#householdContent").val();
 				if (contents === null || contents.trim() === "") {
@@ -445,7 +413,8 @@
 				$("#householdYear").val(date.getFullYear());
 				$("#householdMonth").val(date.getMonth() + 1);
 				$("#householdDay").val(date.getDate());
-				$("#householdDay_mobile").val(date.getDate());
+				
+				$("select#searchDaySelect,select#searchTypeSelect").val("");
 
 				$("div.selectDiv").children("span").each(function() {
 					$(this).html($(this).parent().find("select").find("option:selected").html());
@@ -468,9 +437,7 @@
 					$("#householdMonthView").html($("#householdMonth").val());
 				});
 				$("input[type=button]#searchInit").on("click", function() {
-					$("select#searchDaySelect,select#searchTypeSelect").val("");
-					$("div.selectDiv.searchDaySelect").find("span").html($("select#searchDaySelect").find("option:selected").html());
-					$("div.selectDiv.searchTypeSelect").find("span").html($("select#searchTypeSelect").find("option:selected").html());
+					_finance.search.initVal();
 					_finance.search.search();
 				});
 
@@ -593,9 +560,9 @@
 					year++;
 				}
 				$("#householdYear").val(year);
-				$("#householdYearView").html($("#householdYear").val());
+				$("#householdYear").parent().find("span").html($("#householdYear").val());
 				$("#householdMonth").val(month);
-				$("#householdMonthView").html($("#householdMonth").val());
+				$("#householdMonth").parent().find("span").html($("#householdMonth").val());
 				_finance.search.search();
 			}
 		}

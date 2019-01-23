@@ -81,8 +81,9 @@ public class PaymentController extends AbstractAjaxController {
 			payment.setMoney(money);
 			payment.setCreater(super.getCurrentUser(session));
 			payment.setCreateddate(Util.getNow());
-
+			
 			FactoryDao.getDao(PaymentDao.class).update(payment);
+			getLogger().info("[" + getCurrentUser(session).getId() + "] The payment item was updated.");
 
 			ObjectBean bean = new ObjectBean();
 			bean.setRet(true);
@@ -129,26 +130,32 @@ public class PaymentController extends AbstractAjaxController {
 		getLogger().info("[" + getCurrentUser(session).getId() + "] contents - " + pContents);
 		getLogger().info("[" + getCurrentUser(session).getId() + "] price - " + pPrice);
 		if (Util.StringIsEmptyOrNull(pIdx)) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null! : idx");
 			res.setStatus(403);
 			return;
 		}
 		if (Util.StringIsEmptyOrNull(pDate)) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null! : date");
 			res.setStatus(403);
 			return;
 		}
 		if (Util.StringIsEmptyOrNull(pType)) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null! : type");
 			res.setStatus(403);
 			return;
 		}
 		if (Util.StringIsEmptyOrNull(pCategory)) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null! : category");
 			res.setStatus(403);
 			return;
 		}
 		if (Util.StringIsEmptyOrNull(pContents)) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null! : contents");
 			res.setStatus(403);
 			return;
 		}
 		if (Util.StringIsEmptyOrNull(pPrice)) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null! : price");
 			res.setStatus(403);
 			return;
 		}
@@ -167,6 +174,7 @@ public class PaymentController extends AbstractAjaxController {
 			payment.setCreater(super.getCurrentUser(session));
 			payment.setCreateddate(Util.getNow());
 			FactoryDao.getDao(PaymentDao.class).update(payment);
+			getLogger().info("[" + getCurrentUser(session).getId() + "] The payment item was updated.");
 			bean.setRet(true);
 		}
 		returnAjax(res, bean);
@@ -174,11 +182,15 @@ public class PaymentController extends AbstractAjaxController {
 
 	@RequestMapping(value = "/deletePaymentItem.ajax", method = RequestMethod.POST)
 	public void deletePaymentItem(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] modifyPaymentItem.ajax");
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("PFNV"))) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The user do not have the PFNV of role permission.");
 			res.setStatus(403);
 		}
 		String pIdx = req.getParameter("idx");
+		getLogger().info("[" + getCurrentUser(session).getId() + "] idx - " + pIdx);
 		if (Util.StringIsEmptyOrNull(pIdx)) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null! : idx");
 			res.setStatus(403);
 			return;
 		}
@@ -189,6 +201,7 @@ public class PaymentController extends AbstractAjaxController {
 		if (payment != null) {
 			payment.setIsdeleted(true);
 			FactoryDao.getDao(PaymentDao.class).update(payment);
+			getLogger().info("[" + getCurrentUser(session).getId() + "] The payment item was updated.");
 			bean.setRet(true);
 		}
 		returnAjax(res, bean);
@@ -196,11 +209,15 @@ public class PaymentController extends AbstractAjaxController {
 
 	@RequestMapping(value = "/getPaymentItem.ajax", method = RequestMethod.POST)
 	public void getPaymentItem(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("[" + getCurrentUser(session).getId() + "] getPaymentItem.ajax");
 		if (!super.isViewRole(session, FactoryDao.getDao(ViewroleDao.class).getRole("PFNV"))) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The user do not have the PFNV of role permission.");
 			res.setStatus(403);
 		}
 		String pDate = req.getParameter("date");
+		getLogger().info("[" + getCurrentUser(session).getId() + "] pDate - " + pDate);
 		if (Util.StringIsEmptyOrNull(pDate)) {
+			getLogger().error("[" + getCurrentUser(session).getId() + "] The parameter is null! : date");
 			res.setStatus(403);
 			return;
 		}

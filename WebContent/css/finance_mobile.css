@@ -1,4 +1,4 @@
-﻿.pc-private {
+.pc-private {
     /*display: none;*/
 }
 /* When the popup appears, the background screen is fixed.*/
@@ -19,13 +19,13 @@ div.main {
 }*/
 
 /* The minimum size of main screen.*/
-div.container {
+/*div.container {
     min-width: 320px;
     display: inline-block;
     padding-left:15px;
     padding-right:15px;
     width: 100%;
-}
+}*/
 
 /* The register button style.*/
 div.table-input > input {
@@ -429,11 +429,11 @@ input[type=button]#searchInit{
     padding-right:5px;
 }
 
-span.fa{
+/*span.fa{
     margin-left: 10px;
     margin-right: 20px;
     margin-top: 2px;
-}
+}*/
 div.selectDiv.householdDay_mobile {
     width: 50px;
     text-align: center;
