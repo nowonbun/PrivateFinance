@@ -19,35 +19,6 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 <link rel="stylesheet" href="./css/common.css" />
-<style>
-.sidebar .nav-item .nav-link {
-	text-align: center;
-	padding: .75rem 5px;
-	width: 40px;
-	font-size: 20px;
-}
-
-.sidebar .nav-item .nav-link span {
-	font-size: 5px;
-	display: block;
-}
-
-.sidebar .nav-item.dropdown .dropdown-toggle::after {
-	display: none;
-}
-
-.sidebar .nav-item .dropdown-menu {
-	position: absolute !important;
-	-webkit-transform: none !important;
-	transform: none !important;
-	left: calc(90px + .5rem) !important;
-	margin: 0;
-}
-
-body.sidebar-toggled footer.sticky-footer {
-	width: calc(100% - 40px);
-}
-</style>
 </head>
 <body id="page-top" class="sidebar-toggled">
 	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
