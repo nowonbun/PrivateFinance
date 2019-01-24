@@ -48,7 +48,12 @@
 		});
 	}
 	$(function () {
-		$('[data-toggle="tooltip"]').tooltip()
+		$('[data-toggle="tooltip"]').tooltip();
+		$(".background-blind").on("click", function(){
+			if(!$("body").hasClass("sidebar-toggled")){
+				$("#sidebarToggle").trigger("click");
+			}
+		});
 	});
 </script>
 

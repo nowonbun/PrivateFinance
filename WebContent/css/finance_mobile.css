@@ -1,8 +1,8 @@
-.pc-private {
-    /*display: none;*/
-}
+/*.pc-private {
+    display: none;
+}*/
 /* When the popup appears, the background screen is fixed.*/
-html.fixed {
+/*html.fixed {
     overflow: hidden;
     position: fixed;
     width: 100%;
@@ -11,7 +11,7 @@ html.fixed {
 
 div.main {
     text-align: center;
-}
+}*/
 
 /* The mobile only disappear style.  */
 /*.mobile-off {
@@ -40,7 +40,7 @@ div.table-input > input {
 }
 
 /* The data-title style.*/
-div.account-data,
+/*div.account-data,
 div.credits-data,
 div.normal-data,
 div.total-data {
@@ -50,7 +50,7 @@ div.total-data {
     border: 1px solid black;
     padding-top: 5px;
     padding-bottom: 5px;
-}
+}*/
 /* The folding button style */
 /*div.title-data > label:nth-child(1) {
     float: left;
@@ -66,26 +66,26 @@ div.total-data > span {
 }*/
 
 /* The generic menu style.*/
-div.normal-data {
+/*div.normal-data {
     background-color: rgba(108, 108, 255, 0.29);
-}
+}*/
 
 /* The account menu style*/
-div.account-data {
+/*div.account-data {
     background-color: rgba(43, 167, 77, 0.34);
-}
+}*/
 
 /* The credits menu style*/
-div.credits-data {
+/*div.credits-data {
     background-color: rgba(167, 135, 43, 0.34);
-}
+}*/
 
-div.total-data.data-income{
+/*div.total-data.data-income{
     background-color: rgba(234, 83, 118, 0.48);
 }
 div.total-data.data-expend{
     background-color: rgba(83, 116, 234, 0.48);
-}
+}*/
 
 /* The data table style*/
 table.table-data {
@@ -127,6 +127,7 @@ table.table-data3 > tbody > tr > td:nth-child(3) {
 
 /* The generic data style.*/
 /* The account data style*/
+/*
 table.table-data1 > thead > tr > th:nth-child(1),
 table.table-data2 > thead > tr > th:nth-child(1),
 table.table-data3 > thead > tr > th:nth-child(1) {
@@ -156,7 +157,7 @@ table.table-data1 > thead > tr > th:nth-child(5),
 table.table-data2 > thead > tr > th:nth-child(4),
 table.table-data3 > thead > tr > th:nth-child(3){
     width: 24%;
-}
+}*/
 
 
 

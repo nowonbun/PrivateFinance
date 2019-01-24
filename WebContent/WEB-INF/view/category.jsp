@@ -1,48 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="./particle/top.jsp"></jsp:include>
-<style>
-.custom-table {
-	border: 1px solid #000;
-	box-shadow: 0px 1.2px 1px 1.4px rgba(0, 0, 0, 0.1), 0px 1.4px 2px 1.8px
-		rgba(0, 0, 0, 0.1), 0px 1.8px 3px 2.2px rgba(0, 0, 0, 0.1);
-}
-
-.custom-table .custom-table-row {
-	margin: 0px;
-	border-bottom: 1px solid #000;
-}
-
-.custom-table .custom-table-col {
-	text-align: center;
-	border: 1px dotted #e4e4e4;
-	padding: 0.375rem 0.75rem;
-}
-
-.custom-table .custom-table-col.no-padding {
-	padding: 0px;
-}
-
-.custom-table .custom-table-col .user-btn {
-	margin-top: 3px;
-}
-
-.btn-col button {
-	width: 100%;
-}
-
-.hide {
-	display: none;
-}
-
-.container-finance{
-	max-width: 769px;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-left: auto;
-    margin-right: auto;
-}
-</style>
 <div class="container-fluid">
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="./main.html">Dashboard</a></li>
@@ -56,17 +14,17 @@
 			<div class="card-body">
 				<div class="custom-table income-table">
 					<div class="custom-table-row row">
-						<div class="custom-table-col col-12 col-sm-10">Name</div>
-						<div class="custom-table-col col-12 col-sm-2"></div>
+						<div class="custom-table-col col-8">Name</div>
+						<div class="custom-table-col col-4"></div>
 					</div>
 					<div class="income-list-result list-result">
 						<c:forEach items="${income}" var="item">
 							<div class="custom-table-row row">
 								<input type="hidden" class="item-id" value="${item.id }">
-								<div class="custom-table-col col-12 col-sm-10 no-padding">
+								<div class="custom-table-col col-8 no-padding">
 									<input type="text" class="form-control item-name" value="${item.name }">
 								</div>
-								<div class="custom-table-col col-12 col-sm-2 no-padding btn-col">
+								<div class="custom-table-col col-4 no-padding btn-col">
 									<select class="form-control type-selection">
 										<c:if test="${item.del eq 1}">
 											<option value="1" selected>Active</option>
@@ -98,17 +56,17 @@
 			<div class="card-body">
 				<div class="custom-table income-table">
 					<div class="custom-table-row row">
-						<div class="custom-table-col col-12 col-sm-10">Name</div>
-						<div class="custom-table-col col-12 col-sm-2"></div>
+						<div class="custom-table-col col-8">Name</div>
+						<div class="custom-table-col col-4"></div>
 					</div>
 					<div class="expenditure-list-result list-result">
 						<c:forEach items="${expenditure}" var="item">
 							<div class="custom-table-row row">
 								<input type="hidden" class="item-id" value="${item.id }">
-								<div class="custom-table-col col-12 col-sm-10 no-padding">
+								<div class="custom-table-col col-8 no-padding">
 									<input type="text" class="form-control item-name" value="${item.name }">
 								</div>
-								<div class="custom-table-col col-12 col-sm-2 no-padding btn-col">
+								<div class="custom-table-col col-4 no-padding btn-col">
 									<select class="form-control type-selection">
 										<c:if test="${item.del eq 1}">
 											<option value="1" selected>Active</option>
@@ -140,17 +98,17 @@
 			<div class="card-body">
 				<div class="custom-table income-table">
 					<div class="custom-table-row row">
-						<div class="custom-table-col col-12 col-sm-10">Name</div>
-						<div class="custom-table-col col-12 col-sm-2"></div>
+						<div class="custom-table-col col-8">Name</div>
+						<div class="custom-table-col col-4"></div>
 					</div>
 					<div class="saving-list-result list-result">
 						<c:forEach items="${saving}" var="item">
 							<div class="custom-table-row row">
 								<input type="hidden" class="item-id" value="${item.id }">
-								<div class="custom-table-col col-12 col-sm-10 no-padding">
+								<div class="custom-table-col col-8 no-padding">
 									<input type="text" class="form-control item-name" value="${item.name }">
 								</div>
-								<div class="custom-table-col col-12 col-sm-2 no-padding btn-col">
+								<div class="custom-table-col col-4 no-padding btn-col">
 									<select class="form-control type-selection">
 										<c:if test="${item.del eq 1}">
 											<option value="1" selected>Active</option>
@@ -182,17 +140,17 @@
 			<div class="card-body">
 				<div class="custom-table income-table">
 					<div class="custom-table-row row">
-						<div class="custom-table-col col-12 col-sm-10">Name</div>
-						<div class="custom-table-col col-12 col-sm-2"></div>
+						<div class="custom-table-col col-8">Name</div>
+						<div class="custom-table-col col-4"></div>
 					</div>
 					<div class="withdraw-list-result list-result">
 						<c:forEach items="${withdraw}" var="item">
 							<div class="custom-table-row row">
 								<input type="hidden" class="item-id" value="${item.id }">
-								<div class="custom-table-col col-12 col-sm-10 no-padding">
+								<div class="custom-table-col col-8 no-padding">
 									<input type="text" class="form-control item-name" value="${item.name }">
 								</div>
-								<div class="custom-table-col col-12 col-sm-2 no-padding btn-col">
+								<div class="custom-table-col col-4 no-padding btn-col">
 									<select class="form-control type-selection">
 										<c:if test="${item.del eq 1}">
 											<option value="1" selected>Active</option>

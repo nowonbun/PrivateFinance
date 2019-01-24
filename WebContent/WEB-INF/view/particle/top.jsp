@@ -11,6 +11,7 @@
 <meta name="author" content="">
 <meta name="google-signin-client_id" content="220458850151-v238vlakgd2c4n3dho9o76sc7u9a5ovb.apps.googleusercontent.com">
 <title>Private Finance</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" />
@@ -39,4 +40,5 @@
 	</nav>
 	<div id="wrapper">
 		<jsp:include page="./menu.jsp"></jsp:include>
+		<div class="background-blind"></div>
 		<div id="content-wrapper">

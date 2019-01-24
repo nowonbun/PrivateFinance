@@ -2,9 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="./particle/top.jsp"></jsp:include>
-<link rel="stylesheet" href="./css/finance.css" />
+<!-- link rel="stylesheet" href="./css/finance.css" /-->
+<!-- link rel="stylesheet" media="screen and (min-width:769px)" href="./css/finance_pc.css" /-->
 <link rel="stylesheet" media="screen and (max-width:768px)" href="./css/finance_mobile.css" />
-<link rel="stylesheet" media="screen and (min-width:769px)" href="./css/finance_pc.css" />
 <link rel="stylesheet" type="text/css" href="./css/loading.css" />
 <div class="container-fluid">
 	<ol class="breadcrumb">
@@ -25,15 +25,16 @@
 			</div>
 			<label class="household-date"><%=Util.localization("year", session)%></label>
 			<div class="selectDiv household-date month">
-				<span class="bp2">${month}</span> <select class="household-date month" id="householdMonth">
+				<span class="bp2">${month}</span> 
+				<select class="household-date month" id="householdMonth">
 					<c:forEach items="${monthlist}" var="item">
 						<option value="${item.value}">${item.name}</option>
 					</c:forEach>
 				</select>
 			</div>
-			<label class="household-date"><%=Util.localization("month", session)%></label> <span class="fa fa-chevron-circle-right"></span>
+			<label class="household-date"><%=Util.localization("month", session)%></label> 
+			<span class="fa fa-chevron-circle-right"></span>
 		</div>
-		<div class="space"></div>
 		<div class="main-input">
 			<table class="table-input">
 				<tbody>
@@ -42,7 +43,8 @@
 						<td>
 							<input type="hidden" id="householdIdx">
 							<div class="selectDiv household-date day">
-								<span></span> <select class="household-date day" id="householdDay">
+								<span></span> 
+								<select class="household-date day" id="householdDay">
 									<c:forEach items="${daylist}" var="item">
 										<option value="${item.value}">${item.name}</option>
 									</c:forEach>
@@ -54,7 +56,8 @@
 						<th><%=Util.localization("type", session)%></th>
 						<td>
 							<div class="selectDiv household-category">
-								<span></span> <select class="household-type" id="householdType">
+								<span></span> 
+								<select class="household-type" id="householdType">
 									<c:forEach items="${lowcategory}" var="item">
 										<option value="${item.value}">${item.name}</option>
 									</c:forEach>
@@ -66,7 +69,8 @@
 						<th><%=Util.localization("category", session)%></th>
 						<td>
 							<div class="selectDiv household-category">
-								<span></span> <select class="household-category" id="householdCategory"></select>
+								<span></span> 
+								<select class="household-category" id="householdCategory"></select>
 							</div>
 						</td>
 					</tr>
@@ -79,40 +83,31 @@
 					<tr>
 						<th><%=Util.localization("money", session)%></th>
 						<td>
-							<input type="number" id="householdPrice" autocomplete="off" maxlength="8">
+							<input type="number" id="householdPrice" autocomplete="off" min=0 max="99999999">
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2">
 							<div class="apply-area">
-								<input type="button" value=<%=Util.localization("Save", session)%> id="applySubmit">
+								<input type="button" value="<%=Util.localization("Save", session)%>" id="applySubmit">
 							</div>
 							<div class="modify-area off">
-								<input type="button" value="取消" id="cancelSubmit"> 
-								<input type="button" value="修正" id="modifySubmit"> 
-								<input type="button" value="削除" id="deleteSubmit">
+								<input type="button" value="<%=Util.localization("Cancel", session)%>" id="cancelSubmit"> 
+								<input type="button" value="<%=Util.localization("Modify", session)%>" id="modifySubmit"> 
+								<input type="button" value="<%=Util.localization("Delete", session)%>" id="deleteSubmit">
 							</div>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-		<div class="space"></div>
 		<div class="main-data">
-			<div class="total-data data-income">
-				<label><%=Util.localization("Income", session)%></label> <span class="income-total money-plus"></span>
-			</div>
-			<div class="total-data data-expend">
-				<label><%=Util.localization("Expenditure", session)%></label> <span class="expenditure-total money-minus"></span>
-			</div>
-			<div class="total-data data-saving">
-				<label><%=Util.localization("Saving", session)%></label> <span class="saving-full-total"></span>
-			</div>
 			<div class="search-data">
-				<input type="button" id="searchInit" value="検索初期"> <label><%=Util.localization("day", session)%> : </label>
+				<label><%=Util.localization("day", session)%> : </label>
 				<div class="selectDiv searchDaySelect">
-					<span class="bp2"></span> <select id="searchDaySelect">
-						<option value="">=全体=</option>
+					<span class="bp2"></span> 
+					<select id="searchDaySelect">
+						<option value="">=<%=Util.localization("All", session)%>=</option>
 						<c:forEach items="${daylist}" var="item">
 							<option value="${item.value}">${item.name}</option>
 						</c:forEach>
@@ -120,16 +115,37 @@
 				</div>
 				<label><%=Util.localization("type", session)%> : </label>
 				<div class="selectDiv searchTypeSelect">
-					<span class="bp2"></span> <select id="searchTypeSelect">
-						<option value="">=全体=</option>
+					<span class="bp2"></span> 
+					<select id="searchTypeSelect">
+						<option value="">=<%=Util.localization("All", session)%>=</option>
 						<c:forEach items="${lowcategory}" var="item">
 							<option value="${item.value}">${item.name}</option>
 						</c:forEach>
 					</select>
 				</div>
+				<input type="button" id="searchInit" value="<%=Util.localization("SearchInit", session)%>"> 
 			</div>
-			<div class="normal-data title-data">
-				<label><%=Util.localization("Finence", session)%></label> <label>TOTAL : <span class="payment-total"></span></label>
+			<div class="total-area">
+				<div class="space"></div>
+				<div class="total-data data-income">
+					<label><%=Util.localization("Income", session)%></label> 
+					<span class="income-total money-plus"></span>
+				</div>
+				<div class="space"></div>
+				<div class="total-data data-expend">
+					<label><%=Util.localization("Expenditure", session)%></label> 
+					<span class="expenditure-total money-minus"></span>
+				</div>
+				<div class="space"></div>
+				<div class="total-data data-saving">
+					<label><%=Util.localization("Saving", session)%></label> 
+					<span class="saving-full-total"></span>
+				</div>
+				<div class="space" style="margin-bottom:5px;"></div>
+			</div>
+			<div class="normal-data title-data mt-3">
+				<label><%=Util.localization("Finence", session)%></label> 
+				<label>TOTAL : <span class="payment-total"></span></label>
 			</div>
 			<table class="table-data table-data1 payment-list">
 				<thead>
@@ -143,11 +159,9 @@
 				</thead>
 				<tbody></tbody>
 			</table>
-			<div class="caption">
-				<sup>&nbsp;</sup>
-			</div>
-			<div class="account-data title-data">
-				<label><%=Util.localization("Saving", session)%></label> <label>TOTAL : <span class="saving-total"></span></label>
+			<div class="account-data title-data mt-3">
+				<label><%=Util.localization("Saving", session)%></label> 
+				<label>TOTAL : <span class="saving-total"></span></label>
 			</div>
 			<table class="table-data table-data2 saving-list">
 				<thead>
@@ -183,7 +197,7 @@
 </c:forEach>
 <template class="payment-item">
 <tr class="payment-row">
-	<td class="payment-day"></span><input type="hidden" class="payment-value" value=""></td>
+	<td class="payment-day"><input type="hidden" class="payment-value" value=""></td>
 	<td class="payment-type"></td>
 	<td class="payment-category"></td>
 	<td class="payment-contents"></td>
@@ -192,7 +206,7 @@
 </template>
 <template class="search-no-result">
 <tr class="nothing">
-	<td>データがありません。</td>
+	<td><%=Util.localization("NoResult", session)%></td>
 </tr>
 </template>
 <input type="hidden" class="day-mark" value="<%=Util.localization("day", session)%>">
@@ -375,7 +389,7 @@
 				if (isIdx) {
 					let idx = $("#householdIdx").val();
 					if (idx === null || idx.trim() === "") {
-						toastr.error("Itemを選択してください。");
+						toastr.error("<%=Util.localization("SelectItem", session)%>");
 						return false;
 					}
 				}
@@ -394,6 +408,10 @@
 				}
 				if (parseInt(price) < 0) {
 					toastr.error("金額を０円以上に入力してください。");
+					return false;
+				}
+				if (parseInt(price) > 99999999) {
+					toastr.error("金額を99,999,999円以下に入力してください。");
 					return false;
 				}
 				return true;

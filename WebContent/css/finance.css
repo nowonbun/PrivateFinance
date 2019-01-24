@@ -1,31 +1,31 @@
 /* body */
-body {
+/*body {
     margin: 0px;
     padding: 0px;
     font-size: 12pt;
     font-family:Arial;
-}
+}*/
 /*.finance{
 	text-align: center;
 }*/
-label{
+/*label{
 	margin-bottom: 0px;
-}
+}*/
 /* All select button stlyles.*/
-select {
+/*select {
     -webkit-appearance: none;
     opacity:0;
     position:absolute;
     top:0px;
     left:0px;
     width:100%;
-}
-table{
+}*/
+/*table{
     border-collapse:collapse;
 }
 input{
     -webkit-appearance: none;
-}
+}*/
 /* header, footer*/
 /*header, footer {
     position: fixed;
@@ -49,7 +49,7 @@ input{
     bottom: 0px;
 }*/
 
-div.main {
+/*div.main {
     margin-top: 40px;
     margin-bottom: 40px;
     padding-top: 10px;
@@ -59,14 +59,14 @@ div.main {
 
 div.space {
     height: 30px;
-}
+}*/
 
 /* The select style of date in register screen */
-div.main-date {
+/*div.main-date {
     text-align: center;
     display: block;
     margin-top: 20px;
-}
+}*/
 
 /*select.household-date {
     font-size: 20px;
@@ -80,13 +80,13 @@ div.main-date {
     padding-right: 5px;
 }*/
 /* The select style of date in register screen */
-div.household-date.year {
+/*div.household-date.year {
     width: 60px;
-}
+}*/
 /* The select style of date in register screen */
-div.household-date.month {
+/*div.household-date.month {
     width: 40px;
-}
+}*/
 
 /*label.household-date {
     font-size: 12pt;
@@ -94,7 +94,7 @@ div.household-date.month {
     margin-right: 10px;
 }*/
 /* The arrow style in date*/
-span.main-date-arrow {
+/*span.main-date-arrow {
     font-size: 18px;
     display: inline-block;
     cursor: pointer;
@@ -102,7 +102,7 @@ span.main-date-arrow {
 
 span.main-date-arrow:hover {
     color: #67b4ec;
-}
+}*/
 /*
 span.fa{
     font-size: 20px;
@@ -112,11 +112,11 @@ span.fa{
 }*/
 
 /*common style*/
-div.template {
+/*div.template {
     display: none;
-}
+}*/
 
-input[type=button].signout{
+/*input[type=button].signout{
     float: right;
     border: 0px;
     border-bottom: 1px solid black;
@@ -127,56 +127,56 @@ input[type=button].signout{
 
 input[type=button].signout:hover{
     background-color:#eee;
-}
+}*/
 
-label.error{
+/*label.error{
     color: red;
-    /*margin-bottom: 20px;*/
+    margin-bottom: 20px;
     text-align: left;
     margin: 0px;
     float: left;
     padding-left: 10px;
     font-weight: bold;
-}
+}*/
 
-div.caption{
+/*div.caption{
     text-align:right;
-}
+}*/
 
-table.table-data{
+/*table.table-data{
     table-layout:fixed;
-}
+}*/
 
-table.table-data1 > tbody > tr > td:nth-child(4),
+/*table.table-data1 > tbody > tr > td:nth-child(4),
 table.table-data2 > tbody > tr > td:nth-child(3),
 table.table-data3 > tbody > tr > td:nth-child(2) {
     word-break:break-all;
-}
+}*/
 
-div.search-data{
+/*div.search-data{
     text-align:right;
     margin-top:15px;
     margin-bottom:10px;
-}
+}*/
 
-.container {
+/*.container {
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-}
+}*/
 
-* {
+/** {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
-}
+}*/
 
-div.total-data {
+/*div.total-data {
     position:relative;
 }
 
 div.total-data span{
     position:absolute;
     right:0px;
-}
+}*/

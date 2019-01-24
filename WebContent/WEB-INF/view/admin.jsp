@@ -1,65 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="./particle/top.jsp"></jsp:include>
-<style>
-.custom-table {
-	border: 1px solid #000;
-	box-shadow: 0px 1.2px 1px 1.4px rgba(0, 0, 0, 0.1), 0px 1.4px 2px 1.8px
-		rgba(0, 0, 0, 0.1), 0px 1.8px 3px 2.2px rgba(0, 0, 0, 0.1);
-}
-
-.custom-table .custom-table-row {
-	margin: 0px;
-	border-bottom: 1px solid #000;
-}
-
-.custom-table .custom-table-col {
-	text-align: center;
-	border: 1px dotted #e4e4e4;
-	padding: 0.375rem 0.75rem;
-}
-
-.custom-table .custom-table-col.no-padding {
-	padding: 0px;
-}
-
-.custom-table .custom-table-col .user-btn {
-	margin-top: 3px;
-}
-
-.btn-col button {
-	width: 100%;
-}
-
-.hide {
-	display: none;
-}
-
-.view-select-user .select2-selection, .action-select-user .select2-selection
-	{
-	height: 38px;
-	border-top-left-radius: 0px;
-	border-bottom-left-radius: 0px;
-	border-color: #ced4da;
-}
-
-.view-select-user .select2-selection__rendered, .action-select-user .select2-selection__rendered
-	{
-	line-height: 38px !important;
-}
-
-.view-select-user .select2-selection__arrow, .action-select-user .select2-selection__arrow
-	{
-	height: 38px !important;
-}
-.container-finance{
-	max-width: 769px;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-left: auto;
-    margin-right: auto;
-}
-</style>
 <div class="container-fluid">
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="./main.html">Dashboard</a></li>
@@ -123,8 +64,8 @@
 				</div>
 				<div class="custom-table view-role-result hide">
 					<div class="custom-table-row row">
-						<div class="custom-table-col col-12 col-sm-10">Role</div>
-						<div class="custom-table-col col-12 col-sm-2">Delete</div>
+						<div class="custom-table-col col-8">Role</div>
+						<div class="custom-table-col col-4">Delete</div>
 					</div>
 					<div class="view-role-list-result"></div>
 					<div class="custom-table-row row" style="padding: 5px;">
@@ -175,8 +116,8 @@
 				</div>
 				<div class="custom-table action-role-result hide">
 					<div class="custom-table-row row">
-						<div class="custom-table-col col-12 col-sm-10">View</div>
-						<div class="custom-table-col col-12 col-sm-2">Delete</div>
+						<div class="custom-table-col col-8">View</div>
+						<div class="custom-table-col col-4">Delete</div>
 					</div>
 					<div class="action-role-list-result"></div>
 					<div class="custom-table-row row" style="padding: 5px;">
@@ -202,7 +143,7 @@
 <template class="countrySelect"> </template>
 <template class="viewrole-list-item">
 <div class="custom-table-row row">
-	<div class="custom-table-col col-12 col-sm-10 no-padding">
+	<div class="custom-table-col col-8 no-padding">
 		<select class="form-control view-role-selection">
 			<option value="">Please select item</option>
 			<c:forEach items="${viewrole}" var="item">
@@ -210,14 +151,14 @@
 			</c:forEach>
 		</select>
 	</div>
-	<div class="custom-table-col col-12 col-sm-2 no-padding btn-col">
+	<div class="custom-table-col col-4 no-padding btn-col">
 		<button type='button' class='btn btn-outline-danger btn-sm view-role-delete-btn user-btn role-delete-btn'>DELETE</button>
 	</div>
 </div>
 </template>
 <template class="actionrole-list-item">
 <div class="custom-table-row row">
-	<div class="custom-table-col col-12 col-sm-10 no-padding">
+	<div class="custom-table-col col-8 no-padding">
 		<select class="form-control action-role-selection">
 			<option value="">Please select item</option>
 			<c:forEach items="${actionrole}" var="item">
@@ -225,7 +166,7 @@
 			</c:forEach>
 		</select>
 	</div>
-	<div class="custom-table-col col-12 col-sm-2 no-padding btn-col">
+	<div class="custom-table-col col-4 no-padding btn-col">
 		<button type='button' class='btn btn-outline-danger btn-sm action-role-delete-btn user-btn role-delete-btn'>DELETE</button>
 	</div>
 </div>
