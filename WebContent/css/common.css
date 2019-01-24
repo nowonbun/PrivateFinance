@@ -535,4 +535,7 @@ table.table-data3>tbody>tr>td:nth-child(2) {
 	.card-body{
 		padding:0.25rem;
 	}
+	#householdContent,#householdPrice{
+		font-size:10pt;
+	}
 }
