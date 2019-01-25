@@ -1,5 +1,7 @@
 package Common;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import Model.Group;
@@ -7,16 +9,16 @@ import Model.User;
 import Model.Viewrole;
 
 public class AbstractController {
-	
+
 	private Logger logger = null;
-	
+
 	protected Logger getLogger() {
-		if(logger == null) {
+		if (logger == null) {
 			logger = LoggerManager.getLogger(this.getClass());
 		}
 		return logger;
 	}
-	
+
 	protected User getCurrentUser(HttpSession session) {
 		return (User) session.getAttribute(Define.USER_SESSION_NAME);
 	}
@@ -38,5 +40,15 @@ public class AbstractController {
 			}
 		}
 		return false;
+	}
+
+	protected Cookie[] getCookies(HttpServletRequest request) {
+		return request.getCookies();
+	}
+
+	protected Cookie getCookie(HttpServletRequest request, String name) {
+		return Util.searchArray(getCookies(request), (node) -> {
+			return Util.StringEquals(name, node.getName());
+		});
 	}
 }

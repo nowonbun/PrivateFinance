@@ -44,6 +44,15 @@ public class User implements Serializable {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "map_view_role_user", joinColumns = { @JoinColumn(name = "ID") }, inverseJoinColumns = { @JoinColumn(name = "VIEWCODE") })
 	private List<Viewrole> viewroles;
+	
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<LoginCookie> loginCookies;
+	
+	@OneToMany(mappedBy = "creater", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Category> createrCategories;
+
+	@OneToMany(mappedBy = "updater", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Category> updaterCategories;
 
 	public User() {
 	}
@@ -111,7 +120,7 @@ public class User implements Serializable {
 		return createrPayment;
 	}
 
-	public Payment removeTsnPayments1(Payment createrPayment) {
+	public Payment removeCreaterPayments(Payment createrPayment) {
 		getCreaterPayments().remove(createrPayment);
 		createrPayment.setCreater(null);
 
@@ -126,14 +135,14 @@ public class User implements Serializable {
 		this.updaterPayments = updaterPayments;
 	}
 
-	public Payment addTsnPayments2(Payment updaterPayment) {
+	public Payment addUpdaterPayments(Payment updaterPayment) {
 		getUpdaterPayments().add(updaterPayment);
 		updaterPayment.setUpdater(this);
 
 		return updaterPayment;
 	}
 
-	public Payment removeTsnPayments2(Payment updaterPayment) {
+	public Payment removeUpdaterPayments(Payment updaterPayment) {
 		getUpdaterPayments().remove(updaterPayment);
 		updaterPayment.setUpdater(null);
 
@@ -163,5 +172,68 @@ public class User implements Serializable {
 	public void setViewroles(List<Viewrole> viewroles) {
 		this.viewroles = viewroles;
 	}
+	
+	public List<LoginCookie> getLoginCookies() {
+		return this.loginCookies;
+	}
 
+	public void setLoginCookies(List<LoginCookie> loginCookies) {
+		this.loginCookies = loginCookies;
+	}
+
+	public LoginCookie addLoginCooky(LoginCookie loginCookie) {
+		getLoginCookies().add(loginCookie);
+		loginCookie.setUser(this);
+
+		return loginCookie;
+	}
+
+	public LoginCookie removeLoginCooky(LoginCookie loginCookie) {
+		getLoginCookies().remove(loginCookie);
+		loginCookie.setUser(null);
+
+		return loginCookie;
+	}
+	public List<Category> getUpdaterCategories() {
+		return this.updaterCategories;
+	}
+
+	public void setUpdaterCategories(List<Category> updaterCategories) {
+		this.updaterCategories = updaterCategories;
+	}
+
+	public Category addUpdaterCategory(Category updaterCategory) {
+		getUpdaterCategories().add(updaterCategory);
+		updaterCategory.setUpdater(this);
+
+		return updaterCategory;
+	}
+
+	public Category removeUpdaterCategory(Category updaterCategory) {
+		getUpdaterCategories().remove(updaterCategory);
+		updaterCategory.setUpdater(null);
+
+		return updaterCategory;
+	}
+	public List<Category> getCreaterCategories() {
+		return this.createrCategories;
+	}
+
+	public void setCreaterCategories(List<Category> createrCategories) {
+		this.createrCategories = createrCategories;
+	}
+
+	public Category addCreaterCategory(Category createrCategories) {
+		getCreaterCategories().add(createrCategories);
+		createrCategories.setUpdater(this);
+
+		return createrCategories;
+	}
+
+	public Category removeCreaterCategory(Category createrCategories) {
+		getCreaterCategories().remove(createrCategories);
+		createrCategories.setUpdater(null);
+
+		return createrCategories;
+	}
 }

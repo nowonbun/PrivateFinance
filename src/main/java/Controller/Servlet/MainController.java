@@ -1,6 +1,7 @@
 package Controller.Servlet;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,27 +96,40 @@ public class MainController extends AbstractServletController {
 			res.setStatus(403);
 			return "";
 		}
-		updateCategory(convertCategoryItem(income), LowCategoryDao.INCOME);
-		updateCategory(convertCategoryItem(expenditure), LowCategoryDao.EXPENDITURE);
-		updateCategory(convertCategoryItem(saving), LowCategoryDao.SAVING);
-		updateCategory(convertCategoryItem(withdraw), LowCategoryDao.WITHDRAW);
-
+		updateCategory(convertCategoryItem(income), LowCategoryDao.INCOME, session);
+		updateCategory(convertCategoryItem(expenditure), LowCategoryDao.EXPENDITURE, session);
+		updateCategory(convertCategoryItem(saving), LowCategoryDao.SAVING, session);
+		updateCategory(convertCategoryItem(withdraw), LowCategoryDao.WITHDRAW, session);
+		FactoryDao.resetMaster();
+		
 		modelmap.addAttribute("categoryupdated", true);
 		return category(modelmap, session, req, res);
 	}
 
-	private void updateCategory(List<CategoryBean> list, String code) {
+	private void updateCategory(List<CategoryBean> list, String code, HttpSession session) {
 		for (CategoryBean bean : list) {
 			Category category;
+			if(Util.StringIsEmptyOrNull(bean.getName())) {
+				if (bean.getId() > 0) {
+					category = FactoryDao.getDao(CategoryDao.class).getCategory(bean.getId());
+					category.setIsdeleted(true);
+					FactoryDao.getDao(CategoryDao.class).update(category);
+				}
+				continue;
+			}
 			if (bean.getId() > 0) {
 				category = FactoryDao.getDao(CategoryDao.class).getCategory(bean.getId());
 				category.setIsdeleted(bean.getDel() == 2);
 			} else {
 				category = new Category();
 				category.setIsdeleted(false);
+				category.setCreateddate(new Date());
+				category.setCreater(super.getCurrentUser(session));
 			}
 			category.setName(bean.getName());
 			category.setMstLowCategory(FactoryDao.getDao(LowCategoryDao.class).getLowCategory(code));
+			category.setUpdateddate(new Date());
+			category.setUpdater(super.getCurrentUser(session));
 			FactoryDao.getDao(CategoryDao.class).update(category);
 		}
 	}

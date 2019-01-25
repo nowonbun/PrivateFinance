@@ -171,8 +171,8 @@ public class PaymentController extends AbstractAjaxController {
 			payment.setContents(pContents);
 			BigDecimal money = new BigDecimal(pPrice);
 			payment.setMoney(money);
-			payment.setCreater(super.getCurrentUser(session));
-			payment.setCreateddate(Util.getNow());
+			payment.setUpdater(super.getCurrentUser(session));
+			payment.setUpdateddate(Util.getNow());
 			FactoryDao.getDao(PaymentDao.class).update(payment);
 			getLogger().info("[" + getCurrentUser(session).getId() + "] The payment item was updated.");
 			bean.setRet(true);
@@ -200,6 +200,8 @@ public class PaymentController extends AbstractAjaxController {
 		bean.setRet(false);
 		if (payment != null) {
 			payment.setIsdeleted(true);
+			payment.setUpdater(super.getCurrentUser(session));
+			payment.setUpdateddate(Util.getNow());
 			FactoryDao.getDao(PaymentDao.class).update(payment);
 			getLogger().info("[" + getCurrentUser(session).getId() + "] The payment item was updated.");
 			bean.setRet(true);

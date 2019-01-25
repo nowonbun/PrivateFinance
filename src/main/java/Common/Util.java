@@ -5,15 +5,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import Common.IF.LambdaExpression;
 import Dao.LocalizationDao;
 import Model.User;
 
 public class Util {
 
 	private final static DateFormat yyyyMMddFormat = new SimpleDateFormat("yyyy/MM/dd");
+	private final static DateFormat dateFormat2 = new SimpleDateFormat("yyyyMMddHHmmss");
+	public static final String COOKIE_KEY = "PrivateFinance";
 
 	public static boolean StringEquals(String val1, String val2) {
 		if (val1 == null) {
@@ -82,5 +86,30 @@ public class Util {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		return cal.get(Calendar.DAY_OF_MONTH);
+	}
+
+	public static String createCookieKey() {
+		String key = UUID.randomUUID().toString();
+		return key.replace("-", "") + dateFormat2.format(new Date());
+	}
+
+	public static int getCookieExpire() {
+		return 60 * 60 * 24 * PropertyMap.getInstance().getPropertyInt("config", "cookie_expire");
+	}
+
+	public static String getCookiePath() {
+		return PropertyMap.getInstance().getProperty("config", "cookie_path");
+	}
+
+	public static <T> T searchArray(T[] array, LambdaExpression<T, Boolean> condition) {
+		if (array == null) {
+			return null;
+		}
+		for (T node : array) {
+			if (condition.run(node)) {
+				return node;
+			}
+		}
+		return null;
 	}
 }

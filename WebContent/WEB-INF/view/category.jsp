@@ -185,10 +185,10 @@
 <template class="list-item">
 <div class="custom-table-row row">
 	<input type="hidden" class="item-id" value="0">
-	<div class="custom-table-col col-12 col-sm-10 no-padding">
+	<div class="custom-table-col col-8 no-padding">
 		<input type="text" class="form-control item-name">
 	</div>
-	<div class="custom-table-col col-12 col-sm-2 no-padding btn-col">
+	<div class="custom-table-col col-4 no-padding btn-col">
 		<select class="form-control type-selection add-selection">
 			<option value="0">Add</option>
 			<option value="3">Delete</option>

@@ -2,6 +2,7 @@ package Model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -24,6 +25,20 @@ public class Category implements Serializable {
 
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Payment> payments;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createddate;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updateddate;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CREATER")
+	private User creater;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "UPDATER")
+	private User updater;
 
 	public Category() {
 	}
@@ -82,4 +97,35 @@ public class Category implements Serializable {
 		return payment;
 	}
 
+	public User getCreater() {
+		return this.creater;
+	}
+
+	public void setCreater(User creater) {
+		this.creater = creater;
+	}
+
+	public User getUpdater() {
+		return this.updater;
+	}
+
+	public void setUpdater(User updater) {
+		this.updater = updater;
+	}
+
+	public Date getUpdateddate() {
+		return this.updateddate;
+	}
+
+	public void setUpdateddate(Date updateddate) {
+		this.updateddate = updateddate;
+	}
+
+	public Date getCreateddate() {
+		return this.createddate;
+	}
+
+	public void setCreateddate(Date createddate) {
+		this.createddate = createddate;
+	}
 }

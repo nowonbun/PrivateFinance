@@ -2,6 +2,8 @@ package Controller.Servlet;
 
 import java.util.Date;
 import java.util.stream.Collectors;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,14 +17,29 @@ import Common.FactoryDao;
 import Common.Util;
 import Dao.GroupDao;
 import Dao.LanguageTypeDao;
+import Dao.LoginCookieDao;
 import Dao.UserDao;
+import Model.LoginCookie;
 import Model.User;
 
 @Controller
 public class LoginController extends AbstractServletController {
 	@RequestMapping(value = "/index.html", method = RequestMethod.GET)
 	public String index(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+		getLogger().info("index.html");
 		session.setAttribute(Define.USER_SESSION_NAME, null);
+		Cookie cookie = getCookie(req, Util.COOKIE_KEY);
+		if (cookie != null) {
+			String key = cookie.getValue();
+			LoginCookie loginCookie = FactoryDao.getDao(LoginCookieDao.class).getLoginCookieByKey(key);
+			if (loginCookie != null) {
+				session.setAttribute(Define.USER_SESSION_NAME, loginCookie.getUser());
+				return "redirect:main.html";
+			}
+			cookie.setPath(Util.getCookiePath());
+			cookie.setMaxAge(0);
+			res.addCookie(cookie);
+		}
 		return "index";
 	}
 
@@ -60,14 +77,34 @@ public class LoginController extends AbstractServletController {
 		}
 
 		session.setAttribute(Define.USER_SESSION_NAME, user);
+		String key = Util.createCookieKey();
+		FactoryDao.getDao(LoginCookieDao.class).clearLoginCookie(user);
+		LoginCookie logincookie = new LoginCookie();
+		logincookie.setUser(user);
+		logincookie.setCookiekey(key);
+		logincookie.setCreateddate(new Date());
+		logincookie.setIsdeleted(false);
+		FactoryDao.getDao(LoginCookieDao.class).update(logincookie);
+
+		Cookie cookie = new Cookie(Util.COOKIE_KEY, key);
+		cookie.setMaxAge(Util.getCookieExpire());
+		cookie.setPath(Util.getCookiePath());
+		res.addCookie(cookie);
 
 		return "redirect:main.html";
 	}
 
 	@RequestMapping(value = "/logout.html", method = RequestMethod.GET)
 	public String logout(ModelMap modelmap, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
-		getLogger().info("[" + getCurrentUser(session).getId() + "] logout.html");
+		getLogger().info("logout.html");
+		FactoryDao.getDao(LoginCookieDao.class).clearLoginCookie(getCurrentUser(session));
 		session.setAttribute(Define.USER_SESSION_NAME, null);
-		return "index";
+		Cookie cookie = getCookie(req, Util.COOKIE_KEY);
+		if (cookie != null) {
+			cookie.setPath(Util.getCookiePath());
+			cookie.setMaxAge(0);
+			res.addCookie(cookie);
+		}
+		return "redirect:index.html";
 	}
 }
