@@ -538,4 +538,19 @@ table.table-data3>tbody>tr>td:nth-child(2) {
 	#householdContent,#householdPrice{
 		font-size:10pt;
 	}
+	.user-table .custom-table-col{
+		font-size:0.75rem;
+	}
+	.user-table .custom-table-col .form-control{
+		font-size:0.75rem!important;
+		padding: 0.1rem;
+    	height: 2rem;
+	}
+	.user-table .custom-table-col .select2-selection__rendered{
+		height:1.6rem;
+	}
+	.user-table .custom-table-col .user-btn{
+		font-size:0.75rem;
+		padding: 0.3rem 0.1rem;
+	}
 }

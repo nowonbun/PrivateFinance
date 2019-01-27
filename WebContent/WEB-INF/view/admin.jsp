@@ -14,12 +14,12 @@
 			<div class="card-body">
 				<div class="custom-table user-table">
 					<div class="custom-table-row row">
-						<div class="custom-table-col col-12 col-sm-6 col-md-3">Email</div>
-						<div class="custom-table-col col-12 col-sm-6 col-md-3">Name</div>
-						<div class="custom-table-col col-12 col-sm-6 col-md-2">Group</div>
-						<div class="custom-table-col col-12 col-sm-6 col-md-2">Country</div>
-						<div class="custom-table-col col-12 col-sm-6 col-md-1"></div>
-						<div class="custom-table-col col-12 col-sm-6 col-md-1"></div>
+						<div class="custom-table-col col-3">Email</div>
+						<div class="custom-table-col col-3">Name</div>
+						<div class="custom-table-col col-2">Group</div>
+						<div class="custom-table-col col-2">Country</div>
+						<div class="custom-table-col col-1"></div>
+						<div class="custom-table-col col-1"></div>
 					</div>
 				</div>
 			</div>
@@ -173,31 +173,31 @@
 </template>
 <template class="user-management-list-item">
 <div class="row custom-table-row">
-	<div class="custom-table-col col-12 col-sm-6 col-md-3">
+	<div class="custom-table-col col--3">
 		<span class="user-email"></span>
 		<input type="hidden" class="user-id">
 	</div>
-	<div class="custom-table-col col-12 col-sm-6 col-md-3 no-padding">
+	<div class="custom-table-col col-3 no-padding">
 		<input type="text" class="form-control user-name">
 	</div>
-	<div class="custom-table-col col-12 col-sm-6 col-md-2 no-padding">
+	<div class="custom-table-col col-2 no-padding">
 		<select class="form-control user-group">
 			<c:forEach items="${group}" var="item">
 				<option value="${item.value}">${item.name}</option>
 			</c:forEach>
 		</select> 
 	</div>
-	<div class="custom-table-col col-12 col-sm-6 col-md-2 no-padding">
+	<div class="custom-table-col col-2 no-padding">
 		<select class="form-control user-country">
 			<c:forEach items="${country}" var="item">
 				<option value="${item.value}">${item.name}</option>
 			</c:forEach>
 		</select> 
 	</div>
-	<div class="custom-table-col col-12 col-sm-6 col-md-1 no-padding btn-col">
+	<div class="custom-table-col col-1 no-padding btn-col">
 		<button type="button" class="btn btn-outline-primary btn-sm user-btn modify-btn">MODIFY</button>
 	</div>
-	<div class="custom-table-col col-12 col-sm-6 col-md-1 no-padding btn-col">
+	<div class="custom-table-col col-1 no-padding btn-col">
 		<button type="button" class="btn btn-outline-danger btn-sm user-btn delete-btn">DELETE</button>
 		<button type="button" class="btn btn-outline-warning btn-sm user-btn delete-btn">ACTIVE</button>
 	</div>
