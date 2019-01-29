@@ -11,7 +11,7 @@ import Common.IF.EntityManagerRunable;
 
 public abstract class AbstractDao<T extends Serializable> {
 
-	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("PrivateFinence");
+	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("PrivateFinance");
 	private Class<T> clazz;
 
 	protected AbstractDao(Class<T> clazz) {

@@ -144,7 +144,7 @@
 				<div class="space" style="margin-bottom:5px;"></div>
 			</div>
 			<div class="normal-data title-data mt-3">
-				<label><%=Util.localization("Finence", session)%></label> 
+				<label><%=Util.localization("Finance", session)%></label> 
 				<label>TOTAL : <span class="payment-total"></span></label>
 			</div>
 			<table class="table-data table-data1 payment-list">
