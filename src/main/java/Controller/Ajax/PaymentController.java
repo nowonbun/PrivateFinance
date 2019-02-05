@@ -290,8 +290,8 @@ public class PaymentController extends AbstractAjaxController {
 			ret.getFinancelist().add(bean);
 		}
 
-		BigDecimal ts = new BigDecimal(FactoryDao.getDao(PaymentDao.class).getFullTotal(FactoryDao.getDao(LowCategoryDao.class).getLowCategory(LowCategoryDao.SAVING)).toString());
-		BigDecimal td = new BigDecimal(FactoryDao.getDao(PaymentDao.class).getFullTotal(FactoryDao.getDao(LowCategoryDao.class).getLowCategory(LowCategoryDao.WITHDRAW)).toString());
+		BigDecimal ts = new BigDecimal(FactoryDao.getDao(PaymentDao.class).getFullTotalUtilDate(FactoryDao.getDao(LowCategoryDao.class).getLowCategory(LowCategoryDao.SAVING), year, month).toString());
+		BigDecimal td = new BigDecimal(FactoryDao.getDao(PaymentDao.class).getFullTotalUtilDate(FactoryDao.getDao(LowCategoryDao.class).getLowCategory(LowCategoryDao.WITHDRAW), year, month).toString());
 		BigDecimal fs = ts.subtract(td);
 		ret.setFinancesign(total.compareTo(BigDecimal.ZERO));
 		ret.setFinanceTotal(total.abs().toString());
