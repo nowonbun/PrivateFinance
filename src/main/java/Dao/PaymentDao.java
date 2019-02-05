@@ -60,4 +60,24 @@ public class PaymentDao extends TransactionDao<Payment> {
 			}
 		});
 	}
+	
+	public Number getFullTotalUtilDate(LowCategory lc, int year, int month) {
+		return transaction((em) -> {
+			try {
+				String qy = "SELECT SUM(p.money) FROM Payment p "
+						+ "WHERE p.lowCategory = :lc and p.isdeleted = false and (FUNC('YEAR',p.date) < :year or (FUNC('YEAR',p.date) = :year and FUNC('MONTH',p.date) <= :month))";
+				Query query = em.createQuery(qy);
+				query.setParameter("lc", lc);
+				query.setParameter("year", year);
+				query.setParameter("month", month);
+				Number ret = (Number) query.getSingleResult();
+				if(ret == null) {
+					return 0;
+				}
+				return ret;
+			} catch (NoResultException e) {
+				return 0;
+			}
+		});
+	}
 }
