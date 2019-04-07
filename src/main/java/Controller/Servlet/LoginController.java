@@ -64,7 +64,7 @@ public class LoginController extends AbstractServletController {
 			user.setEmail(email);
 			user.setName(name);
 			user.setGroups(FactoryDao.getDao(GroupDao.class).getData().stream().filter(x -> x.getIsdefault()).collect(Collectors.toList()));
-			user.setLanguaueType(FactoryDao.getDao(LanguageTypeDao.class).getData().stream().filter(x -> x.getCode().equals("0")).findFirst().get());
+			user.setLanguaueType(FactoryDao.getDao(LanguageTypeDao.class).getData().stream().filter(x -> x.getCode().equals(Define.LANGUAGE_TYPE_ENG)).findFirst().get());
 			user.setdeleted(false);
 			user.setCreateddate(new Date());
 			FactoryDao.getDao(UserDao.class).create(user);
